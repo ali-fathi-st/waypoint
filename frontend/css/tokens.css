@@ -1,0 +1,71 @@
+/* =========================================================================
+   tokens.css: the design system's raw values.
+   Every color, size and font in the site comes from these variables.
+   Change a value here and the whole site follows.
+   ========================================================================= */
+
+@font-face {
+  font-family: "Geist";
+  src: url("../assets/fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  /* Surfaces */
+  --color-bg: #f6f7f9; /* page background */
+  --color-surface: #ffffff; /* panels, inputs, sidebar */
+  --color-surface-2: #f1f3f5; /* subtle fills, hovers, skeletons */
+  --color-border: #e1e4e8; /* hairlines */
+  --color-border-strong: #c9ced6; /* input borders */
+
+  /* Text ("ink") */
+  --color-ink: #18202b; /* primary text */
+  --color-ink-2: #4a5563; /* secondary text */
+  --color-ink-3: #66707c; /* hints, labels, timestamps */
+
+  /* Accent: spruce green, the one brand color */
+  --color-accent: #1d6b57;
+  --color-accent-hover: #175848;
+  --color-accent-soft: #e5f0ec;
+  --color-accent-ink: #145142;
+
+  /* Status colors: only for meaning (warnings, errors), never decoration */
+  --color-danger: #b42318;
+  --color-danger-soft: #fdecea;
+  --color-warning: #8a5a00;
+  --color-warning-soft: #fdf3d8;
+  --color-info: #2457b3;
+  --color-info-soft: #e8effb;
+
+  /* Type */
+  --font-sans:
+    "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.8125rem; /* 13px */
+  --text-base: 0.875rem; /* 14px: the app's body size, for density */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.25rem; /* 20px */
+  --text-xl: 1.5rem; /* 24px */
+  --text-2xl: 2.25rem; /* 36px */
+
+  /* Spacing scale (4px steps) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  /* Shape */
+  --radius-sm: 4px; /* badges */
+  --radius: 6px; /* buttons, inputs */
+  --radius-lg: 8px; /* panels, dialogs */
+  --shadow-pop: 0 8px 24px rgb(24 32 43 / 0.12); /* menus, dialogs, toasts only */
+
+  /* Layout */
+  --sidebar-width: 232px;
+  --content-max: 1200px;
+  --control-height: 36px;
+}

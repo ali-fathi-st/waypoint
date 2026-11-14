@@ -1,0 +1,52 @@
+# Publishes the frontend/ folder to GitHub Pages every time main changes.
+#
+# One-time setup on github.com: Settings > Pages > Build and deployment >
+# Source: "GitHub Actions". After that, every push to main runs the tests,
+# then deploys. Watch it under the repo's Actions tab.
+#
+# Guide: docs/05-github-pages.md
+
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # adds a "Run workflow" button on the Actions tab
+
+# Only one deployment at a time; a newer push waits for the current one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - run: npm test
+
+  deploy:
+    name: Deploy
+    needs: test # nothing is published if a test fails
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: frontend # only the website is published, not docs/ or tests/
+      - id: deployment
+        uses: actions/deploy-pages@v5

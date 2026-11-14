@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page not found | Waypoint</title>
+    <!--
+      GitHub Pages shows this page for any address that doesn't exist, at any
+      depth (e.g. /waypoint/a/b/c). Relative links to css/ would break there,
+      so this one page keeps its few styles inline.
+    -->
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #f6f7f9;
+        color: #18202b;
+        font:
+          14px/1.45 ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+      }
+      main {
+        max-width: 26rem;
+        padding: 24px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 24px;
+      }
+      p {
+        margin: 0 0 20px;
+        color: #4a5563;
+      }
+      a {
+        display: inline-block;
+        padding: 9px 14px;
+        border-radius: 6px;
+        background: #1d6b57;
+        color: #fff;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      a:focus-visible {
+        outline: 2px solid #1d6b57;
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Page not found</h1>
+      <p>The address may be mistyped, or the page was moved.</p>
+      <a id="home" href="/">Go to the dashboard</a>
+    </main>
+    <script>
+      // On GitHub Pages project sites the app lives under /<repo-name>/.
+      const first = window.location.pathname.split("/")[1];
+      if (window.location.hostname.endsWith("github.io") && first) {
+        document.getElementById("home").href = "/" + first + "/";
+      }
+    </script>
+  </body>
+</html>

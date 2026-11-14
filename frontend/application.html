@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Application | Waypoint</title>
+    <meta
+      name="description"
+      content="One application: status, timeline, notes, materials, follow-up and interviews."
+    />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-page="applications">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app">
+      <!-- Sidebar and mobile menu are added here by js/ui/shell.js -->
+      <div id="shell"></div>
+
+      <main id="main" class="main" tabindex="-1">
+        <header class="page-header">
+          <div>
+            <a class="page-header__back" href="applications.html" id="back-link"
+              >Applications</a
+            >
+            <h1 id="app-title">Loading application...</h1>
+            <div class="page-header__desc stack-sm" id="app-meta"></div>
+          </div>
+          <div class="page-header__actions" id="app-actions"></div>
+        </header>
+
+        <div id="error"></div>
+
+        <div class="split" id="app-body">
+          <div class="stack">
+            <!-- Shown until the application is recorded as applied -->
+            <section
+              class="panel panel--note"
+              id="next-step"
+              hidden
+              aria-labelledby="next-step-title"
+            >
+              <div class="panel__body">
+                <h2 id="next-step-title">Applying for this role</h2>
+                <ol class="steps">
+                  <li>
+                    Pick the résumé and cover letter under Materials, and review
+                    them.
+                  </li>
+                  <li>
+                    Submit on the
+                    <a
+                      id="next-step-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >employer's posting<span class="sr-only">
+                        (opens in a new tab)</span
+                      ></a
+                    >. Waypoint never submits for you.
+                  </li>
+                  <li>Record it here so the follow-up reminder starts.</li>
+                </ol>
+                <button
+                  type="button"
+                  class="btn btn--primary"
+                  id="next-step-button"
+                >
+                  Record as applied
+                </button>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="timeline-title">
+              <div class="panel__header">
+                <div>
+                  <h2 id="timeline-title">Timeline</h2>
+                  <p>Every change, newest first.</p>
+                </div>
+              </div>
+              <ol class="timeline" id="timeline"></ol>
+            </section>
+
+            <section class="panel" aria-labelledby="notes-title">
+              <div class="panel__header">
+                <div>
+                  <h2 id="notes-title">Notes</h2>
+                  <p>Private to you.</p>
+                </div>
+              </div>
+              <form class="panel__body form-grid" id="notes-form">
+                <label for="notes" class="sr-only">Notes</label>
+                <textarea
+                  class="textarea"
+                  id="notes"
+                  rows="5"
+                  maxlength="5000"
+                  placeholder="Contacts, salary discussions, what to mention in a follow-up..."
+                ></textarea>
+                <div class="row row--end">
+                  <button
+                    type="button"
+                    class="btn btn--ghost btn--sm"
+                    id="notes-discard"
+                    hidden
+                  >
+                    Discard
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn--primary btn--sm"
+                    id="notes-save"
+                    disabled
+                  >
+                    Save notes
+                  </button>
+                </div>
+              </form>
+            </section>
+          </div>
+
+          <div class="stack">
+            <section class="panel" aria-labelledby="job-title">
+              <div class="panel__header">
+                <div>
+                  <h2 id="job-title">Job</h2>
+                  <p>Saved when you started this application.</p>
+                </div>
+              </div>
+              <div class="panel__body" id="job-snapshot"></div>
+            </section>
+
+            <section class="panel" aria-labelledby="materials-title">
+              <div class="panel__header">
+                <div>
+                  <h2 id="materials-title">Materials</h2>
+                  <p id="materials-desc">Versions you plan to send.</p>
+                </div>
+                <a class="btn btn--ghost btn--sm" href="documents.html"
+                  >Documents</a
+                >
+              </div>
+              <div class="panel__body form-grid">
+                <div class="field">
+                  <label for="m-resume">Résumé</label>
+                  <select class="select" id="m-resume"></select>
+                </div>
+                <div class="field">
+                  <label for="m-cover">Cover letter</label>
+                  <select class="select" id="m-cover"></select>
+                </div>
+                <p class="note note--warning" id="draft-warning" hidden>
+                  A linked document is a draft. Review it in Documents and mark
+                  it ready before you apply.
+                </p>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="followup-title">
+              <div class="panel__header">
+                <h2 id="followup-title">Follow-up</h2>
+              </div>
+              <div class="panel__body form-grid" id="followup"></div>
+            </section>
+
+            <section class="panel" aria-labelledby="interviews-title">
+              <div class="panel__header">
+                <h2 id="interviews-title">Interviews</h2>
+                <button type="button" class="btn btn--sm" id="add-interview">
+                  Add interview
+                </button>
+              </div>
+              <div id="interviews"></div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- THE APPROVAL STEP. The only way an application becomes "Applied". -->
+    <dialog class="dialog" id="confirm-dialog" aria-labelledby="confirm-title">
+      <form id="confirm-form" novalidate>
+        <div class="dialog__head">
+          <h2 id="confirm-title">Record as applied</h2>
+          <p>
+            Waypoint doesn't submit applications. Apply on the employer's site
+            first, then record it here.
+          </p>
+          <button
+            type="button"
+            class="btn btn--ghost btn--icon dialog__close"
+            aria-label="Close"
+            data-close
+          ></button>
+        </div>
+        <div class="dialog__body">
+          <a
+            class="icon-link"
+            id="confirm-posting"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Open the job posting<span class="sr-only">
+              (opens in a new tab)</span
+            ></a
+          >
+          <div class="form-grid form-grid--2">
+            <div class="field">
+              <label for="c-applied"
+                >Date you applied <span class="required">*</span></label
+              >
+              <input
+                class="input"
+                type="date"
+                id="c-applied"
+                required
+                autofocus
+                aria-describedby="c-applied-error"
+              />
+              <p class="field__error" id="c-applied-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="c-follow">Follow up on</label>
+              <input
+                class="input"
+                type="date"
+                id="c-follow"
+                aria-describedby="c-follow-hint c-follow-error"
+              />
+              <p class="field__hint" id="c-follow-hint">
+                14 days after applying. Clear it for no reminder.
+              </p>
+              <p class="field__error" id="c-follow-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="c-resume">Résumé you sent</label>
+              <select class="select" id="c-resume"></select>
+            </div>
+            <div class="field">
+              <label for="c-cover">Cover letter you sent</label>
+              <select class="select" id="c-cover"></select>
+            </div>
+          </div>
+          <fieldset class="checklist">
+            <legend>Before you record it</legend>
+            <div class="check">
+              <input
+                type="checkbox"
+                id="c-reviewed"
+                aria-describedby="c-reviewed-error"
+              />
+              <label for="c-reviewed"
+                >I reviewed the résumé and cover letter I sent</label
+              >
+            </div>
+            <p class="field__error" id="c-reviewed-error" hidden>
+              Confirm you reviewed the materials.
+            </p>
+            <div class="check">
+              <input
+                type="checkbox"
+                id="c-submitted"
+                aria-describedby="c-submitted-error"
+              />
+              <label for="c-submitted"
+                >I submitted this application myself on the employer's
+                site</label
+              >
+            </div>
+            <p class="field__error" id="c-submitted-error" hidden>
+              Confirm you submitted it on the employer's site.
+            </p>
+          </fieldset>
+        </div>
+        <div class="dialog__foot">
+          <button type="button" class="btn" data-close>Cancel</button>
+          <button type="submit" class="btn btn--primary" id="confirm-submit">
+            Record as applied
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog
+      class="dialog dialog--sm"
+      id="interview-dialog"
+      aria-labelledby="interview-title"
+    >
+      <form id="interview-form" novalidate>
+        <div class="dialog__head">
+          <h2 id="interview-title">Add interview</h2>
+          <p>An applied application moves to Interview.</p>
+          <button
+            type="button"
+            class="btn btn--ghost btn--icon dialog__close"
+            aria-label="Close"
+            data-close
+          ></button>
+        </div>
+        <div class="dialog__body">
+          <div class="form-grid form-grid--2">
+            <div class="field">
+              <label for="i-date">Date <span class="required">*</span></label>
+              <input class="input" type="date" id="i-date" required />
+            </div>
+            <div class="field">
+              <label for="i-time">Time <span class="required">*</span></label>
+              <input
+                class="input"
+                type="time"
+                id="i-time"
+                value="10:00"
+                required
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label for="i-format">Format</label>
+            <select class="select" id="i-format">
+              <option value="phone">Phone</option>
+              <option value="video" selected>Video</option>
+              <option value="onsite">On-site</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="i-with">With</label>
+            <input
+              class="input"
+              id="i-with"
+              maxlength="120"
+              aria-describedby="i-with-hint"
+            />
+            <p class="field__hint" id="i-with-hint">
+              Optional, e.g. hiring manager.
+            </p>
+          </div>
+          <p class="field__error" id="i-error" hidden></p>
+        </div>
+        <div class="dialog__foot">
+          <button type="button" class="btn" data-close>Cancel</button>
+          <button type="submit" class="btn btn--primary">Add interview</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="js/pages/application.js"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Node (only used for running tests; there are no dependencies)
+node_modules/
+
+# Python (for the backend, later)
+__pycache__/
+*.pyc
+.venv/
+.env

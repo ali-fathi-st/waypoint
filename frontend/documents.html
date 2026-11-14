@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Documents | Waypoint</title>
+    <meta
+      name="description"
+      content="Résumé versions and cover-letter drafts."
+    />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-page="documents">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app">
+      <!-- Sidebar and mobile menu are added here by js/ui/shell.js -->
+      <div id="shell"></div>
+
+      <main id="main" class="main" tabindex="-1">
+        <header class="page-header">
+          <div>
+            <h1>Documents</h1>
+            <p class="page-header__desc">
+              Résumé versions and cover-letter drafts. Drafts stay drafts until
+              you review them.
+            </p>
+          </div>
+          <div class="page-header__actions">
+            <button type="button" class="btn btn--primary" id="upload-open">
+              Upload version
+            </button>
+          </div>
+        </header>
+
+        <div class="stack">
+          <div class="row row--between">
+            <div class="tabs" role="tablist" aria-label="Document type">
+              <button
+                type="button"
+                class="tab"
+                role="tab"
+                data-type=""
+                aria-selected="true"
+              >
+                All
+              </button>
+              <button
+                type="button"
+                class="tab"
+                role="tab"
+                data-type="resume"
+                aria-selected="false"
+              >
+                Résumés
+              </button>
+              <button
+                type="button"
+                class="tab"
+                role="tab"
+                data-type="cover_letter"
+                aria-selected="false"
+              >
+                Cover letters
+              </button>
+            </div>
+            <label class="check" for="show-archived">
+              <input
+                type="checkbox"
+                class="switch"
+                role="switch"
+                id="show-archived"
+              />
+              <span class="ink-2">Show archived</span>
+            </label>
+          </div>
+
+          <div id="error"></div>
+          <section class="panel" id="results" aria-label="Documents"></section>
+        </div>
+      </main>
+    </div>
+    <dialog
+      class="dialog dialog--sm"
+      id="upload-dialog"
+      aria-labelledby="upload-title"
+    >
+      <form id="upload-form" novalidate>
+        <div class="dialog__head">
+          <h2 id="upload-title">Upload a new version</h2>
+          <p id="upload-desc">PDF or Word (.docx), up to 5 MB.</p>
+          <button
+            type="button"
+            class="btn btn--ghost btn--icon dialog__close"
+            aria-label="Close"
+            data-close
+          ></button>
+        </div>
+        <div class="dialog__body">
+          <div class="field">
+            <label for="u-type">Type</label>
+            <select class="select" id="u-type">
+              <option value="resume">Résumé</option>
+              <option value="cover_letter">Cover letter</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="u-title"
+              >Name this version <span class="required">*</span></label
+            >
+            <input
+              class="input"
+              id="u-title"
+              maxlength="120"
+              aria-describedby="u-title-hint u-title-error"
+            />
+            <p class="field__hint" id="u-title-hint">
+              For example, "Data-focused, pipelines first".
+            </p>
+            <p class="field__error" id="u-title-error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="u-file">File <span class="required">*</span></label>
+            <input
+              class="input input--file"
+              type="file"
+              id="u-file"
+              accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              aria-describedby="u-file-error"
+            />
+            <p class="field__error" id="u-file-error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="u-job">Linked job</label>
+            <select class="select" id="u-job" aria-describedby="u-job-hint">
+              <option value="">Not linked</option>
+            </select>
+            <p class="field__hint" id="u-job-hint">
+              Optional. Pick one if this version is tailored to a role.
+            </p>
+          </div>
+        </div>
+        <div class="dialog__foot">
+          <button type="button" class="btn" data-close>Cancel</button>
+          <button type="submit" class="btn btn--primary" id="upload-submit">
+            Upload
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="js/pages/documents.js"></script>
+  </body>
+</html>

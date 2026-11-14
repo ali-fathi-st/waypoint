@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jobs | Waypoint</title>
+    <meta
+      name="description"
+      content="Job postings collected from your sources, ranked against your profile."
+    />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-page="jobs">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app">
+      <!-- Sidebar and mobile menu are added here by js/ui/shell.js -->
+      <div id="shell"></div>
+
+      <main id="main" class="main" tabindex="-1">
+        <header class="page-header">
+          <div>
+            <h1>Jobs</h1>
+            <p class="page-header__desc">
+              Postings collected from your sources, ranked against your profile.
+            </p>
+          </div>
+        </header>
+
+        <div class="stack">
+          <!-- Filters. Every change updates the address bar, so a filtered view can be bookmarked. -->
+          <form
+            class="panel panel__body filters"
+            id="filters"
+            role="search"
+            aria-label="Filter jobs"
+            data-collapsed="true"
+          >
+            <div class="filters__text">
+              <div>
+                <label for="f-q">Title</label>
+                <input
+                  class="input input--search"
+                  id="f-q"
+                  name="q"
+                  type="search"
+                  placeholder="Data engineer, analyst..."
+                  autocomplete="off"
+                />
+              </div>
+              <div class="filters__more">
+                <label for="f-company">Company</label>
+                <input
+                  class="input"
+                  id="f-company"
+                  name="company"
+                  placeholder="Any company"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="filters__more">
+                <label for="f-location">Location</label>
+                <input
+                  class="input"
+                  id="f-location"
+                  name="location"
+                  placeholder="Edmonton, or remote"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn--sm filters__toggle"
+              id="filters-toggle"
+              aria-expanded="false"
+              aria-controls="filters-more"
+            >
+              More filters
+            </button>
+
+            <div class="filters__selects filters__more" id="filters-more">
+              <div>
+                <label for="f-status">Status</label>
+                <select class="select" id="f-status" name="status">
+                  <option value="active">New and shortlisted</option>
+                  <option value="new">New</option>
+                  <option value="shortlisted">Shortlisted</option>
+                  <option value="dismissed">Dismissed</option>
+                  <option value="all">All</option>
+                </select>
+              </div>
+              <div>
+                <label for="f-source">Source</label>
+                <select class="select" id="f-source" name="source">
+                  <option value="">All sources</option>
+                  <option value="greenhouse">Greenhouse</option>
+                  <option value="lever">Lever</option>
+                  <option value="adzuna">Adzuna</option>
+                  <option value="manual">Added manually</option>
+                </select>
+              </div>
+              <div>
+                <label for="f-found">Date found</label>
+                <select class="select" id="f-found" name="found">
+                  <option value="">Any time</option>
+                  <option value="24h">Last 24 hours</option>
+                  <option value="7d">Last 7 days</option>
+                  <option value="30d">Last 30 days</option>
+                </select>
+              </div>
+              <div>
+                <label for="f-min">Match score</label>
+                <select class="select" id="f-min" name="min">
+                  <option value="">Any score</option>
+                  <option value="50">50 or higher</option>
+                  <option value="70">70 or higher</option>
+                  <option value="85">85 or higher</option>
+                </select>
+              </div>
+              <div>
+                <label for="f-sort">Sort by</label>
+                <select class="select" id="f-sort" name="sort">
+                  <option value="match">Best match</option>
+                  <option value="newest">Recently found</option>
+                  <option value="posted">Recently posted</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="button"
+                class="btn btn--ghost btn--sm"
+                id="clear-filters"
+                hidden
+              >
+                Clear filters
+              </button>
+            </div>
+          </form>
+
+          <div id="error"></div>
+
+          <section class="panel" aria-labelledby="results-count">
+            <div class="panel__header">
+              <p id="results-count" class="small ink-2" aria-live="polite">
+                Loading jobs...
+              </p>
+            </div>
+            <div id="results"></div>
+            <nav
+              class="pagination"
+              id="pagination"
+              aria-label="Pagination"
+              hidden
+            >
+              <button type="button" class="btn btn--sm" id="prev-page">
+                Previous
+              </button>
+              <span id="page-label"></span>
+              <button type="button" class="btn btn--sm" id="next-page">
+                Next
+              </button>
+            </nav>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="js/pages/jobs.js"></script>
+  </body>
+</html>

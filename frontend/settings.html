@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Settings | Waypoint</title>
+    <meta
+      name="description"
+      content="Job sources, notifications, account and your data."
+    />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-page="settings">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app">
+      <!-- Sidebar and mobile menu are added here by js/ui/shell.js -->
+      <div id="shell"></div>
+
+      <main id="main" class="main" tabindex="-1">
+        <header class="page-header">
+          <div>
+            <h1>Settings</h1>
+            <p class="page-header__desc">
+              Job sources, notifications and your data.
+            </p>
+          </div>
+        </header>
+
+        <div class="stack">
+          <div class="tabs" role="tablist" aria-label="Settings sections">
+            <button
+              type="button"
+              class="tab"
+              role="tab"
+              id="tab-sources"
+              data-tab="sources"
+              aria-controls="panel-sources"
+            >
+              Sources
+            </button>
+            <button
+              type="button"
+              class="tab"
+              role="tab"
+              id="tab-notifications"
+              data-tab="notifications"
+              aria-controls="panel-notifications"
+            >
+              Notifications
+            </button>
+            <button
+              type="button"
+              class="tab"
+              role="tab"
+              id="tab-account"
+              data-tab="account"
+              aria-controls="panel-account"
+            >
+              Account
+            </button>
+            <button
+              type="button"
+              class="tab"
+              role="tab"
+              id="tab-developer"
+              data-tab="developer"
+              aria-controls="panel-developer"
+            >
+              Developer
+            </button>
+          </div>
+
+          <div id="error"></div>
+
+          <!-- ===== Sources ===== -->
+          <section
+            id="panel-sources"
+            role="tabpanel"
+            aria-labelledby="tab-sources"
+            class="stack"
+            hidden
+          >
+            <p class="ink-2 measure">
+              The backend's collection job reads these settings each time it
+              runs. Sources are only used through their official public APIs.
+            </p>
+            <div id="sources" class="stack"></div>
+            <div class="row row--end">
+              <button
+                type="button"
+                class="btn btn--ghost"
+                id="sources-discard"
+                disabled
+              >
+                Discard
+              </button>
+              <button
+                type="button"
+                class="btn btn--primary"
+                id="sources-save"
+                disabled
+              >
+                Save sources
+              </button>
+            </div>
+          </section>
+
+          <!-- ===== Notifications ===== -->
+          <section
+            id="panel-notifications"
+            role="tabpanel"
+            aria-labelledby="tab-notifications"
+            hidden
+          >
+            <form class="panel" id="notifications-form">
+              <div class="panel__header">
+                <div>
+                  <h2>Notifications</h2>
+                  <p>
+                    Sent by the backend. In-app reminders always show on the
+                    dashboard.
+                  </p>
+                </div>
+              </div>
+              <div class="panel__body form-grid">
+                <div class="setting">
+                  <div>
+                    <label for="n-digest" class="field__label"
+                      >Daily digest</label
+                    >
+                    <p class="small muted">
+                      An email with the day's best new matches.
+                    </p>
+                  </div>
+                  <input
+                    type="checkbox"
+                    class="switch"
+                    role="switch"
+                    id="n-digest"
+                    name="daily_digest"
+                  />
+                </div>
+                <div class="form-grid form-grid--2 measure-sm">
+                  <div class="field">
+                    <label for="n-hour">Send at</label>
+                    <select
+                      class="select"
+                      id="n-hour"
+                      name="digest_hour"
+                    ></select>
+                  </div>
+                  <div class="field">
+                    <label for="n-min">Include jobs scoring</label>
+                    <select class="select" id="n-min" name="digest_min_score">
+                      <option value="50">50 or higher</option>
+                      <option value="60">60 or higher</option>
+                      <option value="70">70 or higher</option>
+                      <option value="80">80 or higher</option>
+                      <option value="90">90 or higher</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="setting setting--divided">
+                  <div>
+                    <label for="n-follow" class="field__label"
+                      >Follow-up reminders</label
+                    >
+                    <p class="small muted">
+                      An email on the day a follow-up is due. Waypoint never
+                      contacts employers.
+                    </p>
+                  </div>
+                  <input
+                    type="checkbox"
+                    class="switch"
+                    role="switch"
+                    id="n-follow"
+                    name="follow_up_reminders"
+                  />
+                </div>
+                <div class="row row--end">
+                  <button
+                    type="button"
+                    class="btn btn--ghost"
+                    id="notifications-discard"
+                    disabled
+                  >
+                    Discard
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn--primary"
+                    id="notifications-save"
+                    disabled
+                  >
+                    Save notifications
+                  </button>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          <!-- ===== Account ===== -->
+          <section
+            id="panel-account"
+            role="tabpanel"
+            aria-labelledby="tab-account"
+            class="stack"
+            hidden
+          >
+            <form class="panel" id="account-form" novalidate>
+              <div class="panel__header">
+                <div>
+                  <h2>Account</h2>
+                  <p>
+                    Sign-in is added with the backend. These details label your
+                    exports and emails.
+                  </p>
+                </div>
+              </div>
+              <div class="panel__body form-grid form-grid--2 measure">
+                <div class="field">
+                  <label for="a-name"
+                    >Display name <span class="required">*</span></label
+                  >
+                  <input
+                    class="input"
+                    id="a-name"
+                    name="display_name"
+                    maxlength="80"
+                    aria-describedby="a-name-error"
+                  />
+                  <p class="field__error" id="a-name-error" hidden></p>
+                </div>
+                <div class="field">
+                  <label for="a-email"
+                    >Email for notifications
+                    <span class="required">*</span></label
+                  >
+                  <input
+                    class="input"
+                    id="a-email"
+                    name="email"
+                    type="email"
+                    aria-describedby="a-email-error"
+                  />
+                  <p class="field__error" id="a-email-error" hidden></p>
+                </div>
+                <div class="field">
+                  <label for="a-tz">Time zone</label>
+                  <select
+                    class="select"
+                    id="a-tz"
+                    name="timezone"
+                    aria-describedby="a-tz-hint"
+                  >
+                    <option value="America/Edmonton">Edmonton</option>
+                    <option value="America/Vancouver">Vancouver</option>
+                    <option value="America/Regina">Regina</option>
+                    <option value="America/Winnipeg">Winnipeg</option>
+                    <option value="America/Toronto">Toronto</option>
+                    <option value="America/Halifax">Halifax</option>
+                    <option value="America/St_Johns">St. John's</option>
+                    <option value="UTC">UTC</option>
+                  </select>
+                  <p class="field__hint" id="a-tz-hint">
+                    Used for digests and reminder dates.
+                  </p>
+                </div>
+                <div class="span-2">
+                  <button
+                    type="submit"
+                    class="btn btn--primary"
+                    id="account-save"
+                    disabled
+                  >
+                    Save account
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <section class="panel" aria-labelledby="data-title">
+              <div class="panel__header">
+                <h2 id="data-title">Your data</h2>
+              </div>
+              <div class="panel__body form-grid">
+                <div class="setting">
+                  <div>
+                    <p class="field__label">Export everything</p>
+                    <p class="small muted">
+                      Jobs, applications, documents list, profile and settings,
+                      as a JSON file.
+                    </p>
+                  </div>
+                  <button type="button" class="btn" id="export">
+                    Download export
+                  </button>
+                </div>
+                <div class="setting setting--divided">
+                  <div>
+                    <p class="field__label">Delete all data</p>
+                    <p class="small muted">
+                      Removes every job, application, document and your profile.
+                      This can't be undone.
+                    </p>
+                  </div>
+                  <button type="button" class="btn btn--danger" id="delete-all">
+                    Delete all data
+                  </button>
+                </div>
+              </div>
+            </section>
+          </section>
+
+          <!-- ===== Developer ===== -->
+          <section
+            id="panel-developer"
+            role="tabpanel"
+            aria-labelledby="tab-developer"
+            class="stack"
+            hidden
+          >
+            <section class="panel" aria-labelledby="source-title">
+              <div class="panel__header">
+                <h2 id="source-title">Where the data comes from</h2>
+              </div>
+              <div class="panel__body form-grid ink-2" id="data-source"></div>
+            </section>
+
+            <section
+              class="panel"
+              aria-labelledby="simulate-title"
+              id="simulate"
+            >
+              <div class="panel__header">
+                <div>
+                  <h2 id="simulate-title">Simulate</h2>
+                  <p>
+                    See every loading, empty and error state without changing
+                    code. Saved in this browser.
+                  </p>
+                </div>
+              </div>
+              <div class="panel__body form-grid">
+                <fieldset class="choices">
+                  <legend class="sr-only">Sample data scenario</legend>
+                  <label class="choice"
+                    ><input type="radio" name="scenario" value="normal" /><span
+                      ><strong>Normal</strong
+                      ><span
+                        >Sample data with a short, realistic delay.</span
+                      ></span
+                    ></label
+                  >
+                  <label class="choice"
+                    ><input type="radio" name="scenario" value="empty" /><span
+                      ><strong>Empty</strong
+                      ><span>No jobs, applications or documents.</span></span
+                    ></label
+                  >
+                  <label class="choice"
+                    ><input type="radio" name="scenario" value="slow" /><span
+                      ><strong>Slow</strong
+                      ><span
+                        >2.5-second responses, to see loading states.</span
+                      ></span
+                    ></label
+                  >
+                  <label class="choice"
+                    ><input type="radio" name="scenario" value="error" /><span
+                      ><strong>Error</strong
+                      ><span
+                        >Every request fails, to see error states.</span
+                      ></span
+                    ></label
+                  >
+                </fieldset>
+                <div class="setting setting--divided">
+                  <p class="small muted">
+                    Your changes to the sample data are saved in this browser.
+                  </p>
+                  <button type="button" class="btn" id="reset-sample">
+                    Reset sample data
+                  </button>
+                </div>
+              </div>
+            </section>
+          </section>
+        </div>
+      </main>
+    </div>
+    <!-- One job source; settings.js copies this for Greenhouse, Lever and Adzuna. -->
+    <template id="source-template">
+      <section class="panel" data-source>
+        <div class="panel__header">
+          <div>
+            <h2 data-name></h2>
+            <p data-about></p>
+          </div>
+          <label class="check">
+            <span class="small ink-2" data-state></span>
+            <input type="checkbox" class="switch" role="switch" data-enabled />
+          </label>
+        </div>
+        <div class="panel__body form-grid">
+          <div class="field">
+            <label data-ids-label></label>
+            <div data-ids></div>
+            <p class="field__hint" data-ids-hint>Press Enter after each one.</p>
+          </div>
+          <p class="small ink-2 icon-text" data-credentials hidden></p>
+          <p class="meta" data-run></p>
+        </div>
+      </section>
+    </template>
+
+    <script type="module" src="js/pages/settings.js"></script>
+  </body>
+</html>

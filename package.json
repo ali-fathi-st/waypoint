@@ -1,0 +1,10 @@
+{
+  "name": "waypoint",
+  "private": true,
+  "description": "Job search and application tracker. Frontend in frontend/, backend in backend/.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\"",
+    "start": "python3 -m http.server 8080 --directory frontend"
+  }
+}

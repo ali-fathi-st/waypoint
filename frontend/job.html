@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Job | Waypoint</title>
+    <meta
+      name="description"
+      content="A job posting with its match explanation."
+    />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-page="jobs">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app">
+      <!-- Sidebar and mobile menu are added here by js/ui/shell.js -->
+      <div id="shell"></div>
+
+      <main id="main" class="main" tabindex="-1">
+        <header class="page-header">
+          <div>
+            <a class="page-header__back" href="jobs.html" id="back-link"
+              >Jobs</a
+            >
+            <h1 id="job-title">Loading job...</h1>
+            <div class="page-header__desc stack-sm" id="job-meta"></div>
+          </div>
+          <div class="page-header__actions" id="job-actions"></div>
+        </header>
+
+        <div id="error"></div>
+
+        <div class="split split--wide-side" id="job-body">
+          <section class="panel" aria-labelledby="description-title">
+            <div class="panel__header">
+              <h2 id="description-title">Description</h2>
+              <a
+                class="btn btn--ghost btn--sm"
+                id="original-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                hidden
+              >
+                Original posting<span class="sr-only">
+                  (opens in a new tab)</span
+                >
+              </a>
+            </div>
+            <!-- Filled with the posting's text. Always inserted as text, never as HTML. -->
+            <div class="panel__body" id="description"></div>
+          </section>
+
+          <div class="stack">
+            <section
+              class="panel"
+              aria-label="Match score"
+              id="match"
+            ></section>
+            <section class="panel" aria-labelledby="skills-title">
+              <div class="panel__header">
+                <div>
+                  <h2 id="skills-title">Skills in this posting</h2>
+                  <p>Extracted from the description.</p>
+                </div>
+              </div>
+              <div class="panel__body" id="skills"></div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="js/pages/job.js"></script>
+  </body>
+</html>

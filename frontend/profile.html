@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profile | Waypoint</title>
+    <meta
+      name="description"
+      content="Your skills, experience and job preferences."
+    />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-page="profile">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app">
+      <!-- Sidebar and mobile menu are added here by js/ui/shell.js -->
+      <div id="shell"></div>
+
+      <main id="main" class="main" tabindex="-1">
+        <header class="page-header">
+          <div>
+            <h1>Candidate profile</h1>
+            <p class="page-header__desc">
+              Your skills, experience and preferences. Matching uses only what
+              you enter here.
+            </p>
+          </div>
+        </header>
+
+        <div id="error"></div>
+
+        <form id="profile-form" class="stack has-save-bar" novalidate hidden>
+          <section class="panel" aria-labelledby="about-title">
+            <div class="panel__header">
+              <div>
+                <h2 id="about-title">About you</h2>
+                <p>
+                  Used to fill in application materials. Nothing is ever made
+                  up.
+                </p>
+              </div>
+            </div>
+            <div class="panel__body form-grid form-grid--2">
+              <div class="field">
+                <label for="full_name"
+                  >Full name <span class="required">*</span></label
+                >
+                <input
+                  class="input"
+                  id="full_name"
+                  name="full_name"
+                  autocomplete="name"
+                  maxlength="120"
+                  aria-describedby="full_name-error"
+                />
+                <p class="field__error" id="full_name-error" hidden></p>
+              </div>
+              <div class="field">
+                <label for="email">Email <span class="required">*</span></label>
+                <input
+                  class="input"
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  aria-describedby="email-error"
+                />
+                <p class="field__error" id="email-error" hidden></p>
+              </div>
+              <div class="field span-2">
+                <label for="headline">Headline</label>
+                <input
+                  class="input"
+                  id="headline"
+                  name="headline"
+                  maxlength="160"
+                  aria-describedby="headline-hint"
+                />
+                <p class="field__hint" id="headline-hint">
+                  One line, for example "IT coordinator moving into data
+                  engineering".
+                </p>
+              </div>
+              <div class="field span-2">
+                <label for="summary">Summary</label>
+                <textarea
+                  class="textarea"
+                  id="summary"
+                  name="summary"
+                  rows="4"
+                  maxlength="2000"
+                ></textarea>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" aria-labelledby="targets-title">
+            <div class="panel__header">
+              <div>
+                <h2 id="targets-title">What you're looking for</h2>
+                <p>These decide which jobs you see and how they score.</p>
+              </div>
+            </div>
+            <div class="panel__body form-grid form-grid--2">
+              <div class="field span-2">
+                <label for="titles-input"
+                  >Target job titles <span class="required">*</span></label
+                >
+                <div id="titles"></div>
+                <p class="field__hint" id="titles-hint">
+                  Press Enter after each title.
+                </p>
+                <p class="field__error" id="titles-error" hidden></p>
+              </div>
+              <div class="field">
+                <label for="locations-input">Locations</label>
+                <div id="locations"></div>
+                <p class="field__hint" id="locations-hint">
+                  Cities you'd work in. Remote jobs always count.
+                </p>
+              </div>
+              <div class="field">
+                <label for="exclusions-input">Skip titles containing</label>
+                <div id="exclusions"></div>
+                <p class="field__hint" id="exclusions-hint">
+                  For example, Senior or Sales.
+                </p>
+              </div>
+              <fieldset
+                class="field span-2"
+                aria-describedby="arrangements-error"
+              >
+                <legend class="field__label">
+                  Work arrangement <span class="required">*</span>
+                </legend>
+                <div class="row row--roomy">
+                  <label class="check"
+                    ><input type="checkbox" name="arrangement" value="onsite" />
+                    On-site</label
+                  >
+                  <label class="check"
+                    ><input type="checkbox" name="arrangement" value="hybrid" />
+                    Hybrid</label
+                  >
+                  <label class="check"
+                    ><input type="checkbox" name="arrangement" value="remote" />
+                    Remote</label
+                  >
+                </div>
+                <p class="field__error" id="arrangements-error" hidden></p>
+              </fieldset>
+              <div class="salary span-2">
+                <div class="field">
+                  <label for="salary_min">Salary from</label>
+                  <input
+                    class="input"
+                    id="salary_min"
+                    name="salary_min"
+                    type="number"
+                    inputmode="numeric"
+                    min="0"
+                    step="1000"
+                  />
+                </div>
+                <div class="field">
+                  <label for="salary_max">Salary to</label>
+                  <input
+                    class="input"
+                    id="salary_max"
+                    name="salary_max"
+                    type="number"
+                    inputmode="numeric"
+                    min="0"
+                    step="1000"
+                    aria-describedby="salary_max-error"
+                  />
+                  <p class="field__error" id="salary_max-error" hidden></p>
+                </div>
+                <div class="field">
+                  <label for="salary_currency">Currency</label>
+                  <select
+                    class="select"
+                    id="salary_currency"
+                    name="salary_currency"
+                  >
+                    <option value="CAD">CAD</option>
+                    <option value="USD">USD</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" aria-labelledby="skills-title">
+            <div class="panel__header">
+              <div>
+                <h2 id="skills-title">Skills</h2>
+                <p>
+                  Compared with the skills in each posting. List only what you
+                  can back up.
+                </p>
+              </div>
+              <button type="button" class="btn btn--sm" id="add-skill">
+                Add skill
+              </button>
+            </div>
+            <div id="skills"></div>
+          </section>
+
+          <section class="panel" aria-labelledby="experience-title">
+            <div class="panel__header">
+              <h2 id="experience-title">Experience</h2>
+              <button type="button" class="btn btn--sm" id="add-experience">
+                Add role
+              </button>
+            </div>
+            <div id="experience"></div>
+          </section>
+
+          <section class="panel" aria-labelledby="education-title">
+            <div class="panel__header">
+              <h2 id="education-title">Education</h2>
+              <button type="button" class="btn btn--sm" id="add-education">
+                Add education
+              </button>
+            </div>
+            <div id="education"></div>
+          </section>
+
+          <!-- Always-visible save bar -->
+          <div class="save-bar">
+            <div class="save-bar__inner">
+              <p class="small muted" id="save-status" aria-live="polite"></p>
+              <div class="row">
+                <button
+                  type="button"
+                  class="btn btn--ghost"
+                  id="discard"
+                  disabled
+                >
+                  Discard
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn--primary"
+                  id="save"
+                  disabled
+                >
+                  Save profile
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
+    <!-- Row templates: profile.js copies these for each skill, role and school. -->
+    <template id="skill-template">
+      <div class="repeat-row" data-row="skill">
+        <div class="repeat-row__fields repeat-row__fields--skill">
+          <div class="field">
+            <label class="sr-only" data-label="name">Skill name</label>
+            <input
+              class="input"
+              data-field="name"
+              placeholder="e.g. SQL"
+              maxlength="60"
+            />
+            <p class="field__error" data-error="name" hidden></p>
+          </div>
+          <div class="field">
+            <label class="sr-only" data-label="proficiency">Level</label>
+            <select class="select" data-field="proficiency">
+              <option value="familiar">Familiar</option>
+              <option value="proficient">Proficient</option>
+              <option value="expert">Expert</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="sr-only" data-label="years">Years</label>
+            <input
+              class="input"
+              data-field="years"
+              type="number"
+              min="0"
+              max="50"
+              placeholder="Years"
+            />
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn btn--ghost btn--icon"
+          data-remove
+          aria-label="Remove skill"
+        ></button>
+      </div>
+    </template>
+
+    <template id="experience-template">
+      <fieldset
+        class="repeat-block form-grid form-grid--2"
+        data-row="experience"
+      >
+        <legend class="sr-only">Role</legend>
+        <div class="field">
+          <label data-label="title"
+            >Job title <span class="required">*</span></label
+          >
+          <input class="input" data-field="title" maxlength="120" />
+          <p class="field__error" data-error="title" hidden></p>
+        </div>
+        <div class="field">
+          <label data-label="company"
+            >Employer <span class="required">*</span></label
+          >
+          <input class="input" data-field="company" maxlength="120" />
+          <p class="field__error" data-error="company" hidden></p>
+        </div>
+        <div class="field">
+          <label data-label="start_month"
+            >Started <span class="required">*</span></label
+          >
+          <input class="input" data-field="start_month" type="month" />
+          <p class="field__error" data-error="start_month" hidden></p>
+        </div>
+        <div class="field">
+          <label data-label="end_month">Ended</label>
+          <input class="input" data-field="end_month" type="month" />
+          <p class="field__hint">Leave empty for your current role.</p>
+          <p class="field__error" data-error="end_month" hidden></p>
+        </div>
+        <div class="field span-2">
+          <label data-label="description">What you did</label>
+          <textarea
+            class="textarea"
+            data-field="description"
+            rows="3"
+            maxlength="2000"
+          ></textarea>
+        </div>
+        <div class="span-2">
+          <button type="button" class="btn btn--ghost btn--sm" data-remove>
+            Remove role
+          </button>
+        </div>
+      </fieldset>
+    </template>
+
+    <template id="education-template">
+      <fieldset
+        class="repeat-block form-grid form-grid--2"
+        data-row="education"
+      >
+        <legend class="sr-only">Education</legend>
+        <div class="field">
+          <label data-label="institution"
+            >Institution <span class="required">*</span></label
+          >
+          <input class="input" data-field="institution" maxlength="120" />
+          <p class="field__error" data-error="institution" hidden></p>
+        </div>
+        <div class="field">
+          <label data-label="credential"
+            >Credential <span class="required">*</span></label
+          >
+          <input
+            class="input"
+            data-field="credential"
+            maxlength="80"
+            placeholder="e.g. BSc, Diploma"
+          />
+          <p class="field__error" data-error="credential" hidden></p>
+        </div>
+        <div class="field">
+          <label data-label="field">Field of study</label>
+          <input class="input" data-field="field" maxlength="120" />
+        </div>
+        <div class="field">
+          <label data-label="end_month">Completed (or expected)</label>
+          <input class="input" data-field="end_month" type="month" />
+        </div>
+        <div class="span-2 row row--between">
+          <label class="check"
+            ><input type="checkbox" data-field="in_progress" /> In
+            progress</label
+          >
+          <button type="button" class="btn btn--ghost btn--sm" data-remove>
+            Remove
+          </button>
+        </div>
+      </fieldset>
+    </template>
+
+    <script type="module" src="js/pages/profile.js"></script>
+  </body>
+</html>

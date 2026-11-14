@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard | Waypoint</title>
+    <meta
+      name="description"
+      content="Waypoint: collect job postings, rank them against your profile, and track every application."
+    />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-page="dashboard">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app">
+      <!-- Sidebar and mobile menu are added here by js/ui/shell.js -->
+      <div id="shell"></div>
+
+      <main id="main" class="main" tabindex="-1">
+        <header class="page-header">
+          <div>
+            <h1>Dashboard</h1>
+            <p class="page-header__desc">Where your job search stands today.</p>
+          </div>
+          <div class="page-header__actions">
+            <a class="btn btn--primary" href="jobs.html?status=new"
+              >Review new jobs</a
+            >
+          </div>
+        </header>
+
+        <div class="stack">
+          <!-- First-visit guide. Hidden once dismissed (remembered in this browser). -->
+          <section
+            class="panel howto"
+            id="howto"
+            aria-labelledby="howto-title"
+            hidden
+          >
+            <div class="panel__header">
+              <div>
+                <h2 id="howto-title">How Waypoint works</h2>
+                <p>Four steps from finding a job to following up.</p>
+              </div>
+              <button
+                type="button"
+                class="btn btn--ghost btn--sm"
+                id="howto-hide"
+              >
+                Hide
+              </button>
+            </div>
+            <div class="panel__body">
+              <ol>
+                <li>
+                  <strong>Fill in your profile</strong
+                  ><span
+                    >Your skills and target titles drive every match
+                    score.</span
+                  >
+                </li>
+                <li>
+                  <strong>Review jobs</strong
+                  ><span>Shortlist the good ones, dismiss the rest.</span>
+                </li>
+                <li>
+                  <strong>Apply on the employer's site</strong
+                  ><span
+                    >Then record it here. Waypoint never applies for you.</span
+                  >
+                </li>
+                <li>
+                  <strong>Follow up</strong
+                  ><span>A reminder appears 14 days after you apply.</span>
+                </li>
+              </ol>
+            </div>
+          </section>
+
+          <div id="error"></div>
+
+          <section
+            class="panel stats"
+            id="stats"
+            aria-label="Summary"
+          ></section>
+
+          <div class="split split--thirds">
+            <div class="stack">
+              <section class="panel" aria-labelledby="review-title">
+                <div class="panel__header">
+                  <div>
+                    <h2 id="review-title">Worth reviewing</h2>
+                    <p>Your highest-scoring new jobs.</p>
+                  </div>
+                  <a class="btn btn--ghost btn--sm" href="jobs.html?status=new"
+                    >All new jobs</a
+                  >
+                </div>
+                <div id="to-review"></div>
+              </section>
+
+              <section class="panel" aria-labelledby="chart-title">
+                <div class="panel__header">
+                  <div>
+                    <h2 id="chart-title">Jobs found per day</h2>
+                    <p>New postings from all sources, last 14 days.</p>
+                  </div>
+                </div>
+                <div class="panel__body chart" id="chart"></div>
+              </section>
+            </div>
+
+            <section class="panel" aria-labelledby="activity-title">
+              <div class="panel__header">
+                <h2 id="activity-title">Recent activity</h2>
+              </div>
+              <div id="activity"></div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="js/pages/dashboard.js"></script>
+  </body>
+</html>
