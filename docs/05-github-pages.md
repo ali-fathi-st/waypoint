@@ -24,6 +24,12 @@ stay in the repository but never appear on the site.
 3. Under **Build and deployment → Source**, choose **GitHub Actions**.
 4. That's it. There's nothing else to configure.
 
+> **Don't add the workflow GitHub suggests.** After you pick "GitHub
+> Actions", GitHub offers templates such as "GitHub Pages Jekyll" or "Static
+> HTML". Skip them: this repository already has its own workflow
+> (`.github/workflows/deploy-pages.yml`). A second one deploys the whole
+> repository over the app, and whichever finishes last wins.
+
 ## Publish (and re-publish)
 
 Any push to `main` publishes. To publish without changing anything:
@@ -70,6 +76,7 @@ The site lives at `/waypoint/`, not at the root of the domain. So:
 | --- | --- | --- |
 | Red ✗ on "Run tests" | A test failed, so nothing was published | Open the run, read which test failed, fix it, push again |
 | Red ✗ on "Deploy" with "Pages not enabled" or a 404 | Pages source isn't set | Do the one-time setup above |
+| Site shows the README instead of the app | A second Pages workflow (e.g. `jekyll-gh-pages.yml`) deployed after ours | Delete the extra file in `.github/workflows/`, keep only `deploy-pages.yml` |
 | Site shows an old version | Browser cache | Hard refresh: `Ctrl + Shift + R` / `Cmd + Shift + R`. Wait a minute after the green check. |
 | Page has no styles | A path starts with `/` or has the wrong case | Make it relative and lowercase |
 | "Page not found" for a page that exists | Wrong case in the link, or the file isn't in `frontend/` | Check the exact file name |
