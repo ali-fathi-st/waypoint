@@ -70,7 +70,7 @@ Use FastAPI's default error bodies. The frontend (`js/api/http-api.js`) reads bo
 | `q` | string | case-insensitive match on title |
 | `company` | string | case-insensitive match on company name |
 | `location` | string | match on location; `remote` also matches remote jobs |
-| `source` | `greenhouse` \| `lever` \| `adzuna` \| `manual` | exact |
+| `source` | `greenhouse` \| `lever` \| `ashby` \| `rss` \| `adzuna` \| `manual` | exact |
 | `found_after` | ISO timestamp | `first_seen_at >= found_after` |
 | `min_score` | 0–100 | `match.score >= min_score` |
 | `review_status` | `active` (default) \| `new` \| `shortlisted` \| `dismissed` \| `all` | `active` = new + shortlisted |

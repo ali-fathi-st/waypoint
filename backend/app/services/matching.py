@@ -16,6 +16,8 @@ from datetime import datetime
 
 from psycopg.types.json import Jsonb
 
+from app.services.area import remote_open_to_you, user_area
+
 WEIGHTS = {
     "required_skills": 0.4,
     "preferred_skills": 0.15,
@@ -57,20 +59,24 @@ def score_job(job: dict, profile: dict, now: datetime) -> dict:
     pref_matched = [s for s in preferred if has(s)]
     factors = []
 
+    # A posting with no skills found at all says nothing either way: half marks, not full.
+    unknown = not job["skills"]
     factors.append({
         "key": "required_skills",
         "label": "Required skills",
         "weight": WEIGHTS["required_skills"],
-        "score": len(req_matched) / len(required) if required else 1,
-        "detail": f"{len(req_matched)} of {len(required)} required skills on your profile"
+        "score": 0.5 if unknown else len(req_matched) / len(required) if required else 1,
+        "detail": "No skills found in the posting" if unknown
+        else f"{len(req_matched)} of {len(required)} required skills on your profile"
         if required else "No required skills listed",
     })  # fmt: skip
     factors.append({
         "key": "preferred_skills",
         "label": "Nice-to-have skills",
         "weight": WEIGHTS["preferred_skills"],
-        "score": len(pref_matched) / len(preferred) if preferred else 1,
-        "detail": f"{len(pref_matched)} of {len(preferred)} nice-to-have skills"
+        "score": 0.5 if unknown else len(pref_matched) / len(preferred) if preferred else 1,
+        "detail": "No skills found in the posting" if unknown
+        else f"{len(pref_matched)} of {len(preferred)} nice-to-have skills"
         if preferred else "No nice-to-have skills listed",
     })  # fmt: skip
 
@@ -95,9 +101,14 @@ def score_job(job: dict, profile: dict, now: datetime) -> dict:
 
     remote = job["work_arrangement"] == "remote"
     location = job["location"]
-    loc_match = remote or (location is not None and any(_city(mine_loc) == _city(location) for mine_loc in profile["locations"]))
-    if remote:
+    remote_open = remote and remote_open_to_you(location, user_area(profile["locations"]))
+    loc_match = remote_open or (
+        location is not None and any(_city(mine_loc) == _city(location) for mine_loc in profile["locations"])
+    )
+    if remote_open:
         loc_detail = "Remote, so location doesn't limit you"
+    elif remote and not loc_match:
+        loc_detail = f"Remote, but only for people in {location}"
     elif loc_match:
         loc_detail = f"{location} is one of your locations"
     else:
@@ -130,12 +141,16 @@ def score_job(job: dict, profile: dict, now: datetime) -> dict:
         total += f["weight"] * f["score"]
     missing_required = [s["name"] for s in required if not has(s)]
     n = len(missing_required)
+    if unknown:
+        summary = "No skills found in the posting; read it to judge the fit."
+    elif n == 0:
+        summary = "You have every required skill listed."
+    else:
+        summary = f"Missing {n} required skill{'' if n == 1 else 's'}: {', '.join(missing_required)}."
     return {
         "job_id": job["id"],
         "score": _js_round(total * 100),
-        "summary": "You have every required skill listed."
-        if n == 0
-        else f"Missing {n} required skill{'' if n == 1 else 's'}: {', '.join(missing_required)}.",
+        "summary": summary,
         "factors": factors,
         "matched_skills": [s["name"] for s in req_matched + pref_matched],
         "missing_skills": [s["name"] for s in required + preferred if not has(s)],

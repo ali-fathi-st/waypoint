@@ -6,3 +6,4 @@ pydantic-settings>=2.4  # reads settings from .env
 python-multipart>=0.0.9 # file uploads (résumés)
 httpx>=0.27             # calls the job sources (and powers FastAPI's TestClient)
 tzdata>=2024.1          # time zones on Windows, which has no built-in list
+defusedxml>=0.7         # reads job feeds (XML) safely

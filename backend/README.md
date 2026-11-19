@@ -1,8 +1,8 @@
 # Backend
 
 The FastAPI server behind Waypoint: PostgreSQL for storage, real job
-collection from Greenhouse, Lever and Adzuna, explainable match scores, and
-every endpoint the website uses (docs/06).
+collection (Government of Alberta feeds, Ashby, Greenhouse, Lever, Adzuna),
+explainable match scores, and every endpoint the website uses (docs/06).
 
 **The full guide is [docs/09](../docs/09-backend.md)**: setup, connecting the
 website, collecting jobs, scheduling, using the API from scripts, how it
@@ -24,6 +24,7 @@ uvicorn app.main:app --reload             # http://localhost:8000/docs
 Then, in another terminal (venv active, `backend` folder):
 
 ```
+python -m db.starter_sources              # turn on checked Alberta sources (fill in your profile first)
 python -m app.ingestion.run               # collect jobs from the sources you turned on
 pytest                                    # run the tests
 ```
@@ -49,9 +50,9 @@ backend/
 │   ├── main.py, config.py, db.py, schemas.py, rows.py, util.py
 │   ├── routers/        jobs, applications, dashboard, candidate, documents, settings, ingestion
 │   ├── services/       matching (the score), rules (application statuses), storage (uploads)
-│   └── ingestion/      run.py (the pipeline), skills.py, text.py, sources/ (greenhouse, lever, adzuna)
+│   └── ingestion/      run.py (the pipeline), check.py, skills.py, text.py, sources/ (greenhouse, lever, ashby, rss, adzuna)
 ├── db/
-│   ├── migrations/     001 jobs, 002 profile, 003 documents + applications, 004 settings + ingestion
+│   ├── migrations/     001 jobs, 002 profile, 003 documents + applications, 004 settings + ingestion, 005 more sources
 │   ├── migrate.py      apply migrations (--reset starts over, --test for the test database)
 │   ├── seed.py         fictional demo data, for trying things out only
 │   └── init/           creates the test database on Docker's first start
@@ -66,7 +67,7 @@ backend/
 | Done | Not yet |
 | --- | --- |
 | All 19 website operations, with the rules below enforced | Sign-in (needed before hosting it anywhere) |
-| Collection from Greenhouse, Lever, Adzuna: raw, quarantine, jobs; change detection; cross-source duplicates; run log | Live runs against the real job boards (adapters are tested on recorded responses) |
+| Collection from Government of Alberta feeds, Ashby, Greenhouse, Lever (checked live) and Adzuna: raw, quarantine, jobs; area and skip-word filters; change detection; cross-source duplicates; run log | Adzuna checked live (needs your key) |
 | Match score (identical to the website's), re-scored when the profile changes | Email notifications |
 | Private uploads (PDF/.docx, 5 MB), export, delete everything | AI cover letters, smarter matching |
 | An HTTP API for other automations, including "collect now" | Hosting |

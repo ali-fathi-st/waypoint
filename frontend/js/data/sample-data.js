@@ -10,6 +10,7 @@
  * on the job page. It's a good first version of the backend's matching logic.
  */
 import { addDays, toDateOnly } from "../lib/format.js";
+import { remoteOpenToYou, userArea } from "../lib/area.js";
 
 // ---------------------------------------------------------------- time helpers
 function daysAgoIso(now, days, hour = 9, minute = 0) {
@@ -636,23 +637,37 @@ export function scoreJob(job, profile, now) {
   const reqMatched = required.filter(has);
   const prefMatched = preferred.filter(has);
   const factors = [];
+  // A posting with no skills found at all says nothing either way: half marks, not full.
+  const unknown = job.skills.length === 0;
   factors.push({
     key: "required_skills",
     label: "Required skills",
     weight: WEIGHTS.required_skills,
-    score: required.length ? reqMatched.length / required.length : 1,
-    detail: required.length
-      ? `${reqMatched.length} of ${required.length} required skills on your profile`
-      : "No required skills listed",
+    score: unknown
+      ? 0.5
+      : required.length
+        ? reqMatched.length / required.length
+        : 1,
+    detail: unknown
+      ? "No skills found in the posting"
+      : required.length
+        ? `${reqMatched.length} of ${required.length} required skills on your profile`
+        : "No required skills listed",
   });
   factors.push({
     key: "preferred_skills",
     label: "Nice-to-have skills",
     weight: WEIGHTS.preferred_skills,
-    score: preferred.length ? prefMatched.length / preferred.length : 1,
-    detail: preferred.length
-      ? `${prefMatched.length} of ${preferred.length} nice-to-have skills`
-      : "No nice-to-have skills listed",
+    score: unknown
+      ? 0.5
+      : preferred.length
+        ? prefMatched.length / preferred.length
+        : 1,
+    detail: unknown
+      ? "No skills found in the posting"
+      : preferred.length
+        ? `${prefMatched.length} of ${preferred.length} nice-to-have skills`
+        : "No nice-to-have skills listed",
   });
   const title = norm(job.title);
   const exactTitle = profile.preferred_titles.find((t) =>
@@ -678,8 +693,11 @@ export function scoreJob(job, profile, now) {
           : "Not one of your target titles",
   });
   const city = (loc) => norm(loc.split(",")[0]);
+  const remote = job.work_arrangement === "remote";
+  const remoteOpen =
+    remote && remoteOpenToYou(job.location, userArea(profile.locations));
   const locMatch =
-    job.work_arrangement === "remote" ||
+    remoteOpen ||
     (job.location != null &&
       profile.locations.some((l) => city(l) === city(job.location)));
   factors.push({
@@ -687,9 +705,10 @@ export function scoreJob(job, profile, now) {
     label: "Location",
     weight: WEIGHTS.location,
     score: locMatch ? 1 : 0,
-    detail:
-      job.work_arrangement === "remote"
-        ? "Remote, so location doesn't limit you"
+    detail: remoteOpen
+      ? "Remote, so location doesn't limit you"
+      : remote && !locMatch
+        ? `Remote, but only for people in ${job.location}`
         : locMatch
           ? `${job.location} is one of your locations`
           : `${job.location ?? "Location not stated"} is outside your locations`,
@@ -734,8 +753,9 @@ export function scoreJob(job, profile, now) {
   return {
     job_id: job.id,
     score,
-    summary:
-      missingRequired.length === 0
+    summary: unknown
+      ? "No skills found in the posting; read it to judge the fit."
+      : missingRequired.length === 0
         ? "You have every required skill listed."
         : `Missing ${missingRequired.length} required skill${missingRequired.length === 1 ? "" : "s"}: ${missingRequired.join(", ")}.`,
     factors,

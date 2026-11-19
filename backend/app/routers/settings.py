@@ -34,7 +34,7 @@ SOURCES = """
     LEFT JOIN (
         SELECT DISTINCT ON (source) * FROM ingestion_runs ORDER BY source, started_at DESC
     ) r ON r.source = s.source
-    ORDER BY array_position(ARRAY['greenhouse', 'lever', 'adzuna'], s.source)
+    ORDER BY array_position(ARRAY['greenhouse', 'lever', 'ashby', 'rss', 'adzuna'], s.source)
 """
 
 
@@ -42,7 +42,7 @@ def credentials_configured(source: str) -> bool:
     if source == "adzuna":
         cfg = get_settings()
         return bool(cfg.adzuna_app_id and cfg.adzuna_app_key)
-    return True  # Greenhouse and Lever job boards are public: no keys needed
+    return True  # the other sources are public: no keys needed
 
 
 def read_settings(db: psycopg.Connection) -> Settings:

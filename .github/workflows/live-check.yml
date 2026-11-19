@@ -1,0 +1,60 @@
+# Runs the real job collector against the live job boards, using the starter
+# sources (db/starter_sources.py) and a sample profile, then prints a report:
+# which boards worked, what was skipped and why, and the best matches.
+# Nothing is saved anywhere. Run it from the Actions tab: "Live source check"
+# > Run workflow. Use it after changing an adapter, or to see if a source
+# changed its format.
+name: Live source check
+
+on:
+  workflow_dispatch:
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: waypoint
+          POSTGRES_PASSWORD: waypoint
+          POSTGRES_DB: waypoint
+        ports: ["5432:5432"]
+        options: --health-cmd "pg_isready -U waypoint" --health-interval 2s --health-retries 15
+    env:
+      DATABASE_URL: postgresql://waypoint:waypoint@localhost:5432/waypoint
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m db.migrate
+      - name: Profile and starter sources
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          from app.db import connect
+          from db.starter_sources import STARTER
+          with connect() as db:
+              for source, ids in STARTER.items():
+                  db.execute("UPDATE source_settings SET enabled = true, identifiers = %s WHERE source = %s", (ids, source))
+              db.execute("""UPDATE candidate_profile SET preferred_titles = '{Data Engineer,Data Analyst,BI Developer,Analytics Engineer,Systems Analyst,IT Analyst}',
+                  locations = '{"Edmonton, AB","Calgary, AB"}', work_arrangements = '{remote,hybrid,onsite}', salary_min = 70000,
+                  exclusions = '{Senior,Staff,Principal,Director,Manager,Sales,Lead,Head,VP,Account}'""")
+              for i, s in enumerate(["Python", "SQL", "Power BI", "Power Automate", "Power Apps", "SharePoint", "Azure", "Git", "Excel", "PowerShell", "Active Directory", "Networking", "PostgreSQL", "REST APIs"]):
+                  db.execute("INSERT INTO candidate_skills (profile_id, position, name, proficiency) VALUES ('me', %s, %s, 'proficient')", (i, s))
+          PY
+      - name: Try the check tool
+        run: |
+          python -m app.ingestion.check greenhouse gitlab nope-not-a-board --show 3
+          python -m app.ingestion.check ashby jobber --show 5
+          python -m app.ingestion.check rss "https://jobpostings.alberta.ca/feeds/data/?locale=en_US" --show 8
+      - name: Collect (first run)
+        run: python -m app.ingestion.run
+      - name: Collect again (should be all unchanged)
+        run: python -m app.ingestion.run
+      - name: Report
+        run: PYTHONPATH=. python scripts/live_report.py

@@ -12,7 +12,7 @@ from typing import Annotated, Literal
 from pydantic import BaseModel, Field
 
 # ---- Allowed values (FastAPI rejects anything else with a 422) ----
-JobSource = Literal["greenhouse", "lever", "adzuna", "manual"]
+JobSource = Literal["greenhouse", "lever", "ashby", "adzuna", "rss", "manual"]
 WorkArrangement = Literal["onsite", "hybrid", "remote", "unknown"]
 EmploymentType = Literal["full_time", "part_time", "contract", "temporary", "internship", "unknown"]
 ReviewStatus = Literal["new", "shortlisted", "dismissed"]
@@ -278,7 +278,7 @@ class DocumentUpdate(BaseModel):
 
 
 # =============================================================== settings
-CollectedSource = Literal["greenhouse", "lever", "adzuna"]
+CollectedSource = Literal["greenhouse", "lever", "ashby", "adzuna", "rss"]
 
 
 class RunSummary(BaseModel):
