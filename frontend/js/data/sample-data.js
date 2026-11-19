@@ -10,6 +10,7 @@
  * on the job page. It's a good first version of the backend's matching logic.
  */
 import { addDays, toDateOnly } from "../lib/format.js";
+import { remoteOpenToYou, userArea } from "../lib/area.js";
 
 // ---------------------------------------------------------------- time helpers
 function daysAgoIso(now, days, hour = 9, minute = 0) {
@@ -678,8 +679,11 @@ export function scoreJob(job, profile, now) {
           : "Not one of your target titles",
   });
   const city = (loc) => norm(loc.split(",")[0]);
+  const remote = job.work_arrangement === "remote";
+  const remoteOpen =
+    remote && remoteOpenToYou(job.location, userArea(profile.locations));
   const locMatch =
-    job.work_arrangement === "remote" ||
+    remoteOpen ||
     (job.location != null &&
       profile.locations.some((l) => city(l) === city(job.location)));
   factors.push({
@@ -687,9 +691,10 @@ export function scoreJob(job, profile, now) {
     label: "Location",
     weight: WEIGHTS.location,
     score: locMatch ? 1 : 0,
-    detail:
-      job.work_arrangement === "remote"
-        ? "Remote, so location doesn't limit you"
+    detail: remoteOpen
+      ? "Remote, so location doesn't limit you"
+      : remote && !locMatch
+        ? `Remote, but only for people in ${job.location}`
         : locMatch
           ? `${job.location} is one of your locations`
           : `${job.location ?? "Location not stated"} is outside your locations`,

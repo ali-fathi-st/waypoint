@@ -38,3 +38,14 @@ with connect() as db:
     print("\n== two sample descriptions")
     for r in db.execute("SELECT source, title, left(description, 600) AS d, skills FROM jobs ORDER BY random() LIMIT 2"):
         print(f"\n--- {r['source']} | {r['title']}\n{r['d']}\nSKILLS: {[(s['name'], s['required']) for s in r['skills']]}")
+
+    print("\n== feed and Ashby samples (title | location | type | salary | posted)")
+    for r in db.execute(
+        "SELECT source, title, location, work_arrangement, employment_type, salary_min, salary_max, salary_currency, posted_at "
+        "FROM jobs WHERE source IN ('rss', 'ashby') ORDER BY source, first_seen_at LIMIT 30"
+    ):
+        print(f"   {r['source']:<6} {r['title'][:55]:<55} | {(r['location'] or '-')[:28]:<28} | {r['work_arrangement']:<7} "
+              f"{r['employment_type']:<10} | {r['salary_min']}-{r['salary_max']} {r['salary_currency']} | {r['posted_at']}")
+    print("\n== raw RSS item (first)")
+    raw = db.execute("SELECT payload FROM raw_postings WHERE source = 'rss' LIMIT 1").fetchone()
+    print(str(raw["payload"])[:2500] if raw else "none")

@@ -68,8 +68,9 @@ class Http:
         self.client = client or httpx.Client(timeout=timeout, headers={"User-Agent": USER_AGENT}, follow_redirects=True)
         self.delay = delay
         self._last = 0.0
+        self._robots: dict = {}
 
-    def get_json(self, url: str, params: dict | None = None):
+    def _get(self, url: str, params: dict | None = None) -> httpx.Response:
         for attempt in range(3):
             wait = self._last + self.delay - time.monotonic()
             if wait > 0:
@@ -94,11 +95,39 @@ class Http:
                 continue
             if response.status_code >= 400:
                 raise SourceError(f"request failed ({response.status_code})")
-            try:
-                return response.json()
-            except ValueError as error:
-                raise SourceError("the source didn't return JSON") from error
+            return response
         raise SourceError("gave up after retries")
+
+    def get_json(self, url: str, params: dict | None = None):
+        response = self._get(url, params)
+        try:
+            return response.json()
+        except ValueError as error:
+            raise SourceError("the source didn't return JSON") from error
+
+    def get_text(self, url: str, params: dict | None = None, max_bytes: int = 10_000_000) -> str:
+        response = self._get(url, params)
+        if len(response.content) > max_bytes:
+            raise SourceError("the response is too large")
+        return response.text
+
+    def allowed_by_robots(self, url: str) -> bool:
+        """Does the site's robots.txt allow fetching this URL? (No robots.txt = allowed.)"""
+        from urllib.parse import urlsplit
+        from urllib.robotparser import RobotFileParser
+
+        parts = urlsplit(url)
+        robots_url = f"{parts.scheme}://{parts.netloc}/robots.txt"
+        if robots_url not in self._robots:
+            parser = RobotFileParser()
+            try:
+                parser.parse(self.get_text(robots_url, max_bytes=500_000).splitlines())
+            except SourceError as error:
+                if "not found" not in str(error):
+                    raise
+                parser.parse([])
+            self._robots[robots_url] = parser
+        return self._robots[robots_url].can_fetch(USER_AGENT, url)
 
     def close(self):
         self.client.close()

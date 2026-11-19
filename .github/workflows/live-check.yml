@@ -35,11 +35,17 @@ jobs:
         run: |
           python - <<'PY'
           from app.db import connect
-          gh = "jobber benevity wealthsimple neofinancial clio 1password hootsuite thinkific dapperlabs koho ada wattpad tophat freshbooks league ecobee nulogy faire gitlab cloudflare databricks stripe samsara affirm coinbase duolingo figma airtable discord reddit twilio okta elastic mongodb datadog hashicorp".split()
-          lv = "plaid palantir spotify attentive koho trulioo clio benevity jobber neofinancial wealthsimple 1password ritual voiceflow cohere shakepay nesto hopper dialogue coveo kinaxis alida leverdemo".split()
+          gh = "orennia robotsandpencils darkhorseviz gitlab cloudflare databricks samsara okta".split()
+          lv = "palantir spotify wealthsimple".split()
+          ab = "jobber neofinancial neo benevity wealthsimple clio 1password koho ada cohere coveo hootsuite".split()
+          base = "https://jobpostings.alberta.ca/feeds/{}/?locale=en_US"
+          rss = [base.format(k) for k in ["data", "analyst", "information%20technology", "business", "systems", "technology"]]
+          rss.append("https://jobpostings.alberta.ca/services/rss/job/?locale=en_US&keywords=data")  # robots.txt says no: must be refused
           with connect() as db:
               db.execute("UPDATE source_settings SET enabled = true, identifiers = %s WHERE source = 'greenhouse'", (gh,))
               db.execute("UPDATE source_settings SET enabled = true, identifiers = %s WHERE source = 'lever'", (lv,))
+              db.execute("UPDATE source_settings SET enabled = true, identifiers = %s WHERE source = 'ashby'", (ab,))
+              db.execute("UPDATE source_settings SET enabled = true, identifiers = %s WHERE source = 'rss'", (rss,))
               db.execute("""UPDATE candidate_profile SET preferred_titles = '{Data Engineer,Data Analyst,BI Developer,Analytics Engineer,Systems Analyst,IT Analyst}',
                   locations = '{"Edmonton, AB","Calgary, AB"}', work_arrangements = '{remote,hybrid,onsite}', salary_min = 70000,
                   exclusions = '{Senior,Staff,Principal,Director,Manager,Sales}'""")
@@ -47,10 +53,13 @@ jobs:
                   db.execute("INSERT INTO candidate_skills (profile_id, position, name, proficiency) VALUES ('me', %s, %s, 'proficient')", (i, s))
           PY
       - name: Try the check tool
-        run: python -m app.ingestion.check greenhouse gitlab nope-not-a-board --show 3
+        run: |
+          python -m app.ingestion.check greenhouse gitlab nope-not-a-board --show 3
+          python -m app.ingestion.check ashby jobber --show 5
+          python -m app.ingestion.check rss "https://jobpostings.alberta.ca/feeds/data/?locale=en_US" --show 8
       - name: Collect (first run)
         run: python -m app.ingestion.run
       - name: Collect again (should be all unchanged)
         run: python -m app.ingestion.run
       - name: Report
-        run: python scripts/live_report.py
+        run: PYTHONPATH=. python scripts/live_report.py

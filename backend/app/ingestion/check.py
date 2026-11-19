@@ -3,7 +3,9 @@ Try job-board identifiers without saving anything: shows whether each board
 exists, how many postings it has, and which are in your area.
 
     python -m app.ingestion.check greenhouse gitlab stripe
-    python -m app.ingestion.check lever plaid --near Edmonton Calgary Canada Remote
+    python -m app.ingestion.check ashby jobber
+    python -m app.ingestion.check rss "https://jobpostings.alberta.ca/feeds/data/?locale=en_US"
+    python -m app.ingestion.check lever palantir --near Edmonton Calgary Canada Remote
 
 Use it to find board names before adding them in Settings > Sources.
 """
@@ -45,6 +47,9 @@ def check(source: str, identifiers: list[str], near: list[str], http: Http | Non
 
 
 def main() -> None:
+    import logging
+
+    logging.getLogger("httpx").setLevel(logging.WARNING)
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("source", choices=sorted(ADAPTERS))
     parser.add_argument("identifiers", nargs="+")

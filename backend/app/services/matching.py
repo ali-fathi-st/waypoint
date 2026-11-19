@@ -16,6 +16,8 @@ from datetime import datetime
 
 from psycopg.types.json import Jsonb
 
+from app.services.area import remote_open_to_you, user_area
+
 WEIGHTS = {
     "required_skills": 0.4,
     "preferred_skills": 0.15,
@@ -95,9 +97,14 @@ def score_job(job: dict, profile: dict, now: datetime) -> dict:
 
     remote = job["work_arrangement"] == "remote"
     location = job["location"]
-    loc_match = remote or (location is not None and any(_city(mine_loc) == _city(location) for mine_loc in profile["locations"]))
-    if remote:
+    remote_open = remote and remote_open_to_you(location, user_area(profile["locations"]))
+    loc_match = remote_open or (
+        location is not None and any(_city(mine_loc) == _city(location) for mine_loc in profile["locations"])
+    )
+    if remote_open:
         loc_detail = "Remote, so location doesn't limit you"
+    elif remote and not loc_match:
+        loc_detail = f"Remote, but only for people in {location}"
     elif loc_match:
         loc_detail = f"{location} is one of your locations"
     else:

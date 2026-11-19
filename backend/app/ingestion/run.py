@@ -11,9 +11,11 @@ docs/09-backend.md.
 For each posting:
   1. Save it as-is in raw_postings (what the source actually said).
   2. Normalize it. If it's unusable, it goes to quarantine with the reason.
-  3. Already stored (same source + id)?   unchanged -> skipped, changed -> updated
-  4. Same job from another source?        skipped (cross-source duplicate)
-  5. Otherwise                            inserted, skills found, scored
+  3. Outside your area (not in your profile's cities or province, and not
+     remote work open to your country)?  skipped, not stored
+  4. Already stored (same source + id)?   unchanged -> skipped, changed -> updated
+  5. Same job from another source?        skipped (cross-source duplicate)
+  6. Otherwise                            inserted, skills found, scored
 Your review status and applications are never touched by a run.
 
 Nothing is invented: if a source fails, the run says so and no jobs appear.
@@ -34,6 +36,7 @@ from app.ingestion.skills import extract_skills
 from app.ingestion.sources import ADAPTERS
 from app.ingestion.sources.base import Http, Invalid, Posting, SourceError
 from app.ingestion.text import norm, slug
+from app.services.area import in_area, user_area
 from app.services.matching import rescore
 from app.util import new_id, utc_now
 
@@ -116,11 +119,13 @@ def run_source(source: str, database_url: str | None = None, http: Http | None =
     own_http = http is None
     http = http or Http(timeout=get_settings().http_timeout)
     counts = {"fetched": 0, "inserted": 0, "updated": 0, "skipped": 0, "failed": 0}
+    outside = 0  # skipped because they're not in your area
     errors: list[dict] = []
     with connect(database_url) as db:
         settings = db.execute("SELECT identifiers FROM source_settings WHERE source = %s", (source,)).fetchone()
         profile = db.execute("SELECT locations FROM candidate_profile LIMIT 1").fetchone()
         vocabulary = [r["name"] for r in db.execute("SELECT name FROM candidate_skills ORDER BY position")]
+        area = user_area(profile["locations"] if profile else [])
         run_id = db.execute(
             "INSERT INTO ingestion_runs (source) VALUES (%s) RETURNING id", (source,)
         ).fetchone()["id"]
@@ -147,6 +152,10 @@ def run_source(source: str, database_url: str | None = None, http: Http | None =
                 )
                 try:
                     posting = adapter.normalize(raw, identifier, context)
+                    if not in_area(posting.location, posting.work_arrangement, area):
+                        counts["skipped"] += 1
+                        outside += 1
+                        continue
                     with db.transaction():  # one bad row can't undo the others
                         outcome, job_id = store(db, source, posting, vocabulary)
                 except (Invalid, KeyError, TypeError, ValueError, psycopg.DataError, psycopg.IntegrityError) as error:
@@ -185,7 +194,7 @@ def run_source(source: str, database_url: str | None = None, http: Http | None =
         ).fetchone()  # fmt: skip
     if own_http:
         http.close()
-    return row
+    return {**row, "outside_area": outside}
 
 
 def run_all(database_url: str | None = None, http: Http | None = None) -> list[dict]:
@@ -199,13 +208,15 @@ def main() -> None:
     parser.add_argument("--source", choices=sorted(ADAPTERS), help="collect only this source")
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(message)s")
+    logging.getLogger("httpx").setLevel(logging.WARNING)  # one line per request is too much
     runs = [run_source(args.source)] if args.source else run_all()
     if not runs:
         print("No sources are enabled. Turn one on in Settings > Sources.")
     for r in runs:
         print(
             f"{r['source']}: {r['status']}. {r['fetched']} fetched, {r['inserted']} new, {r['updated']} updated, "
-            f"{r['skipped']} unchanged or duplicate, {r['failed']} quarantined"
+            f"{r['skipped'] - r['outside_area']} unchanged or duplicate, {r['outside_area']} outside your area, "
+            f"{r['failed']} quarantined"
         )
         for e in r["errors"]:
             print(f"  - {e['identifier'] or '(settings)'}: {e['error']}")
