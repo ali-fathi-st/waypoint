@@ -12,8 +12,9 @@ Read them in order the first time; after that, jump to what you need.
 | 06 | [API contract](06-api-contract.md) | Every endpoint, field and rule for the FastAPI backend, with example JSON |
 | 07 | [Connecting the backend](07-connecting-the-backend.md) | Switching from sample data, one endpoint at a time |
 | 08 | [Testing](08-testing.md) | Automated tests and a click-through checklist |
+| 09 | [Backend steps 1 and 2](09-backend-steps-1-2.md) | Exercise: run FastAPI and PostgreSQL, write the tables and the jobs endpoints |
 
-Also: [backend/README.md](../backend/README.md), the plan for the server.
+Also: [backend/README.md](../backend/README.md), the server: setup, layout and build order.
 
 ## Words used in these guides
 
@@ -28,3 +29,6 @@ Also: [backend/README.md](../backend/README.md), the plan for the server.
 | **localStorage** | A small storage area in your browser, per website |
 | **CORS** | The browser rule that a server must allow a website before the site can call it |
 | **Deploy / publish** | Put the current version online |
+| **Migration** | A numbered SQL file that changes the database structure; each runs once |
+| **Seed data** | Sample rows loaded into a database for development and tests |
+| **Virtual environment** | A folder (`.venv`) holding this project's Python packages, separate from the rest of your computer |

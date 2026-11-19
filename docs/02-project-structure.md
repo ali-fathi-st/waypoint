@@ -12,8 +12,8 @@ waypoint/
 ├── .github/workflows/
 │   └── deploy-pages.yml       Publishes frontend/ to GitHub Pages on every push
 ├── docs/                      These guides
-├── tests/                     Automated checks (npm test)
-├── backend/                   The future FastAPI server (plan only, for now)
+├── tests/                     Automated checks for the website (npm test)
+├── backend/                   The FastAPI server and its own tests (pytest)
 └── frontend/                  The website. This is all GitHub Pages publishes.
 ```
 
@@ -115,7 +115,9 @@ Automated checks using Node's built-in test runner. See [08 Testing](08-testing.
 
 ## backend/
 
-Empty for now except its README, which lays out the FastAPI plan. The frontend
-is designed so the backend can be added one endpoint at a time.
+The FastAPI server, PostgreSQL migrations, seed data and pytest tests. Its
+[README](../backend/README.md) has the full layout and build order; the
+current exercise is [09 Backend steps 1 and 2](09-backend-steps-1-2.md). The
+frontend is designed so the backend can be added one endpoint at a time.
 
 Next: [03 How the frontend works](03-how-the-frontend-works.md)

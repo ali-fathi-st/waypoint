@@ -1,0 +1,5 @@
+# What the backend needs to run. Install with: pip install -r requirements-dev.txt
+fastapi>=0.115          # the web framework
+uvicorn[standard]>=0.30 # the server that runs it
+psycopg[binary]>=3.2    # talks to PostgreSQL
+pydantic-settings>=2.4  # reads settings from .env

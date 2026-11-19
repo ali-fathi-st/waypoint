@@ -1,0 +1,47 @@
+-- =============================================================================
+-- EXERCISE 2a: create the companies and jobs tables.
+-- Guide: docs/09-backend-steps-1-2.md, step 2a.
+--
+-- Write two CREATE TABLE statements below this comment block, then run:
+--     python -m db.migrate
+--     python -m db.seed
+-- and check with:  pytest tests/test_step2a_schema.py
+--
+-- ---- companies --------------------------------------------------------------
+--   id        text, primary key                 e.g. 'co_northline'
+--   name      text, required
+--   website   text, optional (NULL allowed)
+--
+-- ---- jobs -------------------------------------------------------------------
+--   id                text, primary key          e.g. 'job_001'
+--   source            text, required, one of: greenhouse, lever, adzuna, manual
+--   source_job_id     text, required             the source's own id for the posting
+--   title             text, required
+--   company_id        text, required, must exist in companies (foreign key)
+--   location          text, optional
+--   work_arrangement  text, required, one of: onsite, hybrid, remote, unknown
+--   employment_type   text, required, one of: full_time, part_time, contract,
+--                                               temporary, internship, unknown
+--   description       text, required
+--   url               text, required
+--   salary_min        integer, optional, 0 or more
+--   salary_max        integer, optional, 0 or more
+--   salary_currency   text, optional            e.g. 'CAD'
+--   posted_at         timestamptz, optional      when the employer posted it
+--   first_seen_at     timestamptz, required, defaults to now()
+--   last_seen_at      timestamptz, required, defaults to now()
+--   review_status     text, required, defaults to 'new',
+--                     one of: new, shortlisted, dismissed
+--   skills            jsonb, required, defaults to '[]'
+--   match             jsonb, optional            the score explanation
+--   match_score       integer, optional, between 0 and 100
+--
+-- ---- rules ------------------------------------------------------------------
+--   * The same posting must never be stored twice: make (source, source_job_id)
+--     UNIQUE. This is how duplicates are detected later.
+--   * If both salaries are present, salary_max must be >= salary_min.
+--   * Add indexes for what the API filters and sorts by most:
+--     review_status, first_seen_at, match_score.
+--
+-- Hints are in the guide. Try it yourself first!
+-- =============================================================================

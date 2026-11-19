@@ -1,9 +1,26 @@
-# Backend (planned)
+# Backend
 
 The server behind Waypoint: it stores everything in PostgreSQL, collects job
 postings on a schedule, scores them, and answers the website's requests.
-**Nothing is built yet.** This folder holds the plan. The website already
-works without it, on sample data.
+
+**Status:** steps 1 and 2 are set up as guided exercises. The plumbing is
+done; the SQL and the jobs endpoints are yours to write, with tests that say
+when you're done. Start with [docs/09](../docs/09-backend-steps-1-2.md).
+
+## Quick start
+
+```
+cd backend
+docker compose up -d                      # PostgreSQL in Docker
+python3 -m venv .venv                     # Windows: py -m venv .venv
+source .venv/bin/activate                 # Windows: .venv\Scripts\Activate.ps1
+pip install -r requirements-dev.txt
+cp .env.example .env                      # Windows: copy .env.example .env
+python -m db.migrate                      # create the tables
+python -m db.seed                         # load the fictional sample jobs
+uvicorn app.main:app --reload             # http://localhost:8000/docs
+pytest                                    # in a second terminal
+```
 
 ## Stack
 
@@ -12,35 +29,46 @@ works without it, on sample data.
 | Language | Python 3.12+ | |
 | Web framework | FastAPI | Automatic request validation and interactive docs at `/docs` |
 | Data models | Pydantic v2 | Its JSON matches the frontend's field names with no extra config |
-| Database | PostgreSQL | |
-| Database access | SQLAlchemy 2 + Alembic (migrations) | |
-| Tests | pytest | |
+| Database | PostgreSQL 17, in Docker for development | |
+| Database access | psycopg 3 with plain SQL | You see and write every query; the skill data engineering uses daily |
+| Migrations | Numbered `.sql` files, applied by `db/migrate.py` | No tool to learn; it's just SQL |
+| Tests | pytest, against a separate `waypoint_test` database | |
 | Scheduling | GitHub Actions cron first, Prefect later | Runs job collection daily |
 
-## Planned folder layout
+## Folder layout
 
 ```
 backend/
-├── README.md                 this file
-├── pyproject.toml            dependencies
-├── .env.example              DATABASE_URL, ADZUNA_APP_ID, ... (never real values)
-├── alembic/                  database migrations
+├── README.md                  this file
+├── requirements.txt           what the API needs to run
+├── requirements-dev.txt       plus the test tools
+├── .env.example               copy to .env (never commit .env)
+├── docker-compose.yml         PostgreSQL for development
+├── pytest.ini                 test settings
 ├── app/
-│   ├── main.py               FastAPI app, CORS, routers
-│   ├── config.py             settings read from environment variables
-│   ├── db.py                 database connection
-│   ├── models/               SQLAlchemy tables
-│   ├── schemas/              Pydantic request/response models (match docs/06)
-│   ├── routers/              one file per area: jobs, applications, documents, ...
-│   ├── services/
-│   │   ├── matching.py       the match score (port of scoreJob in sample-data.js)
-│   │   └── applications.py   status rules (port of frontend/js/lib/status.js)
-│   └── ingestion/
-│       ├── sources/          greenhouse.py, lever.py, adzuna.py
-│       ├── normalize.py      raw posting → clean job record
-│       └── run.py            one collection run, with a run log
-└── tests/                    pytest, starting with the rules in tests/mock-api.test.js
+│   ├── main.py                FastAPI app, CORS, /health, routers
+│   ├── config.py              settings from .env
+│   ├── db.py                  one connection per request
+│   ├── schemas.py             request/response shapes (match docs/06)
+│   ├── rows.py                database row → Job
+│   └── routers/
+│       └── jobs.py            GET /jobs, GET /jobs/{id}, PATCH /jobs/{id}   ← exercise
+├── db/
+│   ├── migrate.py             applies migrations/*.sql once each, in order
+│   ├── seed.py                loads seed/jobs.json (fictional data)
+│   ├── migrations/
+│   │   └── 001_create_jobs.sql   companies + jobs tables               ← exercise
+│   ├── seed/jobs.json         same sample jobs the website uses
+│   └── init/                  runs once when the Docker database is first created
+└── tests/
+    ├── conftest.py            fresh test database for every test
+    ├── test_step1_health.py
+    ├── test_step2a_schema.py
+    └── test_step2_jobs_api.py
 ```
+
+Coming later: `app/services/` (matching, application rules) and
+`app/ingestion/` (Greenhouse, Lever, Adzuna collectors).
 
 ## Data flow for job collection
 
@@ -68,9 +96,11 @@ operations over in `frontend/js/config.js` as you go
 ([docs/07](../docs/07-connecting-the-backend.md)).
 
 1. **Hello API.** FastAPI app, CORS for `http://localhost:8080`, `GET /health`.
-2. **Jobs, read-only.** `jobs` table, a seed script, `GET /api/v1/jobs` with
-   the filters in [docs/06](../docs/06-api-contract.md), `GET /api/v1/jobs/{id}`.
-   Turn on `listJobs`, `getJob`.
+   *Set up.*
+2. **Jobs.** `jobs` table, a seed script, `GET /api/v1/jobs` with the filters
+   in [docs/06](../docs/06-api-contract.md), `GET /api/v1/jobs/{id}`,
+   `PATCH /api/v1/jobs/{id}`. Turn on `listJobs`, `getJob`, `updateJobStatus`.
+   *Exercise: [docs/09](../docs/09-backend-steps-1-2.md).*
 3. **Profile and scoring.** `GET/PUT /api/v1/candidate`; port `scoreJob()`;
    rescore when the profile changes.
 4. **Applications.** All six application operations, with the status rules
