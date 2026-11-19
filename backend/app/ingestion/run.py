@@ -12,7 +12,8 @@ For each posting:
   1. Save it as-is in raw_postings (what the source actually said).
   2. Normalize it. If it's unusable, it goes to quarantine with the reason.
   3. Outside your area (not in your profile's cities or province, and not
-     remote work open to your country)?  skipped, not stored
+     remote work open to your country), or a title with one of your
+     "Skip titles containing" words?      skipped, not stored
   4. Already stored (same source + id)?   unchanged -> skipped, changed -> updated
   5. Same job from another source?        skipped (cross-source duplicate)
   6. Otherwise                            inserted, skills found, scored
@@ -120,12 +121,14 @@ def run_source(source: str, database_url: str | None = None, http: Http | None =
     http = http or Http(timeout=get_settings().http_timeout)
     counts = {"fetched": 0, "inserted": 0, "updated": 0, "skipped": 0, "failed": 0}
     outside = 0  # skipped because they're not in your area
+    excluded = 0  # skipped because the title has one of your "skip" words
     errors: list[dict] = []
     with connect(database_url) as db:
         settings = db.execute("SELECT identifiers FROM source_settings WHERE source = %s", (source,)).fetchone()
-        profile = db.execute("SELECT locations FROM candidate_profile LIMIT 1").fetchone()
+        profile = db.execute("SELECT locations, exclusions FROM candidate_profile LIMIT 1").fetchone()
         vocabulary = [r["name"] for r in db.execute("SELECT name FROM candidate_skills ORDER BY position")]
         area = user_area(profile["locations"] if profile else [])
+        skip_words = [w.strip().lower() for w in (profile["exclusions"] if profile else []) if w.strip()]
         run_id = db.execute(
             "INSERT INTO ingestion_runs (source) VALUES (%s) RETURNING id", (source,)
         ).fetchone()["id"]
@@ -152,6 +155,10 @@ def run_source(source: str, database_url: str | None = None, http: Http | None =
                 )
                 try:
                     posting = adapter.normalize(raw, identifier, context)
+                    if any(word in posting.title.lower() for word in skip_words):
+                        counts["skipped"] += 1
+                        excluded += 1
+                        continue
                     if not in_area(posting.location, posting.work_arrangement, area):
                         counts["skipped"] += 1
                         outside += 1
@@ -194,7 +201,7 @@ def run_source(source: str, database_url: str | None = None, http: Http | None =
         ).fetchone()  # fmt: skip
     if own_http:
         http.close()
-    return {**row, "outside_area": outside}
+    return {**row, "outside_area": outside, "excluded_title": excluded}
 
 
 def run_all(database_url: str | None = None, http: Http | None = None) -> list[dict]:
@@ -215,8 +222,8 @@ def main() -> None:
     for r in runs:
         print(
             f"{r['source']}: {r['status']}. {r['fetched']} fetched, {r['inserted']} new, {r['updated']} updated, "
-            f"{r['skipped'] - r['outside_area']} unchanged or duplicate, {r['outside_area']} outside your area, "
-            f"{r['failed']} quarantined"
+            f"{r['skipped'] - r['outside_area'] - r['excluded_title']} unchanged or duplicate, "
+            f"{r['outside_area']} outside your area, {r['excluded_title']} skipped by title, {r['failed']} quarantined"
         )
         for e in r["errors"]:
             print(f"  - {e['identifier'] or '(settings)'}: {e['error']}")

@@ -32,7 +32,7 @@ with connect() as db:
         "SELECT j.title, c.name, j.location, j.work_arrangement, j.match_score, j.salary_min, j.salary_max, "
         "j.match->>'summary' AS summary FROM jobs j JOIN companies c ON c.id = j.company_id "
         "WHERE j.location ~* 'edmonton|calgary|alberta|canada' OR j.work_arrangement = 'remote' "
-        "ORDER BY j.match_score DESC NULLS LAST LIMIT 25"
+        "ORDER BY j.match_score DESC NULLS LAST LIMIT 30"
     ):
         print(f"   {r['match_score']:>3} {r['title'][:50]:<50} | {r['name'][:22]:<22} | {(r['location'] or r['work_arrangement'])[:30]}")
     print("\n== two sample descriptions")

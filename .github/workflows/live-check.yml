@@ -41,7 +41,7 @@ jobs:
                   db.execute("UPDATE source_settings SET enabled = true, identifiers = %s WHERE source = %s", (ids, source))
               db.execute("""UPDATE candidate_profile SET preferred_titles = '{Data Engineer,Data Analyst,BI Developer,Analytics Engineer,Systems Analyst,IT Analyst}',
                   locations = '{"Edmonton, AB","Calgary, AB"}', work_arrangements = '{remote,hybrid,onsite}', salary_min = 70000,
-                  exclusions = '{Senior,Staff,Principal,Director,Manager,Sales}'""")
+                  exclusions = '{Senior,Staff,Principal,Director,Manager,Sales,Lead,Head,VP,Account}'""")
               for i, s in enumerate(["Python", "SQL", "Power BI", "Power Automate", "Power Apps", "SharePoint", "Azure", "Git", "Excel", "PowerShell", "Active Directory", "Networking", "PostgreSQL", "REST APIs"]):
                   db.execute("INSERT INTO candidate_skills (profile_id, position, name, proficiency) VALUES ('me', %s, %s, 'proficient')", (i, s))
           PY

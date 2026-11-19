@@ -85,15 +85,26 @@ def countries_in(location: str | None) -> set[str]:
     return found
 
 
+# Words in a location that aren't places: "Remote (Hybrid) - HQ" names no place at all.
+NOT_PLACES = r"\b(remote|hybrid|flexible|work from home|wfh|home|office|offices|hq|headquarters|based|first|only|" \
+             r"within|in|or|and|the|of|any|location|locations|multiple|various|can)\b"
+
+
 def remote_open_to_you(location: str | None, area: dict) -> bool:
-    """A remote job is open to you unless its location limits it to places you're not."""
+    """
+    A remote job is open to you if its location names your country, province or
+    city, or names no place at all ("Remote"). Naming only other places
+    ("Remote, United States", "Remote - ME; NH", "Remote, Sweden") means it isn't.
+    """
     if not area["countries"]:
         return True  # can't tell where you are, so don't guess
     text = _lower(location)
     if re.search(OPEN_TO_ALL, text) or any(city in text for city in area["cities"]):
         return True
-    named = countries_in(location)
-    return not named or bool(named & area["countries"])
+    if countries_in(location) & area["countries"] or re.search(r"\bcan\b", text) and "canada" in area["countries"]:
+        return True
+    leftover = re.sub(r"[^a-z]+", " ", re.sub(NOT_PLACES, " ", text)).strip()
+    return not leftover
 
 
 def in_area(location: str | None, work_arrangement: str, area: dict) -> bool:

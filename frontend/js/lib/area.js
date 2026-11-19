@@ -87,11 +87,26 @@ function countriesIn(location) {
   return found;
 }
 
+// Words in a location that aren't places: "Remote (Hybrid) - HQ" names no place at all.
+const NOT_PLACES =
+  /\b(remote|hybrid|flexible|work from home|wfh|home|office|offices|hq|headquarters|based|first|only|within|in|or|and|the|of|any|location|locations|multiple|various|can)\b/g;
+
+/**
+ * A remote job is open to you if its location names your country, province or
+ * city, or names no place at all ("Remote"). Naming only other places
+ * ("Remote, United States", "Remote, Sweden") means it isn't.
+ */
 export function remoteOpenToYou(location, area) {
   if (!area.countries.size) return true;
   const text = (location ?? "").toLowerCase();
   if (OPEN_TO_ALL.test(text) || [...area.cities].some((c) => text.includes(c)))
     return true;
   const named = countriesIn(location);
-  return !named.size || [...named].some((c) => area.countries.has(c));
+  if ([...named].some((c) => area.countries.has(c))) return true;
+  if (/\bcan\b/.test(text) && area.countries.has("canada")) return true;
+  const leftover = text
+    .replace(NOT_PLACES, " ")
+    .replace(/[^a-z]+/g, " ")
+    .trim();
+  return leftover === "";
 }

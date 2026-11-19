@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from app.db import connect
 from app.ingestion.run import run_source
 from app.ingestion.sources.base import SourceError
 from app.services.area import in_area, remote_open_to_you, user_area
@@ -62,6 +63,11 @@ EDMONTON = user_area(["Edmonton, AB", "Calgary, AB"])
         ("San Francisco, CA", "onsite", False),
         ("Remote - SF Bay Area", "remote", False),
         ("Remote (New York or Seattle)", "remote", False),
+        ("Remote, South Korea", "remote", False),
+        ("Remote - ME; Remote - NH; Remote - VT", "remote", False),
+        ("Remote (Canada)", "remote", True),
+        ("KOHO (CAN)", "remote", True),
+        ("Remote - HQ", "remote", True),
     ],
 )  # fmt: skip
 def test_in_area(location, arrangement, expected):
@@ -172,3 +178,14 @@ def test_feed_links_lose_tracking_parameters(empty):
     run_source("rss", empty, http)
     analyst = next(j for j in jobs(empty, "rss") if "Research" in j["title"])
     assert analyst["url"] == "https://jobpostings.alberta.ca/job/Edmonton-Data-and-Research-Analyst/605081517/"
+
+
+def test_skip_words_in_titles_are_not_stored(empty):
+    configure(empty, "greenhouse", ["exampleco"])
+    with connect(empty) as db:
+        db.execute("UPDATE candidate_profile SET exclusions = '{analytics}'")
+    from tests.test_ingestion import gh_http
+
+    run = run_source("greenhouse", empty, gh_http())
+    assert run["excluded_title"] == 1, "Remote Analytics Engineer has a skip word"
+    assert [j["title"] for j in jobs(empty, "greenhouse")] == ["Data Engineer"]

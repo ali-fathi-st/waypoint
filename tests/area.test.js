@@ -16,6 +16,11 @@ test("remote jobs open to Canada count; other countries don't", () => {
     ["Remote", true],
     [null, true],
     ["Anywhere (Remote)", true],
+    ["Remote, South Korea", false],
+    ["Remote - ME; Remote - NH; Remote - VT", false],
+    ["Remote (Canada)", true],
+    ["KOHO (CAN)", true],
+    ["Remote - HQ", true],
   ]) {
     assert.equal(remoteOpenToYou(location, edmonton), open, String(location));
   }
