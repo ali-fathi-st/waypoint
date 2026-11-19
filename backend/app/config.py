@@ -17,10 +17,24 @@ class Settings(BaseSettings):
     test_database_url: str = "postgresql://waypoint:waypoint@localhost:5432/waypoint_test"
     # Comma-separated list of website origins allowed to call the API.
     cors_origins: str = "http://localhost:8080"
+    # Host names this API answers to. Blocks "DNS rebinding" tricks against a local server.
+    allowed_hosts: str = "localhost,127.0.0.1"
+    # Where uploaded résumés and cover letters are kept. Private: never served.
+    storage_dir: str = "storage"
+    # Adzuna job search (optional). Free keys: https://developer.adzuna.com
+    adzuna_app_id: str = ""
+    adzuna_app_key: str = ""
+    adzuna_country: str = "ca"
+    # How long to wait for a job source before giving up, in seconds.
+    http_timeout: float = 20.0
 
     @property
     def cors_origin_list(self) -> list[str]:
-        return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
+        return [origin.strip().rstrip("/") for origin in self.cors_origins.split(",") if origin.strip()]
+
+    @property
+    def allowed_host_list(self) -> list[str]:
+        return [host.strip() for host in self.allowed_hosts.split(",") if host.strip()]
 
 
 @lru_cache

@@ -115,9 +115,8 @@ Automated checks using Node's built-in test runner. See [08 Testing](08-testing.
 
 ## backend/
 
-The FastAPI server, PostgreSQL migrations, seed data and pytest tests. Its
-[README](../backend/README.md) has the full layout and build order; the
-current exercise is [09 Backend steps 1 and 2](09-backend-steps-1-2.md). The
-frontend is designed so the backend can be added one endpoint at a time.
+The FastAPI server: PostgreSQL migrations, the API, job collection, and its
+pytest tests. Summary in its [README](../backend/README.md); the full guide is
+[09 The backend](09-backend.md).
 
 Next: [03 How the frontend works](03-how-the-frontend-works.md)

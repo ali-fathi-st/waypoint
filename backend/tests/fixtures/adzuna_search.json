@@ -1,0 +1,32 @@
+{
+  "count": 2,
+  "results": [
+    {
+      "id": "4000000001",
+      "title": "<strong>Data</strong> Engineer",
+      "description": "We need SQL and Python skills for our pipelines...",
+      "company": {"display_name": "Example Analytics Co"},
+      "location": {"display_name": "Edmonton, Alberta", "area": ["Canada", "Alberta", "Edmonton"]},
+      "redirect_url": "https://www.adzuna.ca/land/ad/4000000001",
+      "created": "2026-11-12T08:00:00Z",
+      "salary_min": 80000,
+      "salary_max": 100000,
+      "salary_is_predicted": "1",
+      "contract_time": "full_time"
+    },
+    {
+      "id": "4000000002",
+      "title": "BI Developer",
+      "description": "Power BI and SQL reporting.",
+      "company": {"display_name": "Prairie Example Ltd"},
+      "location": {"display_name": "Edmonton, Alberta"},
+      "redirect_url": "https://www.adzuna.ca/land/ad/4000000002",
+      "created": "2026-11-13T08:00:00Z",
+      "salary_min": 78000,
+      "salary_max": 92000,
+      "salary_is_predicted": "0",
+      "contract_type": "permanent",
+      "contract_time": "full_time"
+    }
+  ]
+}

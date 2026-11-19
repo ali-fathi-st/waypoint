@@ -12,9 +12,9 @@ Read them in order the first time; after that, jump to what you need.
 | 06 | [API contract](06-api-contract.md) | Every endpoint, field and rule for the FastAPI backend, with example JSON |
 | 07 | [Connecting the backend](07-connecting-the-backend.md) | Switching from sample data, one endpoint at a time |
 | 08 | [Testing](08-testing.md) | Automated tests and a click-through checklist |
-| 09 | [Backend steps 1 and 2](09-backend-steps-1-2.md) | Exercise: run FastAPI and PostgreSQL, write the tables and the jobs endpoints |
+| 09 | [The backend](09-backend.md) | Run the server and database, collect real jobs, schedule it, use the API from scripts, how it all works |
 
-Also: [backend/README.md](../backend/README.md), the server: setup, layout and build order.
+Also: [backend/README.md](../backend/README.md), a one-page summary of the server.
 
 ## Words used in these guides
 

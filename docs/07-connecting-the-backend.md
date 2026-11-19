@@ -1,8 +1,11 @@
 # 7. Connecting the backend
 
-Until the FastAPI server exists, the site uses built-in sample data. This
-guide switches it over, one endpoint at a time if you like, without touching
-any page code.
+The site uses built-in sample data until you point it at the FastAPI server.
+This guide covers the switch, without touching any page code.
+
+**The backend in `backend/` implements every operation**, so on your
+computer use `apiMode: "http"` (setup: [09 The backend](09-backend.md)). The
+one-endpoint-at-a-time path below is for operations you add yourself.
 
 ## The switch: frontend/js/config.js
 

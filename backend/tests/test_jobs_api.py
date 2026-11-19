@@ -1,23 +1,14 @@
 """
-Steps 2b to 2d: the jobs endpoints. Read a failing test's name and message
-first; each one checks a single rule from the docstrings in app/routers/jobs.py.
-
-Expected results are worked out from db/seed/jobs.json, so if you change the
-sample data these tests still hold.
+The jobs endpoints. Expected results are worked out from the demo data, so
+if the sample data changes these tests still hold.
 """
 
 import pytest
 
-from tests.conftest import parse_time
+from tests.conftest import contract_fields, parse_time
 
-# The fields the website requires in every job (frontend/js/api/contract.js).
-CONTRACT_FIELDS = [
-    "id", "source", "source_job_id", "title", "company", "location",
-    "work_arrangement", "employment_type", "description", "url",
-    "salary_min", "salary_max", "salary_currency",
-    "posted_at", "first_seen_at", "last_seen_at",
-    "review_status", "skills", "match", "application_id",
-]  # fmt: skip
+# The fields the website requires in every job (read from frontend/js/api/contract.js).
+CONTRACT_FIELDS = contract_fields()["job"]
 
 
 def ids(page):
@@ -38,7 +29,7 @@ def score(job):
     return (job["match"] or {}).get("score", -1)
 
 
-# ---------------------------------------------------------------- 2b: one job
+# ---------------------------------------------------------------- one job
 
 
 def test_get_one_job(client, seed_jobs):
@@ -51,7 +42,7 @@ def test_get_one_job(client, seed_jobs):
     assert job["company"] == expected["company"]
     assert job["skills"] == expected["skills"]
     assert job["match"]["score"] == expected["match"]["score"]
-    assert job["application_id"] is None
+    assert job["application_id"] == expected["application_id"]
 
 
 def test_job_has_every_field_the_website_needs(client, seed_jobs):
@@ -71,7 +62,7 @@ def test_unknown_job_is_404(client):
     assert response.json() == {"detail": "Job not found"}
 
 
-# ---------------------------------------------------------------- 2c: the list
+# ---------------------------------------------------------------- the list
 
 
 def test_list_shape(client):
@@ -229,7 +220,7 @@ def test_no_matches_is_an_empty_page(client):
 
 
 def test_search_text_is_never_run_as_sql(client, seed_jobs):
-    """If this fails, user input is being pasted into the SQL. Use %s placeholders."""
+    """User input must never become SQL, and % / _ must be literal characters."""
     attacks = ["' OR '1'='1", "'; DROP TABLE jobs; --", "%", "_"]
     for text in attacks:
         response = client.get("/api/v1/jobs", params={"q": text, "review_status": "all"})
@@ -238,7 +229,7 @@ def test_search_text_is_never_run_as_sql(client, seed_jobs):
     assert everything(client)["total"] == len(seed_jobs), "the jobs table must still be there"
 
 
-# ---------------------------------------------------------------- 2d: status
+# ---------------------------------------------------------------- review status
 
 
 def test_update_shortlists_a_job(client, db, seed_jobs):
@@ -275,3 +266,15 @@ def test_update_unknown_job_is_404(client):
     response = client.patch("/api/v1/jobs/job_nope", json={"review_status": "shortlisted"})
     assert response.status_code == 404
     assert response.json() == {"detail": "Job not found"}
+
+
+def test_jobs_with_an_application_show_its_id(client, seed_jobs):
+    tracked = [j for j in seed_jobs if j["application_id"]]
+    assert tracked
+    for job in tracked:
+        assert client.get(f"/api/v1/jobs/{job['id']}").json()["application_id"] == job["application_id"]
+
+
+def test_timestamps_are_utc(client):
+    job = list_jobs(client)["items"][0]
+    assert job["first_seen_at"].endswith(("Z", "+00:00"))

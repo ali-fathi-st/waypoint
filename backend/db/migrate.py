@@ -42,7 +42,7 @@ def migrate(database_url: str, reset: bool = False) -> list[str]:
                 continue
             sql = path.read_text(encoding="utf-8")
             if not sql.strip() or all(line.strip().startswith("--") for line in sql.splitlines() if line.strip()):
-                raise SystemExit(f"{path.name} has no SQL yet. Write it first (docs/09, step 2a).")
+                raise SystemExit(f"{path.name} has no SQL in it yet.")
             try:
                 conn.execute(sql)
             except psycopg.Error as error:

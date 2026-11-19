@@ -1,6 +1,7 @@
 {
-  "_note": "FICTIONAL sample data, generated from frontend/js/data/sample-data.js. Every company is made up; every link points to example.com.",
-  "generated_at": "2026-11-19T13:34:23.984Z",
+  "_note": "FICTIONAL demo data, generated from frontend/js/data/sample-data.js. Every company and person is made up; every link points to example.com. Development and demos only: never load it into the database you use for your real search.",
+  "generated_at": "2026-11-19T14:00:11.135Z",
+  "timezone": "America/Edmonton",
   "companies": [
     {
       "id": "co_northline",
@@ -161,8 +162,9 @@
           "Airflow"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_002",
@@ -271,8 +273,9 @@
           "Snowflake"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_003",
@@ -381,8 +384,9 @@
           "AWS"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_004",
@@ -485,8 +489,9 @@
           "DAX"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_001"
     },
     {
       "id": "job_005",
@@ -595,8 +600,9 @@
           "Airflow"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_006",
@@ -699,8 +705,9 @@
           "Tableau"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_007",
@@ -796,8 +803,9 @@
         ],
         "missing_skills": [],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_008",
@@ -906,8 +914,9 @@
           "Kafka"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_002"
     },
     {
       "id": "job_009",
@@ -1010,8 +1019,9 @@
           "Kubernetes"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_010",
@@ -1113,8 +1123,9 @@
         ],
         "missing_skills": [],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_003"
     },
     {
       "id": "job_011",
@@ -1223,8 +1234,9 @@
           "dbt"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_012",
@@ -1327,8 +1339,9 @@
           "Great Expectations"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_013",
@@ -1431,8 +1444,9 @@
           "Microsoft 365"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_014",
@@ -1535,8 +1549,9 @@
           "dbt"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_004"
     },
     {
       "id": "job_015",
@@ -1645,8 +1660,9 @@
           "Airflow"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_005"
     },
     {
       "id": "job_016",
@@ -1749,8 +1765,9 @@
           "Looker"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_006"
     },
     {
       "id": "job_017",
@@ -1859,8 +1876,9 @@
           "Azure Data Factory"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_007"
     },
     {
       "id": "job_018",
@@ -1963,8 +1981,9 @@
           "Tableau"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_008"
     },
     {
       "id": "job_019",
@@ -2061,8 +2080,9 @@
           "Linux"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_020",
@@ -2165,8 +2185,9 @@
           "Airflow"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_009"
     },
     {
       "id": "job_021",
@@ -2275,8 +2296,9 @@
           "Snowflake"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     },
     {
       "id": "job_022",
@@ -2379,8 +2401,790 @@
           "Looker"
         ],
         "method": "rules",
-        "computed_at": "2026-11-19T13:34:23.984Z"
-      }
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
     }
-  ]
+  ],
+  "applications": [
+    {
+      "id": "app_001",
+      "job_id": "job_004",
+      "job": {
+        "title": "BI Developer",
+        "company_name": "Prairie Health Data Co-op",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/prairiehealth/4121",
+        "source": "adzuna"
+      },
+      "status": "preparing",
+      "status_source": "user",
+      "applied_at": null,
+      "follow_up_at": null,
+      "resume_document_id": "doc_003",
+      "cover_letter_document_id": null,
+      "notes": "Contract role — ask about extension.",
+      "created_at": "2026-11-19T01:00:00.000Z",
+      "updated_at": "2026-11-19T02:00:00.000Z",
+      "events": [
+        {
+          "id": "evt_0002",
+          "application_id": "app_001",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-19T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0001",
+          "application_id": "app_001",
+          "event_type": "created",
+          "occurred_at": "2026-11-19T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_002",
+      "job_id": "job_008",
+      "job": {
+        "title": "Data Engineer, Integrations",
+        "company_name": "Bowridge Software",
+        "location": "Calgary, AB",
+        "url": "https://jobs.example.com/bowridge/4149",
+        "source": "greenhouse"
+      },
+      "status": "ready_for_review",
+      "status_source": "user",
+      "applied_at": null,
+      "follow_up_at": null,
+      "resume_document_id": "doc_003",
+      "cover_letter_document_id": "doc_005",
+      "notes": "Highlight the API connector work.",
+      "created_at": "2026-11-17T01:00:00.000Z",
+      "updated_at": "2026-11-19T02:05:00.000Z",
+      "events": [
+        {
+          "id": "evt_0005",
+          "application_id": "app_002",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-19T02:05:00.000Z",
+          "summary": "Status changed to ready for review",
+          "from_status": "preparing",
+          "to_status": "ready_for_review",
+          "interview": null
+        },
+        {
+          "id": "evt_0004",
+          "application_id": "app_002",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-18T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0003",
+          "application_id": "app_002",
+          "event_type": "created",
+          "occurred_at": "2026-11-17T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_003",
+      "job_id": "job_010",
+      "job": {
+        "title": "Business Intelligence Analyst",
+        "company_name": "River Valley Municipal Services",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/cityops/4163",
+        "source": "adzuna"
+      },
+      "status": "saved",
+      "status_source": "user",
+      "applied_at": null,
+      "follow_up_at": null,
+      "resume_document_id": null,
+      "cover_letter_document_id": null,
+      "notes": "",
+      "created_at": "2026-11-16T01:00:00.000Z",
+      "updated_at": "2026-11-16T01:00:00.000Z",
+      "events": [
+        {
+          "id": "evt_0006",
+          "application_id": "app_003",
+          "event_type": "created",
+          "occurred_at": "2026-11-16T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_004",
+      "job_id": "job_014",
+      "job": {
+        "title": "Analytics Engineer",
+        "company_name": "Northline Energy Analytics",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/northline/4191",
+        "source": "greenhouse"
+      },
+      "status": "applied",
+      "status_source": "user",
+      "applied_at": "2026-11-12",
+      "follow_up_at": "2026-11-26",
+      "resume_document_id": "doc_003",
+      "cover_letter_document_id": "doc_004",
+      "notes": "Referred by a former classmate.",
+      "created_at": "2026-11-12T01:00:00.000Z",
+      "updated_at": "2026-11-18T02:10:00.000Z",
+      "events": [
+        {
+          "id": "evt_0010",
+          "application_id": "app_004",
+          "event_type": "submission_confirmed",
+          "occurred_at": "2026-11-18T02:10:00.000Z",
+          "summary": "You confirmed you submitted this application on the employer's site",
+          "from_status": "ready_for_review",
+          "to_status": "applied",
+          "interview": null
+        },
+        {
+          "id": "evt_0009",
+          "application_id": "app_004",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-16T02:05:00.000Z",
+          "summary": "Status changed to ready for review",
+          "from_status": "preparing",
+          "to_status": "ready_for_review",
+          "interview": null
+        },
+        {
+          "id": "evt_0008",
+          "application_id": "app_004",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-14T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0007",
+          "application_id": "app_004",
+          "event_type": "created",
+          "occurred_at": "2026-11-12T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_005",
+      "job_id": "job_015",
+      "job": {
+        "title": "Junior Data Engineer",
+        "company_name": "Ravine Logistics",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/ravine/4198",
+        "source": "lever"
+      },
+      "status": "interview",
+      "status_source": "user",
+      "applied_at": "2026-11-10",
+      "follow_up_at": "2026-11-24",
+      "resume_document_id": "doc_002",
+      "cover_letter_document_id": null,
+      "notes": "Hiring manager is the analytics lead.",
+      "created_at": "2026-11-11T01:00:00.000Z",
+      "updated_at": "2026-11-18T21:00:00.000Z",
+      "events": [
+        {
+          "id": "evt_0015",
+          "application_id": "app_005",
+          "event_type": "interview_scheduled",
+          "occurred_at": "2026-11-18T21:00:00.000Z",
+          "summary": "Video interview scheduled",
+          "from_status": null,
+          "to_status": null,
+          "interview": {
+            "scheduled_for": "2026-11-21T16:00:00.000Z",
+            "format": "video",
+            "with_whom": "Analytics lead and one engineer"
+          }
+        },
+        {
+          "id": "evt_0014",
+          "application_id": "app_005",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-18T02:10:00.000Z",
+          "summary": "Status changed to interview",
+          "from_status": "applied",
+          "to_status": "interview",
+          "interview": null
+        },
+        {
+          "id": "evt_0013",
+          "application_id": "app_005",
+          "event_type": "submission_confirmed",
+          "occurred_at": "2026-11-15T02:05:00.000Z",
+          "summary": "You confirmed you submitted this application on the employer's site",
+          "from_status": "preparing",
+          "to_status": "applied",
+          "interview": null
+        },
+        {
+          "id": "evt_0012",
+          "application_id": "app_005",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-13T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0011",
+          "application_id": "app_005",
+          "event_type": "created",
+          "occurred_at": "2026-11-11T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_006",
+      "job_id": "job_016",
+      "job": {
+        "title": "Data Analyst",
+        "company_name": "Bowridge Software",
+        "location": null,
+        "url": "https://jobs.example.com/bowridge/4205",
+        "source": "greenhouse"
+      },
+      "status": "applied",
+      "status_source": "user",
+      "applied_at": "2026-11-03",
+      "follow_up_at": "2026-11-17",
+      "resume_document_id": "doc_002",
+      "cover_letter_document_id": null,
+      "notes": "Applied on their site before tracking here.",
+      "created_at": "2026-11-10T01:00:00.000Z",
+      "updated_at": "2026-11-15T02:00:00.000Z",
+      "events": [
+        {
+          "id": "evt_0017",
+          "application_id": "app_006",
+          "event_type": "submission_confirmed",
+          "occurred_at": "2026-11-15T02:00:00.000Z",
+          "summary": "You confirmed you submitted this application on the employer's site",
+          "from_status": "saved",
+          "to_status": "applied",
+          "interview": null
+        },
+        {
+          "id": "evt_0016",
+          "application_id": "app_006",
+          "event_type": "created",
+          "occurred_at": "2026-11-10T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_007",
+      "job_id": "job_017",
+      "job": {
+        "title": "Data Engineer",
+        "company_name": "Prairie Health Data Co-op",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/prairiehealth/4212",
+        "source": "adzuna"
+      },
+      "status": "rejected",
+      "status_source": "user",
+      "applied_at": "2026-11-08",
+      "follow_up_at": null,
+      "resume_document_id": "doc_002",
+      "cover_letter_document_id": null,
+      "notes": "Rejection email said they chose someone with Azure Data Factory experience.",
+      "created_at": "2026-11-09T01:00:00.000Z",
+      "updated_at": "2026-11-17T02:10:00.000Z",
+      "events": [
+        {
+          "id": "evt_0021",
+          "application_id": "app_007",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-17T02:10:00.000Z",
+          "summary": "Status changed to rejected",
+          "from_status": "applied",
+          "to_status": "rejected",
+          "interview": null
+        },
+        {
+          "id": "evt_0020",
+          "application_id": "app_007",
+          "event_type": "submission_confirmed",
+          "occurred_at": "2026-11-14T02:05:00.000Z",
+          "summary": "You confirmed you submitted this application on the employer's site",
+          "from_status": "preparing",
+          "to_status": "applied",
+          "interview": null
+        },
+        {
+          "id": "evt_0019",
+          "application_id": "app_007",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-12T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0018",
+          "application_id": "app_007",
+          "event_type": "created",
+          "occurred_at": "2026-11-09T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_008",
+      "job_id": "job_018",
+      "job": {
+        "title": "BI Developer",
+        "company_name": "Lumen Retail Systems",
+        "location": "Calgary, AB",
+        "url": "https://jobs.example.com/lumen/4219",
+        "source": "lever"
+      },
+      "status": "withdrawn",
+      "status_source": "user",
+      "applied_at": null,
+      "follow_up_at": null,
+      "resume_document_id": null,
+      "cover_letter_document_id": null,
+      "notes": "Role moved to Calgary on-site full time.",
+      "created_at": "2026-11-08T01:00:00.000Z",
+      "updated_at": "2026-11-16T02:05:00.000Z",
+      "events": [
+        {
+          "id": "evt_0024",
+          "application_id": "app_008",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-16T02:05:00.000Z",
+          "summary": "Status changed to withdrawn",
+          "from_status": "preparing",
+          "to_status": "withdrawn",
+          "interview": null
+        },
+        {
+          "id": "evt_0023",
+          "application_id": "app_008",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-12T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0022",
+          "application_id": "app_008",
+          "event_type": "created",
+          "occurred_at": "2026-11-08T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_009",
+      "job_id": "job_020",
+      "job": {
+        "title": "Data Engineer",
+        "company_name": "Aspen Grove Credit Union",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/aspen/4233",
+        "source": "adzuna"
+      },
+      "status": "offer",
+      "status_source": "user",
+      "applied_at": "2026-11-06",
+      "follow_up_at": null,
+      "resume_document_id": "doc_002",
+      "cover_letter_document_id": "doc_004",
+      "notes": "Offer call scheduled. Compare with the Bowridge process.",
+      "created_at": "2026-11-07T01:00:00.000Z",
+      "updated_at": "2026-11-18T02:20:00.000Z",
+      "events": [
+        {
+          "id": "evt_0030",
+          "application_id": "app_009",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-18T02:20:00.000Z",
+          "summary": "Status changed to offer",
+          "from_status": "interview",
+          "to_status": "offer",
+          "interview": null
+        },
+        {
+          "id": "evt_0029",
+          "application_id": "app_009",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-16T02:15:00.000Z",
+          "summary": "Status changed to interview",
+          "from_status": "applied",
+          "to_status": "interview",
+          "interview": null
+        },
+        {
+          "id": "evt_0028",
+          "application_id": "app_009",
+          "event_type": "submission_confirmed",
+          "occurred_at": "2026-11-13T02:10:00.000Z",
+          "summary": "You confirmed you submitted this application on the employer's site",
+          "from_status": "ready_for_review",
+          "to_status": "applied",
+          "interview": null
+        },
+        {
+          "id": "evt_0027",
+          "application_id": "app_009",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-11T02:05:00.000Z",
+          "summary": "Status changed to ready for review",
+          "from_status": "preparing",
+          "to_status": "ready_for_review",
+          "interview": null
+        },
+        {
+          "id": "evt_0026",
+          "application_id": "app_009",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-09T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0025",
+          "application_id": "app_009",
+          "event_type": "created",
+          "occurred_at": "2026-11-07T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc_001",
+      "document_type": "resume",
+      "title": "General résumé",
+      "version": 1,
+      "status": "archived",
+      "origin": "uploaded",
+      "related_job_id": null,
+      "related_job_title": null,
+      "file_name": "jordan-lee-resume-v1.pdf",
+      "size_bytes": 148220,
+      "created_at": "2026-09-20T15:00:00.000Z",
+      "updated_at": "2026-10-20T15:00:00.000Z"
+    },
+    {
+      "id": "doc_002",
+      "document_type": "resume",
+      "title": "Data-focused résumé",
+      "version": 2,
+      "status": "ready",
+      "origin": "uploaded",
+      "related_job_id": null,
+      "related_job_title": null,
+      "file_name": "jordan-lee-resume-data.pdf",
+      "size_bytes": 152904,
+      "created_at": "2026-10-20T15:00:00.000Z",
+      "updated_at": "2026-10-20T15:00:00.000Z"
+    },
+    {
+      "id": "doc_003",
+      "document_type": "resume",
+      "title": "Data-focused résumé (pipelines first)",
+      "version": 3,
+      "status": "ready",
+      "origin": "uploaded",
+      "related_job_id": null,
+      "related_job_title": null,
+      "file_name": "jordan-lee-resume-data-v3.pdf",
+      "size_bytes": 155310,
+      "created_at": "2026-11-13T15:00:00.000Z",
+      "updated_at": "2026-11-13T15:00:00.000Z"
+    },
+    {
+      "id": "doc_004",
+      "document_type": "cover_letter",
+      "title": "Cover letter — Northline Energy Analytics",
+      "version": 1,
+      "status": "ready",
+      "origin": "generated",
+      "related_job_id": "job_014",
+      "related_job_title": "Analytics Engineer",
+      "file_name": null,
+      "size_bytes": null,
+      "created_at": "2026-11-11T15:00:00.000Z",
+      "updated_at": "2026-11-12T15:00:00.000Z"
+    },
+    {
+      "id": "doc_005",
+      "document_type": "cover_letter",
+      "title": "Cover letter — Bowridge Software",
+      "version": 1,
+      "status": "draft",
+      "origin": "generated",
+      "related_job_id": "job_008",
+      "related_job_title": "Data Engineer, Integrations",
+      "file_name": null,
+      "size_bytes": null,
+      "created_at": "2026-11-17T15:00:00.000Z",
+      "updated_at": "2026-11-17T15:00:00.000Z"
+    },
+    {
+      "id": "doc_006",
+      "document_type": "cover_letter",
+      "title": "Cover letter — Prairie Health Data Co-op",
+      "version": 1,
+      "status": "draft",
+      "origin": "generated",
+      "related_job_id": "job_004",
+      "related_job_title": "BI Developer",
+      "file_name": null,
+      "size_bytes": null,
+      "created_at": "2026-11-18T15:00:00.000Z",
+      "updated_at": "2026-11-18T15:00:00.000Z"
+    }
+  ],
+  "profile": {
+    "id": "cand_001",
+    "full_name": "Jordan Lee",
+    "email": "jordan.lee@example.com",
+    "headline": "IT coordinator moving into data engineering",
+    "summary": "Four years of IT support and systems administration, now building data pipelines in Python and SQL. Automates onboarding workflows, maintains reporting in Power BI, and is finishing a BSc in computing.",
+    "preferred_titles": [
+      "Data Engineer",
+      "Analytics Engineer",
+      "BI Developer",
+      "Data Analyst"
+    ],
+    "locations": [
+      "Edmonton, AB",
+      "Calgary, AB"
+    ],
+    "work_arrangements": [
+      "hybrid",
+      "remote",
+      "onsite"
+    ],
+    "salary_min": 75000,
+    "salary_max": 105000,
+    "salary_currency": "CAD",
+    "exclusions": [
+      "Senior",
+      "Principal",
+      "Sales"
+    ],
+    "skills": [
+      {
+        "name": "Python",
+        "proficiency": "proficient",
+        "years": 3
+      },
+      {
+        "name": "SQL",
+        "proficiency": "proficient",
+        "years": 4
+      },
+      {
+        "name": "PostgreSQL",
+        "proficiency": "proficient",
+        "years": 2
+      },
+      {
+        "name": "Power BI",
+        "proficiency": "expert",
+        "years": 3
+      },
+      {
+        "name": "Power Automate",
+        "proficiency": "expert",
+        "years": 3
+      },
+      {
+        "name": "Git",
+        "proficiency": "proficient",
+        "years": 3
+      },
+      {
+        "name": "Docker",
+        "proficiency": "familiar",
+        "years": 1
+      },
+      {
+        "name": "Azure",
+        "proficiency": "familiar",
+        "years": 1
+      },
+      {
+        "name": "REST APIs",
+        "proficiency": "proficient",
+        "years": 2
+      },
+      {
+        "name": "Excel",
+        "proficiency": "expert",
+        "years": 6
+      }
+    ],
+    "experience": [
+      {
+        "id": "exp_1",
+        "title": "IT Business Coordinator",
+        "company": "Riverbend Health Services",
+        "start_month": "2025-02",
+        "end_month": null,
+        "description": "Built Power Automate flows for staff onboarding and offboarding. Maintains Power BI reporting and SharePoint ticket tracking for a contact centre."
+      },
+      {
+        "id": "exp_2",
+        "title": "Systems Administrator (co-op)",
+        "company": "Tamarack Construction",
+        "start_month": "2024-09",
+        "end_month": "2025-01",
+        "description": "Desktop support for site and remote staff; decommissioned servers at closing project sites."
+      }
+    ],
+    "education": [
+      {
+        "id": "edu_1",
+        "institution": "Northern Plains University",
+        "credential": "BSc",
+        "field": "Computing and Information Systems",
+        "end_month": "2026-12",
+        "in_progress": true
+      },
+      {
+        "id": "edu_2",
+        "institution": "Lakeshore Polytechnic",
+        "credential": "Diploma",
+        "field": "Computer Networking and Technical Support",
+        "end_month": "2020-04",
+        "in_progress": false
+      }
+    ],
+    "updated_at": "2026-11-17T02:00:00.000Z"
+  },
+  "settings": {
+    "sources": [
+      {
+        "source": "greenhouse",
+        "enabled": true,
+        "identifiers": [
+          "northline",
+          "bowridge",
+          "fieldnote"
+        ],
+        "last_run_at": "2026-11-19T12:15:00.000Z",
+        "last_run_status": "succeeded",
+        "last_run_summary": {
+          "fetched": 214,
+          "inserted": 3,
+          "updated": 11,
+          "skipped": 200,
+          "failed": 0
+        },
+        "credentials_configured": true
+      },
+      {
+        "source": "lever",
+        "enabled": true,
+        "identifiers": [
+          "kestrel",
+          "ravine",
+          "lumen"
+        ],
+        "last_run_at": "2026-11-19T12:16:00.000Z",
+        "last_run_status": "partial",
+        "last_run_summary": {
+          "fetched": 96,
+          "inserted": 1,
+          "updated": 4,
+          "skipped": 89,
+          "failed": 2
+        },
+        "credentials_configured": true
+      },
+      {
+        "source": "adzuna",
+        "enabled": true,
+        "identifiers": [
+          "data engineer",
+          "bi developer",
+          "data analyst"
+        ],
+        "last_run_at": "2026-11-19T12:18:00.000Z",
+        "last_run_status": "succeeded",
+        "last_run_summary": {
+          "fetched": 50,
+          "inserted": 2,
+          "updated": 6,
+          "skipped": 42,
+          "failed": 0
+        },
+        "credentials_configured": true
+      }
+    ],
+    "notifications": {
+      "daily_digest": true,
+      "digest_hour": 7,
+      "digest_min_score": 70,
+      "follow_up_reminders": true
+    },
+    "account": {
+      "display_name": "Jordan",
+      "email": "jordan.lee@example.com",
+      "timezone": "America/Edmonton"
+    }
+  }
 }

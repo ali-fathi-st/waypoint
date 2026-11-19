@@ -1,6 +1,6 @@
 """
-Step 2a: your tables. These tests read the database itself, so they check
-the SQL in db/migrations/001_create_jobs.sql directly.
+The tables and the rules the database enforces itself. These read the
+database directly, so they check the SQL in db/migrations/.
 """
 
 import psycopg
@@ -28,6 +28,8 @@ EXPECTED_JOB_COLUMNS = {
     "skills": ("jsonb", False),
     "match": ("jsonb", True),
     "match_score": ("integer", True),
+    "content_hash": ("text", True),
+    "dedupe_key": ("text", True),
 }
 
 
@@ -76,9 +78,11 @@ def test_jobs_table_has_every_column(db):
         assert actual[name][1] == nullable, f"jobs.{name} should be {'NULL' if nullable else 'NOT NULL'}"
 
 
-def test_sample_data_loaded(db, seed_jobs):
-    assert db.execute("SELECT count(*) AS n FROM jobs").fetchone()["n"] == len(seed_jobs)
-    assert db.execute("SELECT count(*) AS n FROM companies").fetchone()["n"] == 10
+def test_sample_data_loaded(db, demo):
+    assert db.execute("SELECT count(*) AS n FROM jobs").fetchone()["n"] == len(demo["jobs"])
+    assert db.execute("SELECT count(*) AS n FROM companies").fetchone()["n"] == len(demo["companies"])
+    assert db.execute("SELECT count(*) AS n FROM applications").fetchone()["n"] == len(demo["applications"])
+    assert db.execute("SELECT count(*) AS n FROM documents").fetchone()["n"] == len(demo["documents"])
 
 
 def test_defaults(db):
@@ -138,3 +142,46 @@ def test_required_columns(db):
 def test_indexes(db, column):
     indexes = db.execute("SELECT indexdef FROM pg_indexes WHERE tablename = 'jobs'").fetchall()
     assert any(f"({column}" in r["indexdef"] for r in indexes), f"add an index on jobs.{column}"
+
+
+def insert_application(db, **changes):
+    row = {"id": "app_test", "job_id": "job_001", **changes}
+    names = ", ".join(row)
+    db.execute(f"INSERT INTO applications ({names}) VALUES ({', '.join(['%s'] * len(row))})", tuple(row.values()))
+
+
+def test_one_application_per_job(db):
+    insert_application(db)
+    with pytest.raises(psycopg.errors.UniqueViolation):
+        insert_application(db, id="app_test_2")
+
+
+def test_follow_up_needs_an_open_application(db):
+    with pytest.raises(psycopg.errors.CheckViolation):
+        insert_application(db, status="rejected", follow_up_at="2026-01-01")
+
+
+def test_follow_up_not_before_applied(db):
+    with pytest.raises(psycopg.errors.CheckViolation):
+        insert_application(db, status="applied", applied_at="2026-02-01", follow_up_at="2026-01-01")
+
+
+def test_document_versions_are_unique_per_type_and_job(db):
+    row = "INSERT INTO documents (id, document_type, title, version, origin) VALUES (%s, 'resume', 'R', 1, 'uploaded')"
+    db.execute("DELETE FROM documents WHERE document_type = 'resume' AND version = 1")
+    db.execute(row, ("doc_a",))
+    with pytest.raises(psycopg.errors.UniqueViolation):
+        db.execute(row, ("doc_b",))
+
+
+def test_settings_have_exactly_one_row(db):
+    with pytest.raises(psycopg.errors.IntegrityError):
+        db.execute("INSERT INTO app_settings (id, notifications, account) VALUES (2, '{}', '{}')")
+
+
+def test_months_are_checked(db):
+    with pytest.raises(psycopg.errors.CheckViolation):
+        db.execute(
+            "INSERT INTO candidate_experience (id, profile_id, position, title, company, start_month) "
+            "VALUES ('e', 'me', 9, 'T', 'C', '2025-13')"
+        )

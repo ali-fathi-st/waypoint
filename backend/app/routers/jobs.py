@@ -1,43 +1,46 @@
 """
-The jobs endpoints. YOUR EXERCISES: steps 2b, 2c and 2d in
-docs/09-backend-steps-1-2.md.
+The jobs endpoints: list (with filters, sorting and pages), get one, and
+shortlist / dismiss.
 
-Each function already has its inputs declared (FastAPI validates them for
-you) and a docstring saying exactly what it must do. Replace each
-`raise HTTPException(501, ...)` with your code. `pytest tests/test_step2_jobs_api.py`
-tells you what still doesn't match.
-
-Rules for every query:
-  * Never put user input into the SQL text (no f-strings with values!).
-    Pass values separately:  db.execute("... WHERE id = %s", (job_id,))
-    That's what makes SQL injection impossible.
-  * Your SELECT must return the columns app/rows.py expects, then
-    row_to_job(row) builds the response for you.
+Every value from the user goes to PostgreSQL as a separate parameter (%s),
+never pasted into the SQL text, so SQL injection is impossible. The one
+f-string below inserts ORDER BY text chosen from a fixed dictionary, never
+user input.
 """
 
 from datetime import datetime
 
 import psycopg
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, Query
 
 from app.db import get_db
-from app.rows import row_to_job
+from app.rows import SELECT_JOB, row_to_job
 from app.schemas import Job, JobPage, JobSort, JobSource, JobStatusUpdate, ReviewFilter
+from app.util import not_found
 
 router = APIRouter(prefix="/api/v1/jobs", tags=["jobs"])
+
+# Ending with j.id makes the order fully predictable, so pages never overlap.
+ORDER_BY = {
+    "match": "j.match_score DESC NULLS LAST, j.first_seen_at DESC, j.id",
+    "newest": "j.first_seen_at DESC, j.id",
+    "posted": "j.posted_at DESC NULLS LAST, j.first_seen_at DESC, j.id",
+}
+
+
+def _like(text: str) -> str:
+    """'data' -> '%data%', with ILIKE's wildcards escaped."""
+    escaped = text.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+    return f"%{escaped}%"
 
 
 @router.get("/{job_id}", response_model=Job)
 def get_job(job_id: str, db: psycopg.Connection = Depends(get_db)) -> Job:
-    """
-    STEP 2b: return one job.
-
-    - SELECT the job's columns plus its company's id, name and website
-      (JOIN companies), named as app/rows.py expects.
-    - If no row comes back: raise HTTPException(status_code=404, detail="Job not found")
-    - Otherwise: return row_to_job(row)
-    """
-    raise HTTPException(status_code=501, detail="Not implemented yet: docs/09, step 2b")
+    """One job, or 404."""
+    row = db.execute(SELECT_JOB + " WHERE j.id = %s", (job_id,)).fetchone()
+    if row is None:
+        raise not_found("Job")
+    return row_to_job(row)
 
 
 @router.get("", response_model=JobPage)
@@ -55,41 +58,55 @@ def list_jobs(
     db: psycopg.Connection = Depends(get_db),
 ) -> JobPage:
     """
-    STEP 2c: return one page of jobs, filtered and sorted.
+    One page of jobs. Filters that are None are skipped; text filters ignore
+    case; location "remote" also matches remote jobs with no location.
+    review_status "active" (the default) means new or shortlisted.
+    `total` counts every match, not just this page.
 
-    Filters (skip any that is None):
-      q             title contains q, ignoring case
-      company       company name contains it, ignoring case
-      location      location contains it, ignoring case; searching "remote"
-                    ALSO matches jobs whose work_arrangement is 'remote'
-      source        exact match
-      found_after   first_seen_at >= found_after
-      min_score     match_score >= min_score
-      review_status "active" = new or shortlisted (the default)
-                    "all"    = no filter
-                    otherwise that exact status
-
-    Careful: in LIKE/ILIKE, % and _ are wildcards. Someone searching for "%"
-    means the character, not "anything", so escape them (hint in docs/09).
-
-    Sort:
-      "match"   match_score highest first (jobs without a score last), then newest
-      "newest"  first_seen_at newest first
-      "posted"  posted_at newest first (no date last), then newest
-
-    Return JobPage(items=[...], total=<count of ALL matches, not just this page>,
-                   limit=limit, offset=offset)
+    % and _ are wildcards in ILIKE, so they're escaped: searching "%" finds a
+    literal percent sign, not everything.
     """
-    raise HTTPException(status_code=501, detail="Not implemented yet: docs/09, step 2c")
+    where, params = [], []
+    if q:
+        where.append("j.title ILIKE %s")
+        params.append(_like(q))
+    if company:
+        where.append("c.name ILIKE %s")
+        params.append(_like(company))
+    if location:
+        if location.strip().lower() == "remote":
+            where.append("(j.location ILIKE %s OR j.work_arrangement = 'remote')")
+        else:
+            where.append("j.location ILIKE %s")
+        params.append(_like(location.strip()))
+    if source:
+        where.append("j.source = %s")
+        params.append(source)
+    if found_after:
+        where.append("j.first_seen_at >= %s")
+        params.append(found_after)
+    if min_score is not None:
+        where.append("j.match_score >= %s")
+        params.append(min_score)
+    if review_status == "active":
+        where.append("j.review_status IN ('new', 'shortlisted')")
+    elif review_status != "all":
+        where.append("j.review_status = %s")
+        params.append(review_status)
+    where_sql = (" WHERE " + " AND ".join(where)) if where else ""
+    total = db.execute(
+        "SELECT count(*) AS n FROM jobs j JOIN companies c ON c.id = j.company_id" + where_sql, params
+    ).fetchone()["n"]
+    rows = db.execute(
+        SELECT_JOB + where_sql + f" ORDER BY {ORDER_BY[sort]} LIMIT %s OFFSET %s", [*params, limit, offset]
+    ).fetchall()
+    return JobPage(items=[row_to_job(r) for r in rows], total=total, limit=limit, offset=offset)
 
 
 @router.patch("/{job_id}", response_model=Job)
 def update_job_status(job_id: str, body: JobStatusUpdate, db: psycopg.Connection = Depends(get_db)) -> Job:
-    """
-    STEP 2d: shortlist, dismiss or restore a job.
-
-    - UPDATE the job's review_status to body.review_status.
-    - If no job has that id: 404 with detail "Job not found".
-    - Return the updated job (tip: reuse get_job(job_id, db)).
-    """
-    raise HTTPException(status_code=501, detail="Not implemented yet: docs/09, step 2d")
+    """Shortlist, dismiss or restore a job."""
+    cur = db.execute("UPDATE jobs SET review_status = %s WHERE id = %s", (body.review_status, job_id))
+    if cur.rowcount == 0:
+        raise not_found("Job")
+    return get_job(job_id, db)

@@ -19,7 +19,8 @@ from app.config import get_settings
 
 def connect(database_url: str | None = None) -> psycopg.Connection:
     """Open a connection. Rows are returned as dicts."""
-    return psycopg.connect(database_url or get_settings().database_url, row_factory=dict_row)
+    # TimeZone=UTC: timestamps come back in UTC, as the API contract says.
+    return psycopg.connect(database_url or get_settings().database_url, row_factory=dict_row, options="-c TimeZone=UTC")
 
 
 def get_db() -> Iterator[psycopg.Connection]:
