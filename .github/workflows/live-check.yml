@@ -31,21 +31,14 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: python -m db.migrate
-      - name: Profile and sources to try
+      - name: Profile and starter sources
         run: |
-          python - <<'PY'
+          PYTHONPATH=. python - <<'PY'
           from app.db import connect
-          gh = "orennia robotsandpencils darkhorseviz gitlab cloudflare databricks samsara okta".split()
-          lv = "palantir spotify wealthsimple".split()
-          ab = "jobber neofinancial neo benevity wealthsimple clio 1password koho ada cohere coveo hootsuite".split()
-          base = "https://jobpostings.alberta.ca/feeds/{}/?locale=en_US"
-          rss = [base.format(k) for k in ["data", "analyst", "information%20technology", "business", "systems", "technology"]]
-          rss.append("https://jobpostings.alberta.ca/services/rss/job/?locale=en_US&keywords=data")  # robots.txt says no: must be refused
+          from db.starter_sources import STARTER
           with connect() as db:
-              db.execute("UPDATE source_settings SET enabled = true, identifiers = %s WHERE source = 'greenhouse'", (gh,))
-              db.execute("UPDATE source_settings SET enabled = true, identifiers = %s WHERE source = 'lever'", (lv,))
-              db.execute("UPDATE source_settings SET enabled = true, identifiers = %s WHERE source = 'ashby'", (ab,))
-              db.execute("UPDATE source_settings SET enabled = true, identifiers = %s WHERE source = 'rss'", (rss,))
+              for source, ids in STARTER.items():
+                  db.execute("UPDATE source_settings SET enabled = true, identifiers = %s WHERE source = %s", (ids, source))
               db.execute("""UPDATE candidate_profile SET preferred_titles = '{Data Engineer,Data Analyst,BI Developer,Analytics Engineer,Systems Analyst,IT Analyst}',
                   locations = '{"Edmonton, AB","Calgary, AB"}', work_arrangements = '{remote,hybrid,onsite}', salary_min = 70000,
                   exclusions = '{Senior,Staff,Principal,Director,Manager,Sales}'""")

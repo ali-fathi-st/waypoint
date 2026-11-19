@@ -29,7 +29,8 @@ US_STATES = (
 # Words that name a country or region in a job's location. "north america" counts for both.
 COUNTRIES = {
     "canada": r"canada|canadian",
-    "united states": r"united states|\busa\b|\bu\.s\.|\bus\b|\bamerica\b",
+    "united states": r"united states|\busa\b|\bu\.s\.|\bus\b|\bamerica\b|bay area|san francisco|new york|\bnyc\b|"
+    r"seattle|boston|chicago|austin|los angeles|denver|atlanta|miami|texas|california|washington,? d\.?c",
     "united kingdom": r"united kingdom|\buk\b|england|scotland|wales",
     "europe": r"europe|\bemea\b|\beu\b",
     "ireland": r"ireland", "germany": r"germany", "france": r"france", "spain": r"spain",

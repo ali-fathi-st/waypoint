@@ -73,6 +73,8 @@ export const JOB_REVIEW_LABEL = {
 export const SOURCE_LABEL = {
   greenhouse: "Greenhouse",
   lever: "Lever",
+  ashby: "Ashby",
+  rss: "Employer feeds",
   adzuna: "Adzuna",
   manual: "Added manually",
 };

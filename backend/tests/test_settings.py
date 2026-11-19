@@ -8,7 +8,7 @@ URL = "/api/v1/settings"
 def test_get(client):
     s = client.get(URL).json()
     assert not [f for f in contract_fields()["settings"] if f not in s]
-    assert [x["source"] for x in s["sources"]] == ["greenhouse", "lever", "adzuna"]
+    assert [x["source"] for x in s["sources"]] == ["greenhouse", "lever", "ashby", "rss", "adzuna"]
     lever = s["sources"][1]
     assert lever["last_run_status"] == "partial" and lever["last_run_summary"]["failed"] == 2
 
@@ -20,7 +20,8 @@ def test_credentials_are_never_returned(client, monkeypatch):
     monkeypatch.setattr(get_settings(), "adzuna_app_key", "secret-456")
     body = client.get(URL).text
     assert "secret-456" not in body and "id-123" not in body
-    assert client.get(URL).json()["sources"][2]["credentials_configured"] is True
+    adzuna = next(x for x in client.get(URL).json()["sources"] if x["source"] == "adzuna")
+    assert adzuna["credentials_configured"] is True
 
 
 def test_update_sources(client):

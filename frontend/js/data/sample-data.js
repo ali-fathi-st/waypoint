@@ -637,23 +637,37 @@ export function scoreJob(job, profile, now) {
   const reqMatched = required.filter(has);
   const prefMatched = preferred.filter(has);
   const factors = [];
+  // A posting with no skills found at all says nothing either way: half marks, not full.
+  const unknown = job.skills.length === 0;
   factors.push({
     key: "required_skills",
     label: "Required skills",
     weight: WEIGHTS.required_skills,
-    score: required.length ? reqMatched.length / required.length : 1,
-    detail: required.length
-      ? `${reqMatched.length} of ${required.length} required skills on your profile`
-      : "No required skills listed",
+    score: unknown
+      ? 0.5
+      : required.length
+        ? reqMatched.length / required.length
+        : 1,
+    detail: unknown
+      ? "No skills found in the posting"
+      : required.length
+        ? `${reqMatched.length} of ${required.length} required skills on your profile`
+        : "No required skills listed",
   });
   factors.push({
     key: "preferred_skills",
     label: "Nice-to-have skills",
     weight: WEIGHTS.preferred_skills,
-    score: preferred.length ? prefMatched.length / preferred.length : 1,
-    detail: preferred.length
-      ? `${prefMatched.length} of ${preferred.length} nice-to-have skills`
-      : "No nice-to-have skills listed",
+    score: unknown
+      ? 0.5
+      : preferred.length
+        ? prefMatched.length / preferred.length
+        : 1,
+    detail: unknown
+      ? "No skills found in the posting"
+      : preferred.length
+        ? `${prefMatched.length} of ${preferred.length} nice-to-have skills`
+        : "No nice-to-have skills listed",
   });
   const title = norm(job.title);
   const exactTitle = profile.preferred_titles.find((t) =>
@@ -739,8 +753,9 @@ export function scoreJob(job, profile, now) {
   return {
     job_id: job.id,
     score,
-    summary:
-      missingRequired.length === 0
+    summary: unknown
+      ? "No skills found in the posting; read it to judge the fit."
+      : missingRequired.length === 0
         ? "You have every required skill listed."
         : `Missing ${missingRequired.length} required skill${missingRequired.length === 1 ? "" : "s"}: ${missingRequired.join(", ")}.`,
     factors,

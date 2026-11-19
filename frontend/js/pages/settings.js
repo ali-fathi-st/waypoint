@@ -60,6 +60,17 @@ const SOURCE_HELP = {
     idLabel: "Company slugs",
     placeholder: "e.g. kestrel",
   },
+  ashby: {
+    about: "Public job boards of employers that use Ashby. No API key needed.",
+    idLabel: "Board names",
+    placeholder: "e.g. jobber",
+  },
+  rss: {
+    about:
+      "Employers' public RSS job feeds, such as the Government of Alberta's. Only read where the site's robots.txt allows it.",
+    idLabel: "Feed addresses",
+    placeholder: "e.g. https://jobpostings.alberta.ca/feeds/data/?locale=en_US",
+  },
   adzuna: {
     about: "Searches many Canadian job boards through the Adzuna API.",
     idLabel: "Search terms",
@@ -70,6 +81,7 @@ const RUN_TEXT = {
   succeeded: ["badge--accent", "Last run succeeded"],
   partial: ["badge--warning", "Last run had failures"],
   failed: ["badge--danger", "Last run failed"],
+  running: ["badge--info", "Running now"],
   never: ["", "Never run"],
 };
 let sourceInputs = []; // { source, enabled: <input>, ids: tag input }

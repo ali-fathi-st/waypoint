@@ -13,7 +13,7 @@ untrusted, so it's parsed with defusedxml (no external entities, no
 
 import re
 from email.utils import parsedate_to_datetime
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from defusedxml import ElementTree
 
@@ -77,6 +77,13 @@ def _field(text: str, *names: str) -> str | None:
     return None
 
 
+def _clean_link(link: str) -> str:
+    """Remove tracking bits (utm_*, feedId) so the same posting always has the same address."""
+    parts = urlsplit(link.strip())
+    query = [(k, v) for k, v in parse_qsl(parts.query) if not k.lower().startswith("utm_") and k != "feedId"]
+    return urlunsplit(parts._replace(query=urlencode(query)))
+
+
 def _date(value: str | None):
     if not value:
         return None
@@ -107,11 +114,11 @@ def normalize(raw: dict, identifier: str, context: dict) -> Posting:
     if employment == "unknown" and "temporary" in kind.lower():
         employment = "temporary"
     salary = YEARLY.search(description)
-    link = (raw.get("link") or "").strip()
+    link = _clean_link(raw.get("link") or "")
     if not link:
         raise Invalid("missing a link")
     return Posting(
-        source_job_id=(raw.get("guid") or link).strip()[:500],
+        source_job_id=_clean_link(raw.get("guid") or link)[:500],
         title=title,
         company_name=context.get("company_name") or urlsplit(identifier).netloc,
         company_website=None,

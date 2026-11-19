@@ -24,7 +24,8 @@ const US_STATES =
   );
 const COUNTRIES = {
   canada: /canada|canadian/,
-  "united states": /united states|\busa\b|\bu\.s\.|\bus\b|\bamerica\b/,
+  "united states":
+    /united states|\busa\b|\bu\.s\.|\bus\b|\bamerica\b|bay area|san francisco|new york|\bnyc\b|seattle|boston|chicago|austin|los angeles|denver|atlanta|miami|texas|california|washington,? d\.?c/,
   "united kingdom": /united kingdom|\buk\b|england|scotland|wales/,
   europe: /europe|\bemea\b|\beu\b/,
   ireland: /ireland/,
