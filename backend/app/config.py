@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     database_url: str = "postgresql://waypoint:waypoint@localhost:5432/waypoint"
     test_database_url: str = "postgresql://waypoint:waypoint@localhost:5432/waypoint_test"
     # Comma-separated list of website origins allowed to call the API.
-    cors_origins: str = "http://localhost:8080"
+    cors_origins: str = "http://localhost:8080,https://ali-fathi-st.github.io"
     # Host names this API answers to. Blocks "DNS rebinding" tricks against a local server.
     allowed_hosts: str = "localhost,127.0.0.1"
     # Where uploaded résumés and cover letters are kept. Private: never served.

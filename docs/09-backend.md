@@ -100,27 +100,38 @@ Stop with `Ctrl+C`. Your data stays in Docker until you delete it.
 
 ## 3. Point the website at it
 
-1. In a second terminal, from the **repository** folder (not `backend`):
-   ```
-   py -m http.server 8080 --directory frontend         # Windows
-   python3 -m http.server 8080 --directory frontend    # Mac
-   ```
-2. In `frontend/js/config.js`:
-   ```js
-   export const config = {
-     apiMode: "http",
-     apiBaseUrl: "http://localhost:8000",
-     liveOperations: [],
-   };
-   ```
-3. Open http://localhost:8080. The sidebar says **Connected to
-   http://localhost:8000**.
+**On the published site** (https://ali-fathi-st.github.io/waypoint/):
 
-**Don't commit that `config.js` change.** GitHub Pages can't use a server on
-your laptop, so the published site would break. Before you commit:
-`git restore frontend/js/config.js`. (If you'd rather not think about it, run
-`git update-index --assume-unchanged frontend/js/config.js` once and git will
-ignore your local change; undo with `--no-assume-unchanged`.)
+1. Start the backend (section 2).
+2. Open the site, go to **Settings → Developer → Your backend**. The address
+   is already filled in (`http://localhost:8000`).
+3. Choose **Connect**. Chrome or Edge asks whether the site may reach apps
+   and services on this device: choose **Allow**.
+4. The page reloads and the sidebar says **Connected to
+   http://localhost:8000**. That's your real data.
+
+It's saved in **this browser only**. Everyone else who opens the site, and
+your other browsers, still see the sample data. Nothing is committed. To go
+back: **Disconnect and use sample data** on the same panel.
+
+It works while the backend is running on that computer. Otherwise every page
+says it can't reach your backend; start uvicorn and refresh. Safari doesn't
+let public sites reach your computer, so use Chrome or Edge.
+
+<details>
+<summary>Or run the website on your computer too</summary>
+
+From the **repository** folder (not `backend`):
+
+```
+py -m http.server 8080 --directory frontend         # Windows
+python3 -m http.server 8080 --directory frontend    # Mac
+```
+
+Open http://localhost:8080 and connect the same way (Settings → Developer).
+Use this when you're changing the website itself.
+
+</details>
 
 Then, in this order:
 
@@ -382,7 +393,8 @@ which are deleted after 30 days.
 | `The database already has jobs` (seed) | Demo data only loads into an empty database | `python -m db.migrate --reset` first, if you really want the demo |
 | `ModuleNotFoundError: app` | Wrong folder | `cd backend` |
 | `ModuleNotFoundError: fastapi` | Virtual environment not active | Activate it (section 1) |
-| Website: "Can't reach the API" | uvicorn stopped, or the site isn't on an allowed origin | Check the uvicorn terminal; use `http://localhost:8080` or add your address to `CORS_ORIGINS` in `.env` |
+| Website: "Can't reach your backend" | uvicorn isn't running, the site's address isn't in `CORS_ORIGINS`, or you chose Block when the browser asked | Check the uvicorn terminal. `CORS_ORIGINS` in `.env` must include `https://ali-fathi-st.github.io` (and `http://localhost:8080` if you run the site locally). If you blocked access: click the icon left of the address bar → Site settings → allow local network / apps on this device |
+| You see sample data on the published site | This browser isn't connected | Settings → Developer → Your backend → Connect |
 | "This website isn't allowed to make changes" (403) | The page's address isn't in `CORS_ORIGINS` | Add it to `.env` exactly as it appears in the address bar (e.g. `http://localhost:8080`), restart uvicorn |
 | `Invalid host header` (400) | You called the API by a name not in `ALLOWED_HOSTS` | Use `localhost`, or add the name to `ALLOWED_HOSTS` in `.env` |
 | A run says `not found (check the board name or company slug)` | The identifier is wrong, or that employer moved to another system | Check the careers link again (Lever slugs are case-sensitive) |

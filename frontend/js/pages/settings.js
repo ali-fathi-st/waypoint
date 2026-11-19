@@ -3,11 +3,17 @@
  * - Sources: which job boards the backend collects from.
  * - Notifications: daily digest and follow-up reminder emails.
  * - Account: name, email, time zone; export or delete all data.
- * - Developer: where data comes from; simulate empty/slow/error states.
+ * - Developer: connect this browser to your backend; where data comes from;
+ *   simulate empty/slow/error states.
  */
 import { initShell } from "../ui/shell.js";
 import { api, apiMode, mockApi } from "../api/api.js";
-import { config } from "../config.js";
+import {
+  connection as config,
+  forgetBackendUrl,
+  saveBackendUrl,
+  testBackend,
+} from "../connection.js";
 import { describeError } from "../api/errors.js";
 import { getMockScenario, setMockScenario } from "../api/mock-api.js";
 import { h, render, $, $$, withBusy } from "../lib/dom.js";
@@ -334,12 +340,72 @@ $("#delete-all").addEventListener("click", async () => {
 
 // =============================================================== developer
 
+// ---- connect this browser to your backend (saved in this browser only)
+const connectedHere = config.source === "browser";
+
+function backendError(message) {
+  const error = $("#backend-url-error");
+  error.textContent = message ?? "";
+  error.hidden = !message;
+  $("#backend-url").setAttribute("aria-invalid", message ? "true" : "false");
+}
+
+function renderBackend() {
+  $("#backend-url").value = connectedHere
+    ? config.apiBaseUrl
+    : "http://localhost:8000";
+  $("#backend-forget").hidden = !connectedHere;
+  $("#backend-connect").textContent = connectedHere
+    ? "Save address"
+    : "Connect";
+  $("#backend-status").textContent = connectedHere
+    ? `This browser is connected to ${config.apiBaseUrl}.`
+    : apiMode === "mock"
+      ? "This browser is using sample data."
+      : `This site is set up (in js/config.js) to use ${config.apiBaseUrl}.`;
+}
+
+$("#backend-test").addEventListener("click", async (e) => {
+  backendError(null);
+  await withBusy(e.currentTarget, "Testing...", async () => {
+    try {
+      await testBackend($("#backend-url").value);
+      toast.success("Your backend answered", "Choose Connect to use it.");
+    } catch (err) {
+      backendError(err.message);
+    }
+  });
+});
+
+$("#backend-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  backendError(null);
+  await withBusy($("#backend-connect"), "Connecting...", async () => {
+    try {
+      await testBackend($("#backend-url").value);
+      saveBackendUrl($("#backend-url").value);
+      toast.success("Connected", "Reloading with your real data...");
+      setTimeout(() => window.location.reload(), 600);
+    } catch (err) {
+      backendError(err.message);
+    }
+  });
+});
+
+$("#backend-forget").addEventListener("click", () => {
+  forgetBackendUrl();
+  toast.success("Disconnected", "Reloading with sample data...");
+  setTimeout(() => window.location.reload(), 600);
+});
+
+renderBackend();
+
 function renderDataSource() {
   const where =
     apiMode === "mock"
       ? "Built-in sample data (the mock API). Nothing is sent anywhere."
       : apiMode === "http"
-        ? `Your backend at ${config.apiBaseUrl}.`
+        ? `Your backend at ${config.apiBaseUrl}${connectedHere ? " (saved in this browser)" : " (set in js/config.js)"}.`
         : `Your backend at ${config.apiBaseUrl} for ${config.liveOperations.join(", ")}; sample data for everything else.`;
   render(
     $("#data-source"),
@@ -347,7 +413,7 @@ function renderDataSource() {
     h(
       "p",
       {},
-      "To connect the FastAPI backend, edit ",
+      "To connect a backend for every visitor instead, edit ",
       h("code", {}, "frontend/js/config.js"),
       ": set ",
       h("code", {}, 'apiMode: "http"'),

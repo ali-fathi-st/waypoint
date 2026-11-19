@@ -218,8 +218,8 @@
                 <div>
                   <h2>Account</h2>
                   <p>
-                    Sign-in is added with the backend. These details label your
-                    exports and emails.
+                    Waypoint is for you alone, so there's no sign-in yet. These
+                    details label your exports and emails.
                   </p>
                 </div>
               </div>
@@ -326,6 +326,56 @@
             class="stack"
             hidden
           >
+            <form class="panel" id="backend-form" novalidate>
+              <div class="panel__header">
+                <div>
+                  <h2 id="backend-title">Your backend</h2>
+                  <p>
+                    Show your real data from the Waypoint backend running on
+                    your computer. Saved in this browser only: everyone else who
+                    opens this site still sees sample data.
+                  </p>
+                </div>
+              </div>
+              <div class="panel__body form-grid measure">
+                <p class="ink-2" id="backend-status"></p>
+                <div class="field">
+                  <label for="backend-url">Backend address</label>
+                  <input
+                    class="input"
+                    id="backend-url"
+                    name="url"
+                    type="url"
+                    inputmode="url"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="http://localhost:8000"
+                    aria-describedby="backend-url-hint backend-url-error"
+                  />
+                  <p class="field__hint" id="backend-url-hint">
+                    Start the backend first (docs/09). Chrome or Edge may ask to
+                    let this site reach apps on your device: choose Allow.
+                  </p>
+                  <p class="field__error" id="backend-url-error" hidden></p>
+                </div>
+                <div class="row">
+                  <button
+                    type="submit"
+                    class="btn btn--primary"
+                    id="backend-connect"
+                  >
+                    Connect
+                  </button>
+                  <button type="button" class="btn" id="backend-test">
+                    Test connection
+                  </button>
+                  <button type="button" class="btn" id="backend-forget" hidden>
+                    Disconnect and use sample data
+                  </button>
+                </div>
+              </div>
+            </form>
+
             <section class="panel" aria-labelledby="source-title">
               <div class="panel__header">
                 <h2 id="source-title">Where the data comes from</h2>

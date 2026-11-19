@@ -4,8 +4,12 @@ A job search tracker. It collects job postings, ranks them against your
 profile and explains every score, then tracks each application from
 "saved" to "offer", with follow-up reminders.
 
-**Live demo:** https://ali-fathi-st.github.io/waypoint/ (runs on fictional
-sample data; nothing you click there is real or sent anywhere)
+**Site:** https://ali-fathi-st.github.io/waypoint/
+
+Visitors see fictional sample data; nothing they click is real or sent
+anywhere. To see **your** data there, run the backend on your computer and
+choose Settings → Developer → Your backend → Connect
+([docs/09](docs/09-backend.md#3-point-the-website-at-it)).
 
 | Part | Folder | Status |
 | --- | --- | --- |

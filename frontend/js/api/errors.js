@@ -39,7 +39,7 @@ export function describeError(e) {
     return "Something unexpected went wrong. Reload the page to try again.";
   switch (e.code) {
     case "network":
-      return "Can't reach the API. Check that the backend is running and apiBaseUrl in js/config.js is correct.";
+      return "Can't reach your backend. Check that it's running, or change the connection in Settings > Developer.";
     case "not_found":
       return "This record doesn't exist, or it was deleted.";
     case "unauthorized":
