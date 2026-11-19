@@ -1,8 +1,16 @@
 # 7. Connecting the backend
 
-Until the FastAPI server exists, the site uses built-in sample data. This
-guide switches it over, one endpoint at a time if you like, without touching
-any page code.
+The site uses built-in sample data until you point it at the FastAPI server.
+This guide covers the switch, without touching any page code.
+
+**The quickest way: Settings → Developer → Your backend → Connect.** It
+points your browser at your backend without changing any file, so the
+published site keeps showing sample data to everyone else. Setup:
+[09 The backend](09-backend.md#3-point-the-website-at-it).
+
+Editing `config.js` (below) changes where data comes from for *every*
+visitor. Use it to connect operations one at a time while you build new ones,
+or once a hosted backend exists.
 
 ## The switch: frontend/js/config.js
 
@@ -70,10 +78,12 @@ valid ones.
 Run **both on your computer**: the site at `http://localhost:8080` and FastAPI
 at `http://localhost:8000`. That avoids every browser restriction.
 
-Don't point the published GitHub Pages site at your laptop. It's an
-`https://` site, and browsers restrict it from calling `http://localhost`:
-Chrome asks for permission, and Safari blocks it. A backend that other
-people use must be hosted on `https://`.
+Don't commit a `config.js` that points at your laptop: every visitor's
+browser would try to reach *their own* computer and fail. To use the
+published site with your backend, connect your browser from Settings →
+Developer instead. Chrome and Edge ask once for permission; Safari blocks
+public sites from reaching your computer. A backend other people use must be
+hosted on `https://`.
 
 | Where | config.js |
 | --- | --- |

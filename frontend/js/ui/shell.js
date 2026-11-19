@@ -6,7 +6,7 @@
 import { h } from "../lib/dom.js";
 import { icon } from "./icons.js";
 import { apiMode } from "../api/api.js";
-import { config } from "../config.js";
+import { connection as config } from "../connection.js";
 import { getMockScenario } from "../api/mock-api.js";
 
 export const NAV_ITEMS = [
@@ -80,8 +80,8 @@ function navList(current) {
 function dataNote() {
   if (apiMode === "http") {
     return h(
-      "p",
-      { class: "data-note" },
+      "a",
+      { href: "settings.html?tab=developer", class: "data-note" },
       icon("database"),
       h("span", {}, `Connected to ${config.apiBaseUrl}`),
     );

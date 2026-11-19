@@ -22,7 +22,9 @@ only if they pass.
 | `tests/api.test.js` | Hybrid mode sends the right operations to the right place |
 
 `mock-api.test.js` doubles as a checklist for the backend: every rule it
-tests, FastAPI must enforce too. Port these tests to `pytest` when you build it.
+tests, FastAPI enforces too, and `backend/tests/test_applications.py` is its
+pytest port. The backend's own tests run with `pytest` from the `backend`
+folder; see [09 The backend](09-backend.md#8-tests).
 
 ### Writing a test
 

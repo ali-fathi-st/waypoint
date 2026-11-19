@@ -1,0 +1,37 @@
+[
+  {
+    "id": "a1b2c3d4-0001",
+    "text": "Data Engineer",
+    "categories": {"location": "Edmonton, AB", "commitment": "Full-time", "team": "Data"},
+    "workplaceType": "hybrid",
+    "hostedUrl": "https://jobs.lever.co/exampleco/a1b2c3d4-0001",
+    "applyUrl": "https://jobs.lever.co/exampleco/a1b2c3d4-0001/apply",
+    "createdAt": 1763000000000,
+    "descriptionPlain": "Build our pipelines.",
+    "description": "<p>Build our pipelines.</p>",
+    "lists": [
+      {"text": "Requirements", "content": "<li>Strong SQL and Python</li><li>Airflow</li>"},
+      {"text": "Nice to have", "content": "<li>dbt</li>"}
+    ],
+    "additionalPlain": "We are an equal opportunity employer.",
+    "salaryRange": {"min": 85000, "max": 105000, "currency": "CAD", "interval": "per-year-salary"},
+    "country": "CA"
+  },
+  {
+    "id": "a1b2c3d4-0002",
+    "text": "Data Analyst (Contract)",
+    "categories": {"location": "Calgary, AB", "commitment": "Contract"},
+    "workplaceType": "unspecified",
+    "hostedUrl": "https://jobs.lever.co/exampleco/a1b2c3d4-0002",
+    "createdAt": 1763100000000,
+    "descriptionPlain": "Reporting in Power BI. Excel is an asset.",
+    "lists": [],
+    "salaryRange": {"min": 40, "max": 55, "currency": "CAD", "interval": "per-hour-wage"}
+  },
+  {
+    "id": "a1b2c3d4-0003",
+    "text": "Broken link job",
+    "categories": {},
+    "hostedUrl": "javascript:alert(1)"
+  }
+]

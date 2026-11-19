@@ -1,7 +1,8 @@
 /**
  * THE API: every page gets its data through this file and nowhere else.
  *
- * It picks the implementation from js/config.js:
+ * It picks the implementation from js/connection.js (js/config.js, unless
+ * this browser was pointed at a backend in Settings > Developer):
  *   mock   -> mock-api.js (sample data in your browser)
  *   http   -> http-api.js (your FastAPI backend)
  *   hybrid -> the operations in config.liveOperations go to the backend,
@@ -10,7 +11,7 @@
  * Because both implementations have the same functions and return the same
  * shapes, switching needs no page changes.
  */
-import { config } from "../config.js";
+import { connection } from "../connection.js";
 import { createMockApi } from "./mock-api.js";
 import { createHttpApi } from "./http-api.js";
 
@@ -51,6 +52,7 @@ export function combineApis(mock, http, live) {
 }
 
 function createApi() {
+  const config = connection;
   if (config.apiMode === "http") return createHttpApi(config.apiBaseUrl);
   if (config.apiMode === "hybrid") {
     return combineApis(

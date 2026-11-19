@@ -1,87 +1,75 @@
-# Backend (planned)
+# Backend
 
-The server behind Waypoint: it stores everything in PostgreSQL, collects job
-postings on a schedule, scores them, and answers the website's requests.
-**Nothing is built yet.** This folder holds the plan. The website already
-works without it, on sample data.
+The FastAPI server behind Waypoint: PostgreSQL for storage, real job
+collection from Greenhouse, Lever and Adzuna, explainable match scores, and
+every endpoint the website uses (docs/06).
+
+**The full guide is [docs/09](../docs/09-backend.md)**: setup, connecting the
+website, collecting jobs, scheduling, using the API from scripts, how it
+works, and what's not built yet.
+
+## Quick start
+
+```
+cd backend
+docker compose up -d                      # PostgreSQL in Docker
+python3 -m venv .venv                     # Windows: py -m venv .venv
+source .venv/bin/activate                 # Windows: .venv\Scripts\Activate.ps1
+pip install -r requirements-dev.txt
+cp .env.example .env                      # Windows: copy .env.example .env
+python -m db.migrate                      # create the tables
+uvicorn app.main:app --reload             # http://localhost:8000/docs
+```
+
+Then, in another terminal (venv active, `backend` folder):
+
+```
+python -m app.ingestion.run               # collect jobs from the sources you turned on
+pytest                                    # run the tests
+```
 
 ## Stack
 
 | Piece | Choice | Why |
 | --- | --- | --- |
 | Language | Python 3.12+ | |
-| Web framework | FastAPI | Automatic request validation and interactive docs at `/docs` |
-| Data models | Pydantic v2 | Its JSON matches the frontend's field names with no extra config |
-| Database | PostgreSQL | |
-| Database access | SQLAlchemy 2 + Alembic (migrations) | |
-| Tests | pytest | |
-| Scheduling | GitHub Actions cron first, Prefect later | Runs job collection daily |
+| Web framework | FastAPI | Request validation and interactive docs at `/docs` |
+| Data models | Pydantic v2 | Its JSON matches the frontend's field names exactly |
+| Database | PostgreSQL 17, in Docker for development | |
+| Database access | psycopg 3 with plain SQL | Every query is visible; the database enforces the key rules |
+| Migrations | Numbered `.sql` files, applied by `db/migrate.py` | Just SQL |
+| Job sources | Official public APIs only, via httpx | |
+| Tests | pytest, against a separate `waypoint_test` database | |
 
-## Planned folder layout
+## Layout
 
 ```
 backend/
-├── README.md                 this file
-├── pyproject.toml            dependencies
-├── .env.example              DATABASE_URL, ADZUNA_APP_ID, ... (never real values)
-├── alembic/                  database migrations
 ├── app/
-│   ├── main.py               FastAPI app, CORS, routers
-│   ├── config.py             settings read from environment variables
-│   ├── db.py                 database connection
-│   ├── models/               SQLAlchemy tables
-│   ├── schemas/              Pydantic request/response models (match docs/06)
-│   ├── routers/              one file per area: jobs, applications, documents, ...
-│   ├── services/
-│   │   ├── matching.py       the match score (port of scoreJob in sample-data.js)
-│   │   └── applications.py   status rules (port of frontend/js/lib/status.js)
-│   └── ingestion/
-│       ├── sources/          greenhouse.py, lever.py, adzuna.py
-│       ├── normalize.py      raw posting → clean job record
-│       └── run.py            one collection run, with a run log
-└── tests/                    pytest, starting with the rules in tests/mock-api.test.js
+│   ├── main.py, config.py, db.py, schemas.py, rows.py, util.py
+│   ├── routers/        jobs, applications, dashboard, candidate, documents, settings, ingestion
+│   ├── services/       matching (the score), rules (application statuses), storage (uploads)
+│   └── ingestion/      run.py (the pipeline), skills.py, text.py, sources/ (greenhouse, lever, adzuna)
+├── db/
+│   ├── migrations/     001 jobs, 002 profile, 003 documents + applications, 004 settings + ingestion
+│   ├── migrate.py      apply migrations (--reset starts over, --test for the test database)
+│   ├── seed.py         fictional demo data, for trying things out only
+│   └── init/           creates the test database on Docker's first start
+├── tests/              about 150 tests; recorded job-board responses in fixtures/
+├── docker-compose.yml  PostgreSQL
+├── .env.example        copy to .env (never commit .env)
+└── storage/            uploaded files (created on first upload; git ignores it)
 ```
 
-## Data flow for job collection
+## Status
 
-```
-Greenhouse / Lever / Adzuna APIs
-        │  fetch (respecting rate limits and terms of use)
-        ▼
-raw_postings        the exact JSON each source returned, with a timestamp
-        │  validate + normalize
-        ├──► quarantine     records that failed validation, with the reason
-        ▼
-jobs                clean records; content_hash detects real changes
-        │  score against the profile
-        ▼
-job_matches         the factors and points the job page shows
-        │
-ingestion_runs      one row per run: fetched, inserted, updated, skipped, failed
-                    (shown in Settings → Sources on the website)
-```
-
-## Build order
-
-Each step ends with the website using real data for one more area. Switch
-operations over in `frontend/js/config.js` as you go
-([docs/07](../docs/07-connecting-the-backend.md)).
-
-1. **Hello API.** FastAPI app, CORS for `http://localhost:8080`, `GET /health`.
-2. **Jobs, read-only.** `jobs` table, a seed script, `GET /api/v1/jobs` with
-   the filters in [docs/06](../docs/06-api-contract.md), `GET /api/v1/jobs/{id}`.
-   Turn on `listJobs`, `getJob`.
-3. **Profile and scoring.** `GET/PUT /api/v1/candidate`; port `scoreJob()`;
-   rescore when the profile changes.
-4. **Applications.** All six application operations, with the status rules
-   enforced server-side. Port `tests/mock-api.test.js` to pytest first, then
-   make them pass.
-5. **Dashboard metrics** as SQL queries.
-6. **Real job collection.** Greenhouse and Lever first (public, no keys),
-   then Adzuna; raw → quarantine → clean; run log; daily schedule.
-7. **Documents** with private file storage (not in the database).
-8. **Settings, export, delete.**
-9. **Sign-in**, then host it on `https://` and point the published site at it.
+| Done | Not yet |
+| --- | --- |
+| All 19 website operations, with the rules below enforced | Sign-in (needed before hosting it anywhere) |
+| Collection from Greenhouse, Lever, Adzuna: raw, quarantine, jobs; change detection; cross-source duplicates; run log | Live runs against the real job boards (adapters are tested on recorded responses) |
+| Match score (identical to the website's), re-scored when the profile changes | Email notifications |
+| Private uploads (PDF/.docx, 5 MB), export, delete everything | AI cover letters, smarter matching |
+| An HTTP API for other automations, including "collect now" | Hosting |
 
 ## Rules the backend must keep
 

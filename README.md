@@ -4,13 +4,17 @@ A job search tracker. It collects job postings, ranks them against your
 profile and explains every score, then tracks each application from
 "saved" to "offer", with follow-up reminders.
 
-**Live demo:** https://ali-fathi-st.github.io/waypoint/ (runs on fictional
-sample data; nothing you click there is real or sent anywhere)
+**Site:** https://ali-fathi-st.github.io/waypoint/
+
+Visitors see fictional sample data; nothing they click is real or sent
+anywhere. To see **your** data there, run the backend on your computer and
+choose Settings → Developer → Your backend → Connect
+([docs/09](docs/09-backend.md#3-point-the-website-at-it)).
 
 | Part | Folder | Status |
 | --- | --- | --- |
 | Website (what you see) | [`frontend/`](frontend/) | Done. Plain HTML, CSS and JavaScript. Runs on sample data. |
-| Server and database | [`backend/`](backend/) | Planned. Python + FastAPI + PostgreSQL. |
+| Server and database | [`backend/`](backend/) | Python + FastAPI + PostgreSQL. Runs on your computer. |
 | Guides | [`docs/`](docs/) | How everything works and how to change it. |
 | Tests | [`tests/`](tests/) | Checks the rules (dates, statuses, API). |
 
@@ -67,6 +71,7 @@ Step by step: [docs/05-github-pages.md](docs/05-github-pages.md).
 | [06 API contract](docs/06-api-contract.md) | build the backend endpoints |
 | [07 Connecting the backend](docs/07-connecting-the-backend.md) | switch from sample data to your FastAPI server |
 | [08 Testing](docs/08-testing.md) | check that nothing broke |
+| [09 The backend](docs/09-backend.md) | run it, collect real jobs, use the API from your own automations |
 
 ## How it's built
 
@@ -82,7 +87,7 @@ Step by step: [docs/05-github-pages.md](docs/05-github-pages.md).
 
 1. ~~Frontend with sample data~~ ✓
 2. ~~Publish on GitHub Pages~~ ✓
-3. Backend: FastAPI + PostgreSQL, starting with `GET /api/v1/jobs` (see [backend/README.md](backend/README.md))
-4. Job collection from Greenhouse, Lever and Adzuna on a schedule
+3. ~~Backend: FastAPI + PostgreSQL, every endpoint~~ ✓ ([docs/09](docs/09-backend.md))
+4. ~~Job collection from Greenhouse, Lever and Adzuna~~ ✓ (scheduled on your computer)
 5. Better matching (skills extraction, text similarity) and AI-drafted cover letters you review before use
 6. Sign-in

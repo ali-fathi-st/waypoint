@@ -169,7 +169,7 @@ UI refetches jobs after a save.
 | POST | `/api/v1/documents` | `multipart/form-data`: `document_type`, `title`, `related_job_id?`, `file` | `Document` |
 | PATCH | `/api/v1/documents/{id}` | `{"title"?, "status"?}` | `Document` |
 
-`version` increments per `document_type`. Accept PDF and DOCX up to 5 MB (the
+`version` counts up per `document_type` and related job: résumé v1, v2, v3; each job's cover letter starts at v1. Accept PDF and DOCX up to 5 MB (the
 frontend checks too, but the API must enforce it). Store files in private
 object storage, never in the response. The frontend never needs a file URL in
 this version.

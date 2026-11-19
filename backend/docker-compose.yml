@@ -1,0 +1,25 @@
+# PostgreSQL for development, in Docker.
+#   Start:  docker compose up -d
+#   Stop:   docker compose down          (your data is kept)
+#   Reset:  docker compose down -v       (deletes all data; next start is fresh)
+#
+# Creates two databases: "waypoint" for the app and "waypoint_test" for pytest.
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: waypoint
+      POSTGRES_PASSWORD: waypoint # development only; never use this in production
+      POSTGRES_DB: waypoint
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d # runs once, on first start
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U waypoint"]
+      interval: 2s
+      retries: 15
+
+volumes:
+  pgdata:

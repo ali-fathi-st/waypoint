@@ -609,7 +609,11 @@ export function createMockApi(options = {}) {
           Math.max(
             0,
             ...data.documents
-              .filter((d) => d.document_type === input.document_type)
+              .filter(
+                (d) =>
+                  d.document_type === input.document_type &&
+                  d.related_job_id === (job?.id ?? null),
+              )
               .map((d) => d.version),
           ) + 1;
         const doc = {

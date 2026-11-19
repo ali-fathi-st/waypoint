@@ -1,0 +1,3190 @@
+{
+  "_note": "FICTIONAL demo data, generated from frontend/js/data/sample-data.js. Every company and person is made up; every link points to example.com. Development and demos only: never load it into the database you use for your real search.",
+  "generated_at": "2026-11-19T14:00:11.135Z",
+  "timezone": "America/Edmonton",
+  "companies": [
+    {
+      "id": "co_northline",
+      "name": "Northline Energy Analytics",
+      "website": "https://northline.example.com"
+    },
+    {
+      "id": "co_kestrel",
+      "name": "Kestrel Insurance Group",
+      "website": "https://kestrel.example.com"
+    },
+    {
+      "id": "co_bowridge",
+      "name": "Bowridge Software",
+      "website": "https://bowridge.example.com"
+    },
+    {
+      "id": "co_prairiehealth",
+      "name": "Prairie Health Data Co-op",
+      "website": "https://prairiehealth.example.com"
+    },
+    {
+      "id": "co_ravine",
+      "name": "Ravine Logistics",
+      "website": "https://ravine.example.com"
+    },
+    {
+      "id": "co_aspen",
+      "name": "Aspen Grove Credit Union",
+      "website": "https://aspengrove.example.com"
+    },
+    {
+      "id": "co_lumen",
+      "name": "Lumen Retail Systems",
+      "website": "https://lumenretail.example.com"
+    },
+    {
+      "id": "co_cityops",
+      "name": "River Valley Municipal Services",
+      "website": null
+    },
+    {
+      "id": "co_fieldnote",
+      "name": "Fieldnote Labs",
+      "website": "https://fieldnote.example.com"
+    },
+    {
+      "id": "co_tamarack",
+      "name": "Tamarack Civil",
+      "website": "https://tamarack.example.com"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job_001",
+      "source": "greenhouse",
+      "source_job_id": "greenhouse-4100",
+      "title": "Data Engineer",
+      "company": {
+        "id": "co_northline",
+        "name": "Northline Energy Analytics",
+        "website": "https://northline.example.com"
+      },
+      "location": "Edmonton, AB",
+      "work_arrangement": "hybrid",
+      "employment_type": "full_time",
+      "description": "Northline turns pipeline and well-site telemetry into daily operating reports for field teams across Alberta.\n\nWhat you'll do\n- Build and maintain batch ingestion jobs that land sensor data in PostgreSQL\n- Model clean, tested tables for the reporting team\n- Monitor pipeline runs and fix failures before the morning reports\n\nWhat you bring\n- Working experience with Python\n- Working experience with SQL\n- Working experience with PostgreSQL\n\nNice to have\n- Exposure to Airflow\n- Exposure to Docker\n\nNorthline Energy Analytics is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/northline/4100",
+      "salary_min": 85000,
+      "salary_max": 105000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-19T18:00:00.000Z",
+      "first_seen_at": "2026-11-19T12:15:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "new",
+      "skills": [
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "PostgreSQL",
+          "required": true,
+          "evidence": "Working experience with PostgreSQL"
+        },
+        {
+          "name": "Airflow",
+          "required": false,
+          "evidence": "Exposure to Airflow"
+        },
+        {
+          "name": "Docker",
+          "required": false,
+          "evidence": "Exposure to Docker"
+        }
+      ],
+      "match": {
+        "job_id": "job_001",
+        "score": 93,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "3 of 3 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0.5,
+            "detail": "1 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Data Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Edmonton, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Python",
+          "SQL",
+          "PostgreSQL",
+          "Docker"
+        ],
+        "missing_skills": [
+          "Airflow"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_002",
+      "source": "lever",
+      "source_job_id": "lever-4107",
+      "title": "Analytics Engineer",
+      "company": {
+        "id": "co_kestrel",
+        "name": "Kestrel Insurance Group",
+        "website": "https://kestrel.example.com"
+      },
+      "location": "Calgary, AB",
+      "work_arrangement": "hybrid",
+      "employment_type": "full_time",
+      "description": "Kestrel's analytics team supports pricing and claims with a modern warehouse and a small, senior-friendly team.\n\nWhat you'll do\n- Own dbt models for claims and policy data\n- Write data tests and documentation\n- Partner with actuaries on new metrics\n\nWhat you bring\n- Working experience with SQL\n- Working experience with dbt\n- Working experience with Python\n\nNice to have\n- Exposure to Snowflake\n- Exposure to Power BI\n\nKestrel Insurance Group is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/kestrel/4107",
+      "salary_min": 90000,
+      "salary_max": 110000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-18T18:00:00.000Z",
+      "first_seen_at": "2026-11-19T12:16:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "new",
+      "skills": [
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "dbt",
+          "required": true,
+          "evidence": "Working experience with dbt"
+        },
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "Snowflake",
+          "required": false,
+          "evidence": "Exposure to Snowflake"
+        },
+        {
+          "name": "Power BI",
+          "required": false,
+          "evidence": "Exposure to Power BI"
+        }
+      ],
+      "match": {
+        "job_id": "job_002",
+        "score": 79,
+        "summary": "Missing 1 required skill: dbt.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 0.6666666666666666,
+            "detail": "2 of 3 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0.5,
+            "detail": "1 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Analytics Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Calgary, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "SQL",
+          "Python",
+          "Power BI"
+        ],
+        "missing_skills": [
+          "dbt",
+          "Snowflake"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_003",
+      "source": "greenhouse",
+      "source_job_id": "greenhouse-4114",
+      "title": "Junior Data Engineer",
+      "company": {
+        "id": "co_bowridge",
+        "name": "Bowridge Software",
+        "website": "https://bowridge.example.com"
+      },
+      "location": null,
+      "work_arrangement": "remote",
+      "employment_type": "full_time",
+      "description": "Bowridge builds scheduling software for clinics. You will join a three-person data team, remote within Canada.\n\nWhat you'll do\n- Write and test Python extract jobs for customer data\n- Maintain the event warehouse schema\n- Pair with senior engineers on pipeline reviews\n\nWhat you bring\n- Working experience with Python\n- Working experience with SQL\n\nNice to have\n- Exposure to Docker\n- Exposure to Git\n- Exposure to AWS\n\nBowridge Software is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/bowridge/4114",
+      "salary_min": 70000,
+      "salary_max": 85000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-16T18:00:00.000Z",
+      "first_seen_at": "2026-11-18T12:17:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "new",
+      "skills": [
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "Docker",
+          "required": false,
+          "evidence": "Exposure to Docker"
+        },
+        {
+          "name": "Git",
+          "required": false,
+          "evidence": "Exposure to Git"
+        },
+        {
+          "name": "AWS",
+          "required": false,
+          "evidence": "Exposure to AWS"
+        }
+      ],
+      "match": {
+        "job_id": "job_003",
+        "score": 95,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "2 of 2 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0.6666666666666666,
+            "detail": "2 of 3 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Data Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Remote, so location doesn't limit you"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Python",
+          "SQL",
+          "Docker",
+          "Git"
+        ],
+        "missing_skills": [
+          "AWS"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_004",
+      "source": "adzuna",
+      "source_job_id": "adzuna-4121",
+      "title": "BI Developer",
+      "company": {
+        "id": "co_prairiehealth",
+        "name": "Prairie Health Data Co-op",
+        "website": "https://prairiehealth.example.com"
+      },
+      "location": "Edmonton, AB",
+      "work_arrangement": "onsite",
+      "employment_type": "contract",
+      "description": "A 12-month contract building operational dashboards for a health data co-operative.\n\nWhat you'll do\n- Design Power BI datasets and reports for program managers\n- Tune SQL views feeding the reports\n- Document data definitions for each report\n\nWhat you bring\n- Working experience with Power BI\n- Working experience with SQL\n\nNice to have\n- Exposure to Azure\n- Exposure to DAX\n\nPrairie Health Data Co-op is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/prairiehealth/4121",
+      "salary_min": 80000,
+      "salary_max": 95000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-18T18:00:00.000Z",
+      "first_seen_at": "2026-11-18T12:18:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "shortlisted",
+      "skills": [
+        {
+          "name": "Power BI",
+          "required": true,
+          "evidence": "Working experience with Power BI"
+        },
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "Azure",
+          "required": false,
+          "evidence": "Exposure to Azure"
+        },
+        {
+          "name": "DAX",
+          "required": false,
+          "evidence": "Exposure to DAX"
+        }
+      ],
+      "match": {
+        "job_id": "job_004",
+        "score": 93,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "2 of 2 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0.5,
+            "detail": "1 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"BI Developer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Edmonton, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Power BI",
+          "SQL",
+          "Azure"
+        ],
+        "missing_skills": [
+          "DAX"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_001"
+    },
+    {
+      "id": "job_005",
+      "source": "greenhouse",
+      "source_job_id": "greenhouse-4128",
+      "title": "Senior Data Platform Engineer",
+      "company": {
+        "id": "co_northline",
+        "name": "Northline Energy Analytics",
+        "website": "https://northline.example.com"
+      },
+      "location": "Edmonton, AB",
+      "work_arrangement": "hybrid",
+      "employment_type": "full_time",
+      "description": "Lead the design of Northline's next data platform.\n\nWhat you'll do\n- Set platform architecture and standards\n- Mentor engineers\n- Run capacity planning\n\nWhat you bring\n- Working experience with Python\n- Working experience with Kubernetes\n- Working experience with Terraform\n- Working experience with Spark\n\nNice to have\n- Exposure to Airflow\n\nNorthline Energy Analytics is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/northline/4128",
+      "salary_min": 130000,
+      "salary_max": 155000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-16T18:00:00.000Z",
+      "first_seen_at": "2026-11-17T12:19:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "new",
+      "skills": [
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "Kubernetes",
+          "required": true,
+          "evidence": "Working experience with Kubernetes"
+        },
+        {
+          "name": "Terraform",
+          "required": true,
+          "evidence": "Working experience with Terraform"
+        },
+        {
+          "name": "Spark",
+          "required": true,
+          "evidence": "Working experience with Spark"
+        },
+        {
+          "name": "Airflow",
+          "required": false,
+          "evidence": "Exposure to Airflow"
+        }
+      ],
+      "match": {
+        "job_id": "job_005",
+        "score": 35,
+        "summary": "Missing 3 required skills: Kubernetes, Terraform, Spark.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 0.25,
+            "detail": "1 of 4 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0,
+            "detail": "0 of 1 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 0,
+            "detail": "Contains \"Senior\", which is on your exclusion list"
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Edmonton, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Python"
+        ],
+        "missing_skills": [
+          "Kubernetes",
+          "Terraform",
+          "Spark",
+          "Airflow"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_006",
+      "source": "lever",
+      "source_job_id": "lever-4135",
+      "title": "Data Analyst, Operations",
+      "company": {
+        "id": "co_ravine",
+        "name": "Ravine Logistics",
+        "website": "https://ravine.example.com"
+      },
+      "location": "Edmonton, AB",
+      "work_arrangement": "onsite",
+      "employment_type": "full_time",
+      "description": "Ravine runs cross-dock freight terminals in Edmonton and Saskatoon.\n\nWhat you'll do\n- Report on terminal throughput and on-time performance\n- Automate weekly Excel reports\n- Answer ad-hoc questions from operations leads\n\nWhat you bring\n- Working experience with SQL\n- Working experience with Excel\n\nNice to have\n- Exposure to Power BI\n- Exposure to Tableau\n\nRavine Logistics is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/ravine/4135",
+      "salary_min": 65000,
+      "salary_max": 78000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-15T18:00:00.000Z",
+      "first_seen_at": "2026-11-17T12:20:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "new",
+      "skills": [
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "Excel",
+          "required": true,
+          "evidence": "Working experience with Excel"
+        },
+        {
+          "name": "Power BI",
+          "required": false,
+          "evidence": "Exposure to Power BI"
+        },
+        {
+          "name": "Tableau",
+          "required": false,
+          "evidence": "Exposure to Tableau"
+        }
+      ],
+      "match": {
+        "job_id": "job_006",
+        "score": 93,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "2 of 2 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0.5,
+            "detail": "1 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Data Analyst\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Edmonton, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "SQL",
+          "Excel",
+          "Power BI"
+        ],
+        "missing_skills": [
+          "Tableau"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_007",
+      "source": "adzuna",
+      "source_job_id": "adzuna-4142",
+      "title": "Reporting Analyst",
+      "company": {
+        "id": "co_aspen",
+        "name": "Aspen Grove Credit Union",
+        "website": "https://aspengrove.example.com"
+      },
+      "location": "Edmonton, AB",
+      "work_arrangement": "hybrid",
+      "employment_type": "full_time",
+      "description": "Aspen Grove's member analytics team is hiring a reporting analyst.\n\nWhat you'll do\n- Maintain monthly regulatory and member reports\n- Validate data with finance\n- Improve report refresh reliability\n\nWhat you bring\n- Working experience with SQL\n- Working experience with Power BI\n\nNice to have\n- Exposure to Python\n\nAspen Grove Credit Union is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/aspen/4142",
+      "salary_min": null,
+      "salary_max": null,
+      "salary_currency": null,
+      "posted_at": "2026-11-16T18:00:00.000Z",
+      "first_seen_at": "2026-11-16T12:21:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "new",
+      "skills": [
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "Power BI",
+          "required": true,
+          "evidence": "Working experience with Power BI"
+        },
+        {
+          "name": "Python",
+          "required": false,
+          "evidence": "Exposure to Python"
+        }
+      ],
+      "match": {
+        "job_id": "job_007",
+        "score": 88,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "2 of 2 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 1,
+            "detail": "1 of 1 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 0.5,
+            "detail": "Related to your target title \"Data Analyst\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Edmonton, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 0.5,
+            "detail": "Salary not posted"
+          }
+        ],
+        "matched_skills": [
+          "SQL",
+          "Power BI",
+          "Python"
+        ],
+        "missing_skills": [],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_008",
+      "source": "greenhouse",
+      "source_job_id": "greenhouse-4149",
+      "title": "Data Engineer, Integrations",
+      "company": {
+        "id": "co_bowridge",
+        "name": "Bowridge Software",
+        "website": "https://bowridge.example.com"
+      },
+      "location": "Calgary, AB",
+      "work_arrangement": "remote",
+      "employment_type": "full_time",
+      "description": "Connect Bowridge to clinic billing systems through partner APIs.\n\nWhat you'll do\n- Build API connectors with retries and idempotent upserts\n- Write integration tests against partner sandboxes\n- Track connector health metrics\n\nWhat you bring\n- Working experience with Python\n- Working experience with REST APIs\n- Working experience with SQL\n\nNice to have\n- Exposure to PostgreSQL\n- Exposure to Kafka\n\nBowridge Software is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/bowridge/4149",
+      "salary_min": 88000,
+      "salary_max": 102000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-15T18:00:00.000Z",
+      "first_seen_at": "2026-11-16T12:22:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "shortlisted",
+      "skills": [
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "REST APIs",
+          "required": true,
+          "evidence": "Working experience with REST APIs"
+        },
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "PostgreSQL",
+          "required": false,
+          "evidence": "Exposure to PostgreSQL"
+        },
+        {
+          "name": "Kafka",
+          "required": false,
+          "evidence": "Exposure to Kafka"
+        }
+      ],
+      "match": {
+        "job_id": "job_008",
+        "score": 93,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "3 of 3 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0.5,
+            "detail": "1 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Data Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Remote, so location doesn't limit you"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Python",
+          "REST APIs",
+          "SQL",
+          "PostgreSQL"
+        ],
+        "missing_skills": [
+          "Kafka"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_002"
+    },
+    {
+      "id": "job_009",
+      "source": "lever",
+      "source_job_id": "lever-4156",
+      "title": "Machine Learning Engineer",
+      "company": {
+        "id": "co_lumen",
+        "name": "Lumen Retail Systems",
+        "website": "https://lumenretail.example.com"
+      },
+      "location": "Calgary, AB",
+      "work_arrangement": "onsite",
+      "employment_type": "full_time",
+      "description": "Lumen builds demand forecasting for grocery chains.\n\nWhat you'll do\n- Train and ship forecasting models\n- Own model monitoring\n- Work with data engineering on features\n\nWhat you bring\n- Working experience with Python\n- Working experience with PyTorch\n- Working experience with MLOps\n\nNice to have\n- Exposure to Kubernetes\n\nLumen Retail Systems is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/lumen/4156",
+      "salary_min": 120000,
+      "salary_max": 140000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-13T18:00:00.000Z",
+      "first_seen_at": "2026-11-15T12:23:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "dismissed",
+      "skills": [
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "PyTorch",
+          "required": true,
+          "evidence": "Working experience with PyTorch"
+        },
+        {
+          "name": "MLOps",
+          "required": true,
+          "evidence": "Working experience with MLOps"
+        },
+        {
+          "name": "Kubernetes",
+          "required": false,
+          "evidence": "Exposure to Kubernetes"
+        }
+      ],
+      "match": {
+        "job_id": "job_009",
+        "score": 48,
+        "summary": "Missing 2 required skills: PyTorch, MLOps.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 0.3333333333333333,
+            "detail": "1 of 3 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0,
+            "detail": "0 of 1 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 0.5,
+            "detail": "Related to your target title \"Data Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Calgary, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Python"
+        ],
+        "missing_skills": [
+          "PyTorch",
+          "MLOps",
+          "Kubernetes"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_010",
+      "source": "adzuna",
+      "source_job_id": "adzuna-4163",
+      "title": "Business Intelligence Analyst",
+      "company": {
+        "id": "co_cityops",
+        "name": "River Valley Municipal Services",
+        "website": null
+      },
+      "location": "Edmonton, AB",
+      "work_arrangement": "onsite",
+      "employment_type": "full_time",
+      "description": "Municipal services analytics team supporting transit and waste operations.\n\nWhat you'll do\n- Publish service-level dashboards\n- Automate data collection from operations spreadsheets\n- Train staff on self-serve reports\n\nWhat you bring\n- Working experience with Power BI\n- Working experience with SQL\n- Working experience with Excel\n\nNice to have\n- Exposure to Power Automate\n\nRiver Valley Municipal Services is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/cityops/4163",
+      "salary_min": 76000,
+      "salary_max": 92000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-15T18:00:00.000Z",
+      "first_seen_at": "2026-11-15T12:24:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "shortlisted",
+      "skills": [
+        {
+          "name": "Power BI",
+          "required": true,
+          "evidence": "Working experience with Power BI"
+        },
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "Excel",
+          "required": true,
+          "evidence": "Working experience with Excel"
+        },
+        {
+          "name": "Power Automate",
+          "required": false,
+          "evidence": "Exposure to Power Automate"
+        }
+      ],
+      "match": {
+        "job_id": "job_010",
+        "score": 90,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "3 of 3 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 1,
+            "detail": "1 of 1 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 0.5,
+            "detail": "Related to your target title \"Data Analyst\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Edmonton, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Power BI",
+          "SQL",
+          "Excel",
+          "Power Automate"
+        ],
+        "missing_skills": [],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_003"
+    },
+    {
+      "id": "job_011",
+      "source": "greenhouse",
+      "source_job_id": "greenhouse-4170",
+      "title": "Data Engineer (Contract)",
+      "company": {
+        "id": "co_fieldnote",
+        "name": "Fieldnote Labs",
+        "website": "https://fieldnote.example.com"
+      },
+      "location": null,
+      "work_arrangement": "remote",
+      "employment_type": "contract",
+      "description": "Six-month contract to migrate cron scripts to scheduled Airflow DAGs.\n\nWhat you'll do\n- Port existing ingestion scripts to Airflow\n- Add retries, alerts and run summaries\n- Hand over runbooks to the internal team\n\nWhat you bring\n- Working experience with Python\n- Working experience with Airflow\n- Working experience with SQL\n\nNice to have\n- Exposure to dbt\n- Exposure to PostgreSQL\n\nFieldnote Labs is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/fieldnote/4170",
+      "salary_min": 95000,
+      "salary_max": 115000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-13T18:00:00.000Z",
+      "first_seen_at": "2026-11-14T12:25:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "new",
+      "skills": [
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "Airflow",
+          "required": true,
+          "evidence": "Working experience with Airflow"
+        },
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "dbt",
+          "required": false,
+          "evidence": "Exposure to dbt"
+        },
+        {
+          "name": "PostgreSQL",
+          "required": false,
+          "evidence": "Exposure to PostgreSQL"
+        }
+      ],
+      "match": {
+        "job_id": "job_011",
+        "score": 79,
+        "summary": "Missing 1 required skill: Airflow.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 0.6666666666666666,
+            "detail": "2 of 3 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0.5,
+            "detail": "1 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Data Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Remote, so location doesn't limit you"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Python",
+          "SQL",
+          "PostgreSQL"
+        ],
+        "missing_skills": [
+          "Airflow",
+          "dbt"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_012",
+      "source": "lever",
+      "source_job_id": "lever-4177",
+      "title": "Data Quality Analyst",
+      "company": {
+        "id": "co_kestrel",
+        "name": "Kestrel Insurance Group",
+        "website": "https://kestrel.example.com"
+      },
+      "location": "Calgary, AB",
+      "work_arrangement": "hybrid",
+      "employment_type": "full_time",
+      "description": "Help Kestrel trust its numbers.\n\nWhat you'll do\n- Write automated checks on policy and claims tables\n- Triage data incidents\n- Report quality trends monthly\n\nWhat you bring\n- Working experience with SQL\n- Working experience with Python\n\nNice to have\n- Exposure to dbt\n- Exposure to Great Expectations\n\nKestrel Insurance Group is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/kestrel/4177",
+      "salary_min": 72000,
+      "salary_max": 86000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-11T18:00:00.000Z",
+      "first_seen_at": "2026-11-13T12:26:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "new",
+      "skills": [
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "dbt",
+          "required": false,
+          "evidence": "Exposure to dbt"
+        },
+        {
+          "name": "Great Expectations",
+          "required": false,
+          "evidence": "Exposure to Great Expectations"
+        }
+      ],
+      "match": {
+        "job_id": "job_012",
+        "score": 75,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "2 of 2 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0,
+            "detail": "0 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 0.5,
+            "detail": "Related to your target title \"Data Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Calgary, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "SQL",
+          "Python"
+        ],
+        "missing_skills": [
+          "dbt",
+          "Great Expectations"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_013",
+      "source": "adzuna",
+      "source_job_id": "adzuna-4184",
+      "title": "IT Systems Analyst",
+      "company": {
+        "id": "co_tamarack",
+        "name": "Tamarack Civil",
+        "website": "https://tamarack.example.com"
+      },
+      "location": "Edmonton, AB",
+      "work_arrangement": "onsite",
+      "employment_type": "full_time",
+      "description": "Support project systems for a civil construction firm.\n\nWhat you'll do\n- Automate project setup in Microsoft 365\n- Maintain reporting on equipment usage\n- Support site staff\n\nWhat you bring\n- Working experience with Microsoft 365\n- Working experience with Power Automate\n\nNice to have\n- Exposure to Power BI\n- Exposure to SQL\n\nTamarack Civil is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/tamarack/4184",
+      "salary_min": 70000,
+      "salary_max": 82000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-13T18:00:00.000Z",
+      "first_seen_at": "2026-11-13T12:27:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "new",
+      "skills": [
+        {
+          "name": "Microsoft 365",
+          "required": true,
+          "evidence": "Working experience with Microsoft 365"
+        },
+        {
+          "name": "Power Automate",
+          "required": true,
+          "evidence": "Working experience with Power Automate"
+        },
+        {
+          "name": "Power BI",
+          "required": false,
+          "evidence": "Exposure to Power BI"
+        },
+        {
+          "name": "SQL",
+          "required": false,
+          "evidence": "Exposure to SQL"
+        }
+      ],
+      "match": {
+        "job_id": "job_013",
+        "score": 70,
+        "summary": "Missing 1 required skill: Microsoft 365.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 0.5,
+            "detail": "1 of 2 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 1,
+            "detail": "2 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 0.5,
+            "detail": "Related to your target title \"Data Analyst\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Edmonton, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Power Automate",
+          "Power BI",
+          "SQL"
+        ],
+        "missing_skills": [
+          "Microsoft 365"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_014",
+      "source": "greenhouse",
+      "source_job_id": "greenhouse-4191",
+      "title": "Analytics Engineer",
+      "company": {
+        "id": "co_northline",
+        "name": "Northline Energy Analytics",
+        "website": "https://northline.example.com"
+      },
+      "location": "Edmonton, AB",
+      "work_arrangement": "hybrid",
+      "employment_type": "full_time",
+      "description": "Shape the reporting layer field teams rely on every morning.\n\nWhat you'll do\n- Model production and maintenance data in dbt\n- Define shared metrics\n- Review analysts' SQL\n\nWhat you bring\n- Working experience with SQL\n- Working experience with dbt\n\nNice to have\n- Exposure to Python\n- Exposure to Power BI\n\nNorthline Energy Analytics is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/northline/4191",
+      "salary_min": 88000,
+      "salary_max": 104000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-10T18:00:00.000Z",
+      "first_seen_at": "2026-11-11T12:28:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "shortlisted",
+      "skills": [
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "dbt",
+          "required": true,
+          "evidence": "Working experience with dbt"
+        },
+        {
+          "name": "Python",
+          "required": false,
+          "evidence": "Exposure to Python"
+        },
+        {
+          "name": "Power BI",
+          "required": false,
+          "evidence": "Exposure to Power BI"
+        }
+      ],
+      "match": {
+        "job_id": "job_014",
+        "score": 80,
+        "summary": "Missing 1 required skill: dbt.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 0.5,
+            "detail": "1 of 2 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 1,
+            "detail": "2 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Analytics Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Edmonton, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "SQL",
+          "Python",
+          "Power BI"
+        ],
+        "missing_skills": [
+          "dbt"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_004"
+    },
+    {
+      "id": "job_015",
+      "source": "lever",
+      "source_job_id": "lever-4198",
+      "title": "Junior Data Engineer",
+      "company": {
+        "id": "co_ravine",
+        "name": "Ravine Logistics",
+        "website": "https://ravine.example.com"
+      },
+      "location": "Edmonton, AB",
+      "work_arrangement": "hybrid",
+      "employment_type": "full_time",
+      "description": "First data engineering hire under Ravine's analytics lead.\n\nWhat you'll do\n- Build ingestion from terminal systems\n- Keep the PostgreSQL warehouse tidy\n- Automate reports that are done by hand today\n\nWhat you bring\n- Working experience with Python\n- Working experience with SQL\n\nNice to have\n- Exposure to PostgreSQL\n- Exposure to dbt\n- Exposure to Airflow\n\nRavine Logistics is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/ravine/4198",
+      "salary_min": 68000,
+      "salary_max": 80000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-08T18:00:00.000Z",
+      "first_seen_at": "2026-11-10T12:29:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "shortlisted",
+      "skills": [
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "PostgreSQL",
+          "required": false,
+          "evidence": "Exposure to PostgreSQL"
+        },
+        {
+          "name": "dbt",
+          "required": false,
+          "evidence": "Exposure to dbt"
+        },
+        {
+          "name": "Airflow",
+          "required": false,
+          "evidence": "Exposure to Airflow"
+        }
+      ],
+      "match": {
+        "job_id": "job_015",
+        "score": 90,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "2 of 2 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0.3333333333333333,
+            "detail": "1 of 3 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Data Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Edmonton, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Python",
+          "SQL",
+          "PostgreSQL"
+        ],
+        "missing_skills": [
+          "dbt",
+          "Airflow"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_005"
+    },
+    {
+      "id": "job_016",
+      "source": "greenhouse",
+      "source_job_id": "greenhouse-4205",
+      "title": "Data Analyst",
+      "company": {
+        "id": "co_bowridge",
+        "name": "Bowridge Software",
+        "website": "https://bowridge.example.com"
+      },
+      "location": null,
+      "work_arrangement": "remote",
+      "employment_type": "full_time",
+      "description": "Product analytics for clinic scheduling software.\n\nWhat you'll do\n- Analyze feature usage\n- Build self-serve dashboards\n- Support experiment readouts\n\nWhat you bring\n- Working experience with SQL\n- Working experience with Python\n\nNice to have\n- Exposure to Looker\n- Exposure to Power BI\n\nBowridge Software is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/bowridge/4205",
+      "salary_min": 70000,
+      "salary_max": 84000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-09T18:00:00.000Z",
+      "first_seen_at": "2026-11-09T12:30:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "shortlisted",
+      "skills": [
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "Looker",
+          "required": false,
+          "evidence": "Exposure to Looker"
+        },
+        {
+          "name": "Power BI",
+          "required": false,
+          "evidence": "Exposure to Power BI"
+        }
+      ],
+      "match": {
+        "job_id": "job_016",
+        "score": 93,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "2 of 2 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0.5,
+            "detail": "1 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Data Analyst\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Remote, so location doesn't limit you"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "SQL",
+          "Python",
+          "Power BI"
+        ],
+        "missing_skills": [
+          "Looker"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_006"
+    },
+    {
+      "id": "job_017",
+      "source": "adzuna",
+      "source_job_id": "adzuna-4212",
+      "title": "Data Engineer",
+      "company": {
+        "id": "co_prairiehealth",
+        "name": "Prairie Health Data Co-op",
+        "website": "https://prairiehealth.example.com"
+      },
+      "location": "Edmonton, AB",
+      "work_arrangement": "hybrid",
+      "employment_type": "full_time",
+      "description": "Build pipelines that bring member clinic data into the co-op's Azure warehouse.\n\nWhat you'll do\n- Develop Azure Data Factory and Python pipelines\n- Implement data validation and quarantine\n- Document lineage for privacy reviews\n\nWhat you bring\n- Working experience with Python\n- Working experience with SQL\n- Working experience with Azure\n\nNice to have\n- Exposure to Azure Data Factory\n- Exposure to Docker\n\nPrairie Health Data Co-op is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/prairiehealth/4212",
+      "salary_min": 82000,
+      "salary_max": 98000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-07T18:00:00.000Z",
+      "first_seen_at": "2026-11-08T12:31:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "shortlisted",
+      "skills": [
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "Azure",
+          "required": true,
+          "evidence": "Working experience with Azure"
+        },
+        {
+          "name": "Azure Data Factory",
+          "required": false,
+          "evidence": "Exposure to Azure Data Factory"
+        },
+        {
+          "name": "Docker",
+          "required": false,
+          "evidence": "Exposure to Docker"
+        }
+      ],
+      "match": {
+        "job_id": "job_017",
+        "score": 93,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "3 of 3 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0.5,
+            "detail": "1 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Data Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Edmonton, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Python",
+          "SQL",
+          "Azure",
+          "Docker"
+        ],
+        "missing_skills": [
+          "Azure Data Factory"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_007"
+    },
+    {
+      "id": "job_018",
+      "source": "lever",
+      "source_job_id": "lever-4219",
+      "title": "BI Developer",
+      "company": {
+        "id": "co_lumen",
+        "name": "Lumen Retail Systems",
+        "website": "https://lumenretail.example.com"
+      },
+      "location": "Calgary, AB",
+      "work_arrangement": "hybrid",
+      "employment_type": "full_time",
+      "description": "Retail performance reporting for grocery partners.\n\nWhat you'll do\n- Build Power BI reports\n- Maintain semantic models\n- Support partner analysts\n\nWhat you bring\n- Working experience with Power BI\n- Working experience with SQL\n\nNice to have\n- Exposure to Python\n- Exposure to Tableau\n\nLumen Retail Systems is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/lumen/4219",
+      "salary_min": 78000,
+      "salary_max": 90000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-05T18:00:00.000Z",
+      "first_seen_at": "2026-11-07T12:32:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "shortlisted",
+      "skills": [
+        {
+          "name": "Power BI",
+          "required": true,
+          "evidence": "Working experience with Power BI"
+        },
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "Python",
+          "required": false,
+          "evidence": "Exposure to Python"
+        },
+        {
+          "name": "Tableau",
+          "required": false,
+          "evidence": "Exposure to Tableau"
+        }
+      ],
+      "match": {
+        "job_id": "job_018",
+        "score": 93,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "2 of 2 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0.5,
+            "detail": "1 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"BI Developer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Calgary, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Power BI",
+          "SQL",
+          "Python"
+        ],
+        "missing_skills": [
+          "Tableau"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_008"
+    },
+    {
+      "id": "job_019",
+      "source": "greenhouse",
+      "source_job_id": "greenhouse-4226",
+      "title": "Platform Support Engineer",
+      "company": {
+        "id": "co_fieldnote",
+        "name": "Fieldnote Labs",
+        "website": "https://fieldnote.example.com"
+      },
+      "location": null,
+      "work_arrangement": "remote",
+      "employment_type": "full_time",
+      "description": "Keep Fieldnote's survey platform running for customers.\n\nWhat you'll do\n- Investigate customer incidents\n- Automate support tasks\n- Improve runbooks\n\nWhat you bring\n- Working experience with Linux\n- Working experience with Python\n\nNice to have\n- Exposure to Docker\n\nFieldnote Labs is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/fieldnote/4226",
+      "salary_min": 72000,
+      "salary_max": 85000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-07T18:00:00.000Z",
+      "first_seen_at": "2026-11-07T12:33:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "dismissed",
+      "skills": [
+        {
+          "name": "Linux",
+          "required": true,
+          "evidence": "Working experience with Linux"
+        },
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "Docker",
+          "required": false,
+          "evidence": "Exposure to Docker"
+        }
+      ],
+      "match": {
+        "job_id": "job_019",
+        "score": 70,
+        "summary": "Missing 1 required skill: Linux.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 0.5,
+            "detail": "1 of 2 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 1,
+            "detail": "1 of 1 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 0.5,
+            "detail": "Related to your target title \"Data Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Remote, so location doesn't limit you"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Python",
+          "Docker"
+        ],
+        "missing_skills": [
+          "Linux"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_020",
+      "source": "adzuna",
+      "source_job_id": "adzuna-4233",
+      "title": "Data Engineer",
+      "company": {
+        "id": "co_aspen",
+        "name": "Aspen Grove Credit Union",
+        "website": "https://aspengrove.example.com"
+      },
+      "location": "Edmonton, AB",
+      "work_arrangement": "hybrid",
+      "employment_type": "full_time",
+      "description": "Modernize member and transaction pipelines at Aspen Grove.\n\nWhat you'll do\n- Rebuild nightly loads with tests and monitoring\n- Design incremental models\n- Work with security on access controls\n\nWhat you bring\n- Working experience with SQL\n- Working experience with Python\n- Working experience with PostgreSQL\n\nNice to have\n- Exposure to Airflow\n\nAspen Grove Credit Union is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/aspen/4233",
+      "salary_min": 85000,
+      "salary_max": 100000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-05T18:00:00.000Z",
+      "first_seen_at": "2026-11-06T12:34:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "shortlisted",
+      "skills": [
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "PostgreSQL",
+          "required": true,
+          "evidence": "Working experience with PostgreSQL"
+        },
+        {
+          "name": "Airflow",
+          "required": false,
+          "evidence": "Exposure to Airflow"
+        }
+      ],
+      "match": {
+        "job_id": "job_020",
+        "score": 85,
+        "summary": "You have every required skill listed.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 1,
+            "detail": "3 of 3 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0,
+            "detail": "0 of 1 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Data Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Edmonton, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "SQL",
+          "Python",
+          "PostgreSQL"
+        ],
+        "missing_skills": [
+          "Airflow"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": "app_009"
+    },
+    {
+      "id": "job_021",
+      "source": "lever",
+      "source_job_id": "lever-4240",
+      "title": "Data Engineer",
+      "company": {
+        "id": "co_kestrel",
+        "name": "Kestrel Insurance Group",
+        "website": "https://kestrel.example.com"
+      },
+      "location": "Calgary, AB",
+      "work_arrangement": "hybrid",
+      "employment_type": "full_time",
+      "description": "Join the claims data platform team.\n\nWhat you'll do\n- Build Spark jobs for claims history\n- Maintain Airflow DAGs\n- Improve data freshness SLAs\n\nWhat you bring\n- Working experience with Python\n- Working experience with SQL\n- Working experience with Spark\n\nNice to have\n- Exposure to Airflow\n- Exposure to Snowflake\n\nKestrel Insurance Group is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/kestrel/4240",
+      "salary_min": 92000,
+      "salary_max": 110000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-04T18:00:00.000Z",
+      "first_seen_at": "2026-11-06T12:35:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "shortlisted",
+      "skills": [
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "Spark",
+          "required": true,
+          "evidence": "Working experience with Spark"
+        },
+        {
+          "name": "Airflow",
+          "required": false,
+          "evidence": "Exposure to Airflow"
+        },
+        {
+          "name": "Snowflake",
+          "required": false,
+          "evidence": "Exposure to Snowflake"
+        }
+      ],
+      "match": {
+        "job_id": "job_021",
+        "score": 72,
+        "summary": "Missing 1 required skill: Spark.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 0.6666666666666666,
+            "detail": "2 of 3 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0,
+            "detail": "0 of 2 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 1,
+            "detail": "Matches your target title \"Data Engineer\""
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Calgary, AB is one of your locations"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "Python",
+          "SQL"
+        ],
+        "missing_skills": [
+          "Spark",
+          "Airflow",
+          "Snowflake"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    },
+    {
+      "id": "job_022",
+      "source": "greenhouse",
+      "source_job_id": "greenhouse-4247",
+      "title": "Senior Analytics Engineer",
+      "company": {
+        "id": "co_bowridge",
+        "name": "Bowridge Software",
+        "website": "https://bowridge.example.com"
+      },
+      "location": null,
+      "work_arrangement": "remote",
+      "employment_type": "full_time",
+      "description": "Lead the analytics engineering practice at Bowridge.\n\nWhat you'll do\n- Set modeling standards\n- Own the metrics layer\n- Mentor analysts\n\nWhat you bring\n- Working experience with SQL\n- Working experience with dbt\n- Working experience with Python\n\nNice to have\n- Exposure to Looker\n\nBowridge Software is an equal opportunity employer. This is a fictional sample posting.",
+      "url": "https://jobs.example.com/bowridge/4247",
+      "salary_min": 125000,
+      "salary_max": 140000,
+      "salary_currency": "CAD",
+      "posted_at": "2026-11-12T18:00:00.000Z",
+      "first_seen_at": "2026-11-12T12:36:00.000Z",
+      "last_seen_at": "2026-11-19T12:15:00.000Z",
+      "review_status": "new",
+      "skills": [
+        {
+          "name": "SQL",
+          "required": true,
+          "evidence": "Working experience with SQL"
+        },
+        {
+          "name": "dbt",
+          "required": true,
+          "evidence": "Working experience with dbt"
+        },
+        {
+          "name": "Python",
+          "required": true,
+          "evidence": "Working experience with Python"
+        },
+        {
+          "name": "Looker",
+          "required": false,
+          "evidence": "Exposure to Looker"
+        }
+      ],
+      "match": {
+        "job_id": "job_022",
+        "score": 52,
+        "summary": "Missing 1 required skill: dbt.",
+        "factors": [
+          {
+            "key": "required_skills",
+            "label": "Required skills",
+            "weight": 0.4,
+            "score": 0.6666666666666666,
+            "detail": "2 of 3 required skills on your profile"
+          },
+          {
+            "key": "preferred_skills",
+            "label": "Nice-to-have skills",
+            "weight": 0.15,
+            "score": 0,
+            "detail": "0 of 1 nice-to-have skills"
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "weight": 0.2,
+            "score": 0,
+            "detail": "Contains \"Senior\", which is on your exclusion list"
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Remote, so location doesn't limit you"
+          },
+          {
+            "key": "work_arrangement",
+            "label": "Work arrangement",
+            "weight": 0.1,
+            "score": 1,
+            "detail": "Matches a work arrangement you accept"
+          },
+          {
+            "key": "salary",
+            "label": "Salary",
+            "weight": 0.05,
+            "score": 1,
+            "detail": "Posted range reaches your minimum"
+          }
+        ],
+        "matched_skills": [
+          "SQL",
+          "Python"
+        ],
+        "missing_skills": [
+          "dbt",
+          "Looker"
+        ],
+        "method": "rules",
+        "computed_at": "2026-11-19T14:00:11.135Z"
+      },
+      "application_id": null
+    }
+  ],
+  "applications": [
+    {
+      "id": "app_001",
+      "job_id": "job_004",
+      "job": {
+        "title": "BI Developer",
+        "company_name": "Prairie Health Data Co-op",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/prairiehealth/4121",
+        "source": "adzuna"
+      },
+      "status": "preparing",
+      "status_source": "user",
+      "applied_at": null,
+      "follow_up_at": null,
+      "resume_document_id": "doc_003",
+      "cover_letter_document_id": null,
+      "notes": "Contract role — ask about extension.",
+      "created_at": "2026-11-19T01:00:00.000Z",
+      "updated_at": "2026-11-19T02:00:00.000Z",
+      "events": [
+        {
+          "id": "evt_0002",
+          "application_id": "app_001",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-19T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0001",
+          "application_id": "app_001",
+          "event_type": "created",
+          "occurred_at": "2026-11-19T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_002",
+      "job_id": "job_008",
+      "job": {
+        "title": "Data Engineer, Integrations",
+        "company_name": "Bowridge Software",
+        "location": "Calgary, AB",
+        "url": "https://jobs.example.com/bowridge/4149",
+        "source": "greenhouse"
+      },
+      "status": "ready_for_review",
+      "status_source": "user",
+      "applied_at": null,
+      "follow_up_at": null,
+      "resume_document_id": "doc_003",
+      "cover_letter_document_id": "doc_005",
+      "notes": "Highlight the API connector work.",
+      "created_at": "2026-11-17T01:00:00.000Z",
+      "updated_at": "2026-11-19T02:05:00.000Z",
+      "events": [
+        {
+          "id": "evt_0005",
+          "application_id": "app_002",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-19T02:05:00.000Z",
+          "summary": "Status changed to ready for review",
+          "from_status": "preparing",
+          "to_status": "ready_for_review",
+          "interview": null
+        },
+        {
+          "id": "evt_0004",
+          "application_id": "app_002",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-18T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0003",
+          "application_id": "app_002",
+          "event_type": "created",
+          "occurred_at": "2026-11-17T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_003",
+      "job_id": "job_010",
+      "job": {
+        "title": "Business Intelligence Analyst",
+        "company_name": "River Valley Municipal Services",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/cityops/4163",
+        "source": "adzuna"
+      },
+      "status": "saved",
+      "status_source": "user",
+      "applied_at": null,
+      "follow_up_at": null,
+      "resume_document_id": null,
+      "cover_letter_document_id": null,
+      "notes": "",
+      "created_at": "2026-11-16T01:00:00.000Z",
+      "updated_at": "2026-11-16T01:00:00.000Z",
+      "events": [
+        {
+          "id": "evt_0006",
+          "application_id": "app_003",
+          "event_type": "created",
+          "occurred_at": "2026-11-16T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_004",
+      "job_id": "job_014",
+      "job": {
+        "title": "Analytics Engineer",
+        "company_name": "Northline Energy Analytics",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/northline/4191",
+        "source": "greenhouse"
+      },
+      "status": "applied",
+      "status_source": "user",
+      "applied_at": "2026-11-12",
+      "follow_up_at": "2026-11-26",
+      "resume_document_id": "doc_003",
+      "cover_letter_document_id": "doc_004",
+      "notes": "Referred by a former classmate.",
+      "created_at": "2026-11-12T01:00:00.000Z",
+      "updated_at": "2026-11-18T02:10:00.000Z",
+      "events": [
+        {
+          "id": "evt_0010",
+          "application_id": "app_004",
+          "event_type": "submission_confirmed",
+          "occurred_at": "2026-11-18T02:10:00.000Z",
+          "summary": "You confirmed you submitted this application on the employer's site",
+          "from_status": "ready_for_review",
+          "to_status": "applied",
+          "interview": null
+        },
+        {
+          "id": "evt_0009",
+          "application_id": "app_004",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-16T02:05:00.000Z",
+          "summary": "Status changed to ready for review",
+          "from_status": "preparing",
+          "to_status": "ready_for_review",
+          "interview": null
+        },
+        {
+          "id": "evt_0008",
+          "application_id": "app_004",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-14T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0007",
+          "application_id": "app_004",
+          "event_type": "created",
+          "occurred_at": "2026-11-12T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_005",
+      "job_id": "job_015",
+      "job": {
+        "title": "Junior Data Engineer",
+        "company_name": "Ravine Logistics",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/ravine/4198",
+        "source": "lever"
+      },
+      "status": "interview",
+      "status_source": "user",
+      "applied_at": "2026-11-10",
+      "follow_up_at": "2026-11-24",
+      "resume_document_id": "doc_002",
+      "cover_letter_document_id": null,
+      "notes": "Hiring manager is the analytics lead.",
+      "created_at": "2026-11-11T01:00:00.000Z",
+      "updated_at": "2026-11-18T21:00:00.000Z",
+      "events": [
+        {
+          "id": "evt_0015",
+          "application_id": "app_005",
+          "event_type": "interview_scheduled",
+          "occurred_at": "2026-11-18T21:00:00.000Z",
+          "summary": "Video interview scheduled",
+          "from_status": null,
+          "to_status": null,
+          "interview": {
+            "scheduled_for": "2026-11-21T16:00:00.000Z",
+            "format": "video",
+            "with_whom": "Analytics lead and one engineer"
+          }
+        },
+        {
+          "id": "evt_0014",
+          "application_id": "app_005",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-18T02:10:00.000Z",
+          "summary": "Status changed to interview",
+          "from_status": "applied",
+          "to_status": "interview",
+          "interview": null
+        },
+        {
+          "id": "evt_0013",
+          "application_id": "app_005",
+          "event_type": "submission_confirmed",
+          "occurred_at": "2026-11-15T02:05:00.000Z",
+          "summary": "You confirmed you submitted this application on the employer's site",
+          "from_status": "preparing",
+          "to_status": "applied",
+          "interview": null
+        },
+        {
+          "id": "evt_0012",
+          "application_id": "app_005",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-13T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0011",
+          "application_id": "app_005",
+          "event_type": "created",
+          "occurred_at": "2026-11-11T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_006",
+      "job_id": "job_016",
+      "job": {
+        "title": "Data Analyst",
+        "company_name": "Bowridge Software",
+        "location": null,
+        "url": "https://jobs.example.com/bowridge/4205",
+        "source": "greenhouse"
+      },
+      "status": "applied",
+      "status_source": "user",
+      "applied_at": "2026-11-03",
+      "follow_up_at": "2026-11-17",
+      "resume_document_id": "doc_002",
+      "cover_letter_document_id": null,
+      "notes": "Applied on their site before tracking here.",
+      "created_at": "2026-11-10T01:00:00.000Z",
+      "updated_at": "2026-11-15T02:00:00.000Z",
+      "events": [
+        {
+          "id": "evt_0017",
+          "application_id": "app_006",
+          "event_type": "submission_confirmed",
+          "occurred_at": "2026-11-15T02:00:00.000Z",
+          "summary": "You confirmed you submitted this application on the employer's site",
+          "from_status": "saved",
+          "to_status": "applied",
+          "interview": null
+        },
+        {
+          "id": "evt_0016",
+          "application_id": "app_006",
+          "event_type": "created",
+          "occurred_at": "2026-11-10T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_007",
+      "job_id": "job_017",
+      "job": {
+        "title": "Data Engineer",
+        "company_name": "Prairie Health Data Co-op",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/prairiehealth/4212",
+        "source": "adzuna"
+      },
+      "status": "rejected",
+      "status_source": "user",
+      "applied_at": "2026-11-08",
+      "follow_up_at": null,
+      "resume_document_id": "doc_002",
+      "cover_letter_document_id": null,
+      "notes": "Rejection email said they chose someone with Azure Data Factory experience.",
+      "created_at": "2026-11-09T01:00:00.000Z",
+      "updated_at": "2026-11-17T02:10:00.000Z",
+      "events": [
+        {
+          "id": "evt_0021",
+          "application_id": "app_007",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-17T02:10:00.000Z",
+          "summary": "Status changed to rejected",
+          "from_status": "applied",
+          "to_status": "rejected",
+          "interview": null
+        },
+        {
+          "id": "evt_0020",
+          "application_id": "app_007",
+          "event_type": "submission_confirmed",
+          "occurred_at": "2026-11-14T02:05:00.000Z",
+          "summary": "You confirmed you submitted this application on the employer's site",
+          "from_status": "preparing",
+          "to_status": "applied",
+          "interview": null
+        },
+        {
+          "id": "evt_0019",
+          "application_id": "app_007",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-12T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0018",
+          "application_id": "app_007",
+          "event_type": "created",
+          "occurred_at": "2026-11-09T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_008",
+      "job_id": "job_018",
+      "job": {
+        "title": "BI Developer",
+        "company_name": "Lumen Retail Systems",
+        "location": "Calgary, AB",
+        "url": "https://jobs.example.com/lumen/4219",
+        "source": "lever"
+      },
+      "status": "withdrawn",
+      "status_source": "user",
+      "applied_at": null,
+      "follow_up_at": null,
+      "resume_document_id": null,
+      "cover_letter_document_id": null,
+      "notes": "Role moved to Calgary on-site full time.",
+      "created_at": "2026-11-08T01:00:00.000Z",
+      "updated_at": "2026-11-16T02:05:00.000Z",
+      "events": [
+        {
+          "id": "evt_0024",
+          "application_id": "app_008",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-16T02:05:00.000Z",
+          "summary": "Status changed to withdrawn",
+          "from_status": "preparing",
+          "to_status": "withdrawn",
+          "interview": null
+        },
+        {
+          "id": "evt_0023",
+          "application_id": "app_008",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-12T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0022",
+          "application_id": "app_008",
+          "event_type": "created",
+          "occurred_at": "2026-11-08T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    },
+    {
+      "id": "app_009",
+      "job_id": "job_020",
+      "job": {
+        "title": "Data Engineer",
+        "company_name": "Aspen Grove Credit Union",
+        "location": "Edmonton, AB",
+        "url": "https://jobs.example.com/aspen/4233",
+        "source": "adzuna"
+      },
+      "status": "offer",
+      "status_source": "user",
+      "applied_at": "2026-11-06",
+      "follow_up_at": null,
+      "resume_document_id": "doc_002",
+      "cover_letter_document_id": "doc_004",
+      "notes": "Offer call scheduled. Compare with the Bowridge process.",
+      "created_at": "2026-11-07T01:00:00.000Z",
+      "updated_at": "2026-11-18T02:20:00.000Z",
+      "events": [
+        {
+          "id": "evt_0030",
+          "application_id": "app_009",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-18T02:20:00.000Z",
+          "summary": "Status changed to offer",
+          "from_status": "interview",
+          "to_status": "offer",
+          "interview": null
+        },
+        {
+          "id": "evt_0029",
+          "application_id": "app_009",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-16T02:15:00.000Z",
+          "summary": "Status changed to interview",
+          "from_status": "applied",
+          "to_status": "interview",
+          "interview": null
+        },
+        {
+          "id": "evt_0028",
+          "application_id": "app_009",
+          "event_type": "submission_confirmed",
+          "occurred_at": "2026-11-13T02:10:00.000Z",
+          "summary": "You confirmed you submitted this application on the employer's site",
+          "from_status": "ready_for_review",
+          "to_status": "applied",
+          "interview": null
+        },
+        {
+          "id": "evt_0027",
+          "application_id": "app_009",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-11T02:05:00.000Z",
+          "summary": "Status changed to ready for review",
+          "from_status": "preparing",
+          "to_status": "ready_for_review",
+          "interview": null
+        },
+        {
+          "id": "evt_0026",
+          "application_id": "app_009",
+          "event_type": "status_changed",
+          "occurred_at": "2026-11-09T02:00:00.000Z",
+          "summary": "Status changed to preparing",
+          "from_status": "saved",
+          "to_status": "preparing",
+          "interview": null
+        },
+        {
+          "id": "evt_0025",
+          "application_id": "app_009",
+          "event_type": "created",
+          "occurred_at": "2026-11-07T01:00:00.000Z",
+          "summary": "Application created",
+          "from_status": null,
+          "to_status": "saved",
+          "interview": null
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc_001",
+      "document_type": "resume",
+      "title": "General résumé",
+      "version": 1,
+      "status": "archived",
+      "origin": "uploaded",
+      "related_job_id": null,
+      "related_job_title": null,
+      "file_name": "jordan-lee-resume-v1.pdf",
+      "size_bytes": 148220,
+      "created_at": "2026-09-20T15:00:00.000Z",
+      "updated_at": "2026-10-20T15:00:00.000Z"
+    },
+    {
+      "id": "doc_002",
+      "document_type": "resume",
+      "title": "Data-focused résumé",
+      "version": 2,
+      "status": "ready",
+      "origin": "uploaded",
+      "related_job_id": null,
+      "related_job_title": null,
+      "file_name": "jordan-lee-resume-data.pdf",
+      "size_bytes": 152904,
+      "created_at": "2026-10-20T15:00:00.000Z",
+      "updated_at": "2026-10-20T15:00:00.000Z"
+    },
+    {
+      "id": "doc_003",
+      "document_type": "resume",
+      "title": "Data-focused résumé (pipelines first)",
+      "version": 3,
+      "status": "ready",
+      "origin": "uploaded",
+      "related_job_id": null,
+      "related_job_title": null,
+      "file_name": "jordan-lee-resume-data-v3.pdf",
+      "size_bytes": 155310,
+      "created_at": "2026-11-13T15:00:00.000Z",
+      "updated_at": "2026-11-13T15:00:00.000Z"
+    },
+    {
+      "id": "doc_004",
+      "document_type": "cover_letter",
+      "title": "Cover letter — Northline Energy Analytics",
+      "version": 1,
+      "status": "ready",
+      "origin": "generated",
+      "related_job_id": "job_014",
+      "related_job_title": "Analytics Engineer",
+      "file_name": null,
+      "size_bytes": null,
+      "created_at": "2026-11-11T15:00:00.000Z",
+      "updated_at": "2026-11-12T15:00:00.000Z"
+    },
+    {
+      "id": "doc_005",
+      "document_type": "cover_letter",
+      "title": "Cover letter — Bowridge Software",
+      "version": 1,
+      "status": "draft",
+      "origin": "generated",
+      "related_job_id": "job_008",
+      "related_job_title": "Data Engineer, Integrations",
+      "file_name": null,
+      "size_bytes": null,
+      "created_at": "2026-11-17T15:00:00.000Z",
+      "updated_at": "2026-11-17T15:00:00.000Z"
+    },
+    {
+      "id": "doc_006",
+      "document_type": "cover_letter",
+      "title": "Cover letter — Prairie Health Data Co-op",
+      "version": 1,
+      "status": "draft",
+      "origin": "generated",
+      "related_job_id": "job_004",
+      "related_job_title": "BI Developer",
+      "file_name": null,
+      "size_bytes": null,
+      "created_at": "2026-11-18T15:00:00.000Z",
+      "updated_at": "2026-11-18T15:00:00.000Z"
+    }
+  ],
+  "profile": {
+    "id": "cand_001",
+    "full_name": "Jordan Lee",
+    "email": "jordan.lee@example.com",
+    "headline": "IT coordinator moving into data engineering",
+    "summary": "Four years of IT support and systems administration, now building data pipelines in Python and SQL. Automates onboarding workflows, maintains reporting in Power BI, and is finishing a BSc in computing.",
+    "preferred_titles": [
+      "Data Engineer",
+      "Analytics Engineer",
+      "BI Developer",
+      "Data Analyst"
+    ],
+    "locations": [
+      "Edmonton, AB",
+      "Calgary, AB"
+    ],
+    "work_arrangements": [
+      "hybrid",
+      "remote",
+      "onsite"
+    ],
+    "salary_min": 75000,
+    "salary_max": 105000,
+    "salary_currency": "CAD",
+    "exclusions": [
+      "Senior",
+      "Principal",
+      "Sales"
+    ],
+    "skills": [
+      {
+        "name": "Python",
+        "proficiency": "proficient",
+        "years": 3
+      },
+      {
+        "name": "SQL",
+        "proficiency": "proficient",
+        "years": 4
+      },
+      {
+        "name": "PostgreSQL",
+        "proficiency": "proficient",
+        "years": 2
+      },
+      {
+        "name": "Power BI",
+        "proficiency": "expert",
+        "years": 3
+      },
+      {
+        "name": "Power Automate",
+        "proficiency": "expert",
+        "years": 3
+      },
+      {
+        "name": "Git",
+        "proficiency": "proficient",
+        "years": 3
+      },
+      {
+        "name": "Docker",
+        "proficiency": "familiar",
+        "years": 1
+      },
+      {
+        "name": "Azure",
+        "proficiency": "familiar",
+        "years": 1
+      },
+      {
+        "name": "REST APIs",
+        "proficiency": "proficient",
+        "years": 2
+      },
+      {
+        "name": "Excel",
+        "proficiency": "expert",
+        "years": 6
+      }
+    ],
+    "experience": [
+      {
+        "id": "exp_1",
+        "title": "IT Business Coordinator",
+        "company": "Riverbend Health Services",
+        "start_month": "2025-02",
+        "end_month": null,
+        "description": "Built Power Automate flows for staff onboarding and offboarding. Maintains Power BI reporting and SharePoint ticket tracking for a contact centre."
+      },
+      {
+        "id": "exp_2",
+        "title": "Systems Administrator (co-op)",
+        "company": "Tamarack Construction",
+        "start_month": "2024-09",
+        "end_month": "2025-01",
+        "description": "Desktop support for site and remote staff; decommissioned servers at closing project sites."
+      }
+    ],
+    "education": [
+      {
+        "id": "edu_1",
+        "institution": "Northern Plains University",
+        "credential": "BSc",
+        "field": "Computing and Information Systems",
+        "end_month": "2026-12",
+        "in_progress": true
+      },
+      {
+        "id": "edu_2",
+        "institution": "Lakeshore Polytechnic",
+        "credential": "Diploma",
+        "field": "Computer Networking and Technical Support",
+        "end_month": "2020-04",
+        "in_progress": false
+      }
+    ],
+    "updated_at": "2026-11-17T02:00:00.000Z"
+  },
+  "settings": {
+    "sources": [
+      {
+        "source": "greenhouse",
+        "enabled": true,
+        "identifiers": [
+          "northline",
+          "bowridge",
+          "fieldnote"
+        ],
+        "last_run_at": "2026-11-19T12:15:00.000Z",
+        "last_run_status": "succeeded",
+        "last_run_summary": {
+          "fetched": 214,
+          "inserted": 3,
+          "updated": 11,
+          "skipped": 200,
+          "failed": 0
+        },
+        "credentials_configured": true
+      },
+      {
+        "source": "lever",
+        "enabled": true,
+        "identifiers": [
+          "kestrel",
+          "ravine",
+          "lumen"
+        ],
+        "last_run_at": "2026-11-19T12:16:00.000Z",
+        "last_run_status": "partial",
+        "last_run_summary": {
+          "fetched": 96,
+          "inserted": 1,
+          "updated": 4,
+          "skipped": 89,
+          "failed": 2
+        },
+        "credentials_configured": true
+      },
+      {
+        "source": "adzuna",
+        "enabled": true,
+        "identifiers": [
+          "data engineer",
+          "bi developer",
+          "data analyst"
+        ],
+        "last_run_at": "2026-11-19T12:18:00.000Z",
+        "last_run_status": "succeeded",
+        "last_run_summary": {
+          "fetched": 50,
+          "inserted": 2,
+          "updated": 6,
+          "skipped": 42,
+          "failed": 0
+        },
+        "credentials_configured": true
+      }
+    ],
+    "notifications": {
+      "daily_digest": true,
+      "digest_hour": 7,
+      "digest_min_score": 70,
+      "follow_up_reminders": true
+    },
+    "account": {
+      "display_name": "Jordan",
+      "email": "jordan.lee@example.com",
+      "timezone": "America/Edmonton"
+    }
+  }
+}
