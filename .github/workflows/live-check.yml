@@ -1,10 +1,12 @@
-# Runs the real job collector against live job boards (GitHub's servers can
-# reach them). Used to check the adapters and find boards that exist.
+# Runs the real job collector against the live job boards, using the starter
+# sources (db/starter_sources.py) and a sample profile, then prints a report:
+# which boards worked, what was skipped and why, and the best matches.
+# Nothing is saved anywhere. Run it from the Actions tab: "Live source check"
+# > Run workflow. Use it after changing an adapter, or to see if a source
+# changed its format.
 name: Live source check
 
 on:
-  push:
-    branches: ["live-check"]
   workflow_dispatch:
 
 jobs:

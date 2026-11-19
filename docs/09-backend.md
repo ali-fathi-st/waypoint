@@ -143,33 +143,71 @@ Then, in this order:
 
 ## 4. Collect real jobs
 
-Waypoint only uses official, public job-board APIs. It never scrapes pages,
-logs in, or gets around anything.
+Waypoint only uses official public job APIs and feeds. It never scrapes
+pages, logs in, or gets around anything, and it reads a site's feed only
+where that site's robots.txt allows it.
+
+**Quickest start:** fill in your Profile first (locations, target titles,
+skills, and "Skip titles containing"), then:
+
+```
+python -m db.starter_sources
+python -m app.ingestion.run
+```
+
+`starter_sources` turns on sources checked against the live services on
+2026-11-19: Government of Alberta job feeds (data, analyst, IT and similar
+searches), Jobber, Neo Financial, Benevity, Koho, Wealthsimple, 1Password
+and Cohere (on Ashby), and Robots and Pencils, Orennia, Darkhorse, GitLab,
+Databricks and Samsara (on Greenhouse). It adds to whatever you already have,
+and you can change them in **Settings → Sources**.
 
 | Source | Identifier (Settings → Sources) | Where to find it | Key needed |
 | --- | --- | --- | --- |
-| Greenhouse | Board token | The careers link goes to `boards.greenhouse.io/`**`token`** or `job-boards.greenhouse.io/`**`token`** | No |
-| Lever | Company slug | The careers link goes to `jobs.lever.co/`**`slug`** (case-sensitive; EU boards: write `eu:slug`) | No |
-| Adzuna | Search term, e.g. `data engineer` | Searched in each city on your profile | Yes: free at [developer.adzuna.com](https://developer.adzuna.com), then set `ADZUNA_APP_ID` and `ADZUNA_APP_KEY` in `backend/.env` and restart uvicorn |
+| Employer feeds (RSS) | The feed's full address | Government of Alberta: `https://jobpostings.alberta.ca/feeds/`**`word`**`/?locale=en_US`, where *word* is a search word (`data`, `analyst`, `information%20technology`) | No |
+| Ashby | Board name | Careers link goes to `jobs.ashbyhq.com/`**`name`** | No |
+| Greenhouse | Board token | Careers link goes to `boards.greenhouse.io/`**`token`** or `job-boards.greenhouse.io/`**`token`** | No |
+| Lever | Company slug | Careers link goes to `jobs.lever.co/`**`slug`** (case-sensitive; EU boards: `eu:slug`) | No |
+| Adzuna | Search term, e.g. `data engineer` | Searched in each city on your profile | Yes: free at [developer.adzuna.com](https://developer.adzuna.com); set `ADZUNA_APP_ID` and `ADZUNA_APP_KEY` in `backend/.env`, restart uvicorn |
 
-Greenhouse and Lever are per employer: open the careers page of a company you
-want to work for, click a job, and look at the address. Adzuna searches across
-many boards at once.
+**Adzuna gives the widest local coverage.** It searches many Canadian job
+boards at once, so it finds employers that don't use the systems above. It's
+worth the two-minute sign-up.
 
-Collect now:
+**Try a board before adding it.** This reads it without saving anything:
 
 ```
-python -m app.ingestion.run                    # every source that's on
-python -m app.ingestion.run --source lever     # just one
+python -m app.ingestion.check ashby jobber
+python -m app.ingestion.check greenhouse orennia gitlab
+python -m app.ingestion.check rss "https://jobpostings.alberta.ca/feeds/data/?locale=en_US"
 ```
 
-It prints what happened, e.g.
-`greenhouse: succeeded. 42 fetched, 42 new, 0 updated, 0 unchanged or duplicate, 0 quarantined`,
-and **Settings → Sources** shows the same. Run it again and the same jobs come
-back as *unchanged*: nothing is duplicated.
+**What gets kept.** Each run only stores postings that are:
 
-If a board name is wrong or a source is down, the run says so
-(`partial` or `failed`) and adds nothing for it. It never makes jobs up.
+- in one of your profile's cities or provinces, or remote work open to your
+  country ("Remote - Canada" yes; "Remote, United States" or "Remote, Sweden"
+  no), and
+- not titled with one of your "Skip titles containing" words.
+
+Everything else is counted as skipped, not stored. With no locations on your
+profile, everything is kept. Run it again and the same jobs come back as
+*unchanged*: nothing is duplicated.
+
+A run prints what happened, e.g.
+`rss: succeeded. 110 fetched, 29 new, 0 updated, 44 unchanged or duplicate, 1 outside your area, 36 skipped by title, 0 quarantined`,
+and **Settings → Sources** shows the latest run. If a board name is wrong or
+a source is down, the run says so (`partial` or `failed`) and adds nothing
+for it. It never makes jobs up.
+
+Good to know:
+
+- The Government of Alberta feeds return the newest 20 postings per search,
+  so run daily (next section) and use several search words.
+- Greenhouse and Lever boards are mostly per company and lean to tech
+  employers; many Alberta employers use other systems. Adzuna fills that gap.
+- **Live source check** (GitHub → Actions → Live source check → Run workflow)
+  runs the collector on GitHub's servers against the real boards and prints
+  a report. Use it if a source seems to have changed.
 
 ## 5. Collect every day automatically
 
@@ -254,11 +292,13 @@ backend/
 │       ├── run.py         one collection run: raw → quarantine → jobs
 │       ├── skills.py      finds skills in descriptions
 │       ├── text.py        HTML → plain text, normalizing
-│       └── sources/       greenhouse.py, lever.py, adzuna.py (+ base.py: the interface)
+│       ├── check.py       try boards without saving anything
+│       └── sources/       greenhouse, lever, ashby, rss, adzuna (+ base.py: the interface)
 ├── db/
 │   ├── migrations/        numbered .sql files: the whole schema
 │   ├── migrate.py         applies each migration once
 │   ├── seed.py            loads the fictional demo data
+│   ├── starter_sources.py turns on checked Alberta sources
 │   └── seed/demo.json
 └── tests/                 pytest, plus recorded job-board responses in fixtures/
 ```
@@ -347,7 +387,8 @@ job-board responses, so they never touch your data or the internet.
 | `test_documents.py` | Upload checks, private storage, versions |
 | `test_settings.py` | Settings, export, delete everything |
 | `test_matching.py` | Python scores = the website's scores |
-| `test_ingestion.py` | The whole pipeline, all three sources |
+| `test_ingestion.py` | The whole pipeline: Greenhouse, Lever, Adzuna |
+| `test_sources_more.py` | Ashby, RSS feeds (robots.txt, unsafe XML), the area and skip-word rules |
 
 Responses are also checked against the field lists in
 `frontend/js/api/contract.js`, so the backend and website can't drift apart.
@@ -376,7 +417,7 @@ which are deleted after 30 days.
 | --- | --- |
 | **Sign-in** | Waypoint is single-user and assumes only you can reach it. `uvicorn` listens on your computer only (127.0.0.1) by default; keep it that way. **Add sign-in before hosting it anywhere.** This is the one blocker for putting it online. |
 | Hosting | Runs on your computer. Hosting needs sign-in, `https://`, a managed PostgreSQL, and cloud file storage (replace the three functions in `services/storage.py`). |
-| Live job-board checks | The Greenhouse, Lever and Adzuna adapters follow their documented formats and are tested against recorded responses, but couldn't be tried against the live services while being built. If a first real run shows quarantined postings or errors, `GET /api/v1/ingestion/runs` and the `quarantine` table say exactly why. |
+| Adzuna, live | Greenhouse, Lever, Ashby and the Government of Alberta feeds were checked against the live services (2026-11-19). Adzuna follows its documented format and is tested on recorded responses, but needs your key to try live. If its first run shows errors, `GET /api/v1/ingestion/runs` says why. |
 | Adzuna descriptions | Adzuna only returns a short snippet, so its jobs show fewer skills and less precise scores. |
 | Skills from new profile skills | Skills are found when a job is collected. A skill you add to your profile later is used for scoring right away, but only looked for in postings collected from then on. |
 | Notifications | The digest and reminder settings are saved, but nothing sends email yet. Follow-ups show on the dashboard and Applications page. |
@@ -397,6 +438,8 @@ which are deleted after 30 days.
 | You see sample data on the published site | This browser isn't connected | Settings → Developer → Your backend → Connect |
 | "This website isn't allowed to make changes" (403) | The page's address isn't in `CORS_ORIGINS` | Add it to `.env` exactly as it appears in the address bar (e.g. `http://localhost:8080`), restart uvicorn |
 | `Invalid host header` (400) | You called the API by a name not in `ALLOWED_HOSTS` | Use `localhost`, or add the name to `ALLOWED_HOSTS` in `.env` |
+| Most postings are "outside your area" | Your profile's locations don't match how employers write them | Add your city as employers write it ("Edmonton, AB"), and your province. Remote jobs need to say your country, or no place at all |
+| A run says `robots.txt doesn't allow reading that address` | That address is off-limits to tools | Use the site's other feed address (e.g. `/feeds/...` instead of `/services/...` for the Government of Alberta) |
 | A run says `not found (check the board name or company slug)` | The identifier is wrong, or that employer moved to another system | Check the careers link again (Lever slugs are case-sensitive) |
 | A run says `ADZUNA_APP_ID and ADZUNA_APP_KEY aren't set` | No Adzuna keys | Add them to `.env` and restart uvicorn, or turn Adzuna off |
 | Many postings quarantined | A source changed its format | `GET /api/v1/ingestion/runs` and the `quarantine` table show the reason for each |
