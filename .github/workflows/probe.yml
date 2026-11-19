@@ -1,0 +1,19 @@
+name: Probe job feeds
+on:
+  push:
+    branches: ["probe"]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Feeds and boards
+        run: |
+          ua="Waypoint/1.0 (personal job search tracker)"
+          probe() { code=$(curl -s -A "$ua" -o /tmp/body -w '%{http_code} %{content_type}' --max-time 20 "$1"); echo "== $code $1"; head -c ${2:-400} /tmp/body | tr -s '\n' ' '; echo; }
+          probe "https://jobpostings.alberta.ca/robots.txt" 600
+          probe "https://jobpostings.alberta.ca/services/rss/job/?locale=en_US&keywords=data" 1500
+          probe "https://jobpostings.alberta.ca/services/rss/job/?locale=en_US" 300
+          for t in jobber darkhorseviz 7shifts cybrid orennia robotsandpencils jobberinc getjobber benevityinc neofinancialtechnologies amii; do probe "https://boards-api.greenhouse.io/v1/boards/$t/jobs" 150; done
+          for t in jobgether jobber benevity neo-financial; do probe "https://api.lever.co/v0/postings/$t?mode=json&limit=1" 200; done
+          for t in jobber; do probe "https://api.ashbyhq.com/posting-api/job-board/$t" 200; done
+          probe "https://api.smartrecruiters.com/v1/companies/EPCOR/postings?limit=1" 300
